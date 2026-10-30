@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "studio": "remotion studio",
-    "render": "remotion render src/index.ts Main out/video.mp4",
+    "render": "node scripts/render.mjs",
+    "render:remotion": "remotion render src/index.ts Main out/video.mp4",
     "sfx": "node scripts/make-sfx.mjs",
     "cues": "node scripts/srt-to-cues.mjs",
     "typecheck": "tsc --noEmit"

@@ -1,6 +1,5 @@
-import {Config} from '@remotion/cli/config';
-Config.setEntryPoint('./src/index.ts');
-Config.setVideoImageFormat('jpeg');
+import { Config } from "@remotion/cli/config";
+
+Config.setRendererPort(3030);
 Config.setOverwriteOutput(true);
-Config.setCodec('h264');
-Config.setRendererPort(3100);
+Config.setCodec("h264");

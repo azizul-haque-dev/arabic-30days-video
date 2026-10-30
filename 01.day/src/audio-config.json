@@ -1,0 +1,10 @@
+{
+  "voiceover": {
+    "enabled": true,
+    "includeInRender": true,
+    "file": "voiceover.mp3"
+  },
+  "sfx": {
+    "enabled": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "arabic-master-day7",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Arabic Master — Survival Arabic Day 7 motion graphics (Remotion)",
+  "scripts": {
+    "start": "remotion studio",
+    "studio": "remotion studio",
+    "render:dev": "tsx scripts/render.mts",
+    "render": "remotion render src/index.ts Main out/video.mp4",
+    "verify:audio": "tsx scripts/verify-audio.mts",
+    "typecheck": "tsc --noEmit",
+    "sfx": "node scripts/make-sfx.mjs"
+  },
+  "dependencies": {
+    "@fontsource/hind-siliguri": "^5.3.0",
+    "@remotion/cli": "4.0.539",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.539"
+  },
+  "devDependencies": {
+    "@remotion/bundler": "^4.0.539",
+    "@remotion/renderer": "^4.0.539",
+    "@types/react": "^18.3.31",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

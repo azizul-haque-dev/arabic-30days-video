@@ -1,0 +1,13 @@
+{
+  "voiceover": {
+    "enabled": true,
+    "previewEnabled": true,
+    "includeInRender": true,
+    "file": "voiceover.mp3"
+  },
+  "sfx": {
+    "enabled": true,
+    "includeInRender": true,
+    "files": ["chime.wav", "click.wav", "pop.wav", "thud.wav", "whoosh.wav"]
+  }
+}

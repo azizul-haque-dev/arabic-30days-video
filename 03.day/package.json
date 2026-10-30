@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "studio": "remotion studio",
-    "render": "remotion render src/index.ts Main out/video.mp4",
+    "render": "node scripts/render.mjs",
+    "render:remotion": "remotion render src/index.ts Main out/video.mp4",
     "tsc": "tsc --noEmit"
   },
   "keywords": [],

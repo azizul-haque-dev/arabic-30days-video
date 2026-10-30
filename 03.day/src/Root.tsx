@@ -1,8 +1,9 @@
 import React from "react";
-import { AbsoluteFill, Audio, Composition, Sequence, staticFile } from "remotion";
+import { AbsoluteFill, Audio, Composition, getRemotionEnvironment, Sequence, staticFile } from "remotion";
 import { theme, VIDEO } from "./theme";
 import { TOTAL_FRAMES } from "./timing";
 import { scenes, sentences, sfxPlan, SceneId } from "./content";
+import audioConfig from "./audio-config.json";
 import { BgMesh, Grade, Grain, SceneFrame, Vignette } from "./components/kit";
 import { loadFonts } from "./components/fonts";
 import { PreviewAudio } from "./components/PreviewAudio";
@@ -30,6 +31,9 @@ const renderScene = (id: SceneId, from: number, dur: number) => {
 
 const Main: React.FC = () => {
   const sfx = sfxPlan();
+  const { isRendering } = getRemotionEnvironment();
+  const includeSfx = audioConfig.sfx.enabled &&
+    (isRendering ? audioConfig.sfx.includeInRender : true);
   return (
     <AbsoluteFill style={{ fontFamily: theme.fonts.body, letterSpacing: 0 }}>
       <BgMesh />
@@ -46,7 +50,7 @@ const Main: React.FC = () => {
       <Grain />
       <Vignette />
       <PreviewAudio />
-      {sfx.map((e, i) => (
+      {includeSfx && sfx.map((e, i) => (
         <Sequence key={i} from={Math.max(0, e.frame)} durationInFrames={VIDEO.fps} layout="none">
           <Audio src={staticFile(`sfx/${e.name}.wav`)} volume={e.vol} playbackRate={e.rate ?? 1} />
         </Sequence>

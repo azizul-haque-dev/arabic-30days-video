@@ -1,25 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { Audio, Sequence, continueRender, delayRender, getRemotionEnvironment, staticFile } from "remotion";
+import { Audio, Sequence, cancelRender, continueRender, delayRender, staticFile } from "remotion";
 
-// ─── Voiceover preview ────────────────────────────────────────────────────────
-// Plays public/voiceover.mp3 (if the file exists) so the Studio preview can be checked against the narration.
-// Flag: set VOICEOVER_IN_RENDER = true to also bake it into rendered files. Default: off in renders.
-export const VOICEOVER_IN_RENDER = false;
+const REQUIRED_AUDIO_FILES = [
+  "voiceover.wav",
+  "sfx/pop_a.wav",
+  "sfx/pop_b.wav",
+  "sfx/click.wav",
+  "sfx/whoosh.wav",
+  "sfx/swipe.wav",
+  "sfx/chime.wav",
+  "sfx/thud.wav",
+] as const;
 
 export const PreviewAudio: React.FC = () => {
-  const env = getRemotionEnvironment();
-  const active = !env.isRendering || VOICEOVER_IN_RENDER;
-  const [handle] = useState(() => (active ? delayRender("voiceover check") : null));
-  const [exists, setExists] = useState(false);
+  const [handle] = useState(() => delayRender("Loading required audio assets"));
+  const [assetsReady, setAssetsReady] = useState(false);
+
   useEffect(() => {
-    if (handle === null) return;
-    fetch(staticFile("voiceover.mp3"), { method: "HEAD" })
-      .then((r) => setExists(r.ok && (r.headers.get("content-type") ?? "").includes("audio")))
-      .catch(() => setExists(false))
-      .finally(() => continueRender(handle));
+    Promise.all(
+      REQUIRED_AUDIO_FILES.map(async (file) => {
+        const response = await fetch(staticFile(file), { method: "HEAD" });
+        if (!response.ok) {
+          throw new Error(`Required audio asset "${file}" returned HTTP ${response.status}`);
+        }
+      }),
+    ).then(
+      () => {
+        setAssetsReady(true);
+        continueRender(handle);
+      },
+      (error: unknown) => {
+        cancelRender(error instanceof Error ? error : new Error(String(error)));
+      },
+    );
   }, [handle]);
-  if (!active || !exists) return null;
-  return <Audio src={staticFile("voiceover.mp3")} volume={1} />;
+
+  if (!assetsReady) return null;
+  return <Audio src={staticFile("voiceover.wav")} volume={1} />;
 };
 
 // ─── SFX ──────────────────────────────────────────────────────────────────────

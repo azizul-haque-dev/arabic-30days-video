@@ -1,5 +1,5 @@
 import React from "react";
-import { Audio, Sequence, staticFile } from "remotion";
+import { Audio, getRemotionEnvironment, Sequence, staticFile } from "remotion";
 import { CONFIG } from "./config";
 import { FPS, SFX } from "./timeline";
 
@@ -9,6 +9,10 @@ const BASE = { pop: 0.3, click: 0.26, thud: 0.24, chime: 0.28, whoosh: 0.26, swi
 const RATES = [1, 1.06, 0.95, 1.03, 0.97]; // slight pitch variation for consecutive same-type sounds
 
 export const SfxLayer: React.FC = () => {
+  if (getRemotionEnvironment().isRendering && !CONFIG.sfxEnabled) {
+    throw new Error("Sound effects must be enabled when rendering.");
+  }
+  if (!CONFIG.sfxEnabled) return null;
   const count: Record<string, number> = {};
   return (
     <>
