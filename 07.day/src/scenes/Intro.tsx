@@ -13,11 +13,22 @@ export const Hook: React.FC = () => {
   const fK = loc("hook", T.hook.kintu), fA = loc("hook", T.hook.atke), fC = loc("hook", T.hook.chinta), fAp = loc("hook", T.hook.apnar);
   const outA = interpolate(frame, [fC - 4, fC + 6], [0, 1], { ...clamp, easing: theme.ease.in });
   const relief = useP(fC, theme.spring.bouncy);
-  const bubbleIn = useP(2, theme.spring.bouncy);
+  const bubbleIn = frame < 2 ? 1 : useP(2, theme.spring.bouncy);
+
   return (
     <AbsoluteFill>
+      {/* Top Header - Always visible from frame 0 */}
+      <div style={{ position: "absolute", top: 40, width: "100%", display: "flex", justifyContent: "center", gap: 14 }}>
+        <Chip fill={C.primary} color="#FFFFFF" size={30} style={{ padding: "8px 24px", fontWeight: theme.font.heavy }}>
+          DAY 07 • সপ্তম দিন
+        </Chip>
+        <Chip fill={C.accentSoft} color={C.text} size={26} style={{ padding: "8px 20px" }}>
+          প্রবাসীদের দৈনন্দিন আরবি
+        </Chip>
+      </div>
+
       {/* speech bubble: stuck dots → check */}
-      <div style={{ position: "absolute", left: 390, top: 110, width: 300, height: 190, transform: `scale(${bubbleIn * (1 + 0.08 * relief)})`, opacity: Math.min(1, bubbleIn * 2) }}>
+      <div style={{ position: "absolute", left: 390, top: 120, width: 300, height: 180, transform: `scale(${bubbleIn * (1 + 0.08 * relief)})`, opacity: 1 }}>
         <div style={{ position: "absolute", inset: 0, borderRadius: 70, background: relief > 0.05 ? C.accent : C.surface, boxShadow: theme.shadow.card, border: `1px solid ${C.line}` }} />
         <div style={{ position: "absolute", left: 60, bottom: -22, width: 50, height: 50, background: relief > 0.05 ? C.accent : C.surface, transform: "rotate(45deg)", borderRadius: 10 }} />
         <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", gap: 22, opacity: 1 - Math.min(1, relief * 3) }}>
@@ -28,17 +39,25 @@ export const Hook: React.FC = () => {
         </svg>
       </div>
 
-      {/* phase A */}
+      {/* phase A - Visible from frame 0 */}
       <div style={{ position: "absolute", left: 72, right: 72, top: 380, opacity: 1 - outA, transform: `translateY(${-30 * outA}px)` }}>
-        <Words text="আরব দেশে থাকেন" delay={6} size={80} />
-        <div style={{ height: 8 }} />
-        <Words text="কিন্তু আরবি বলতে গিয়ে" delay={fK} size={80} />
-        <div style={{ height: 14 }} />
-        <Words text="আটকে যান?" delay={fA} size={160} color={C.primary} per={6} />
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+          <div style={{ fontSize: 72, fontWeight: theme.font.heavy, color: C.text }}>
+            <span style={{ color: C.primary }}>আরব</span> দেশে থাকেন?
+          </div>
+          <div style={{ fontSize: 52, fontWeight: theme.font.mid, color: C.textDim }}>
+            কিন্তু আরবি বলতে গিয়ে <span style={{ color: C.accent, fontWeight: theme.font.heavy }}>আটকে</span> যান?
+          </div>
+          <div style={{ display: "flex", gap: 12, marginTop: 14 }}>
+            <Chip fill={C.primarySoft} color={C.primaryDeep} size={24} style={{ padding: "6px 18px" }}>✓ বাক্য ৬১ – ৭০</Chip>
+            <Chip fill="#FFFFFF" color={C.text} size={24} style={{ padding: "6px 18px", border: `1.5px solid ${C.line}` }}>✓ ৩০ দিনের কোর্স</Chip>
+            <Chip fill={C.primarySoft} color={C.primaryDeep} size={24} style={{ padding: "6px 18px" }}>✓ Arabic Master</Chip>
+          </div>
+        </div>
       </div>
 
       {/* phase B */}
-      <div style={{ position: "absolute", left: 72, right: 72, top: 400 }}>
+      <div style={{ position: "absolute", left: 72, right: 72, top: 400, opacity: outA }}>
         <Words text="চিন্তা নেই!" delay={fC} size={190} color={C.primary} per={6} />
         <Sweep delay={fC + 8} dur={14}><div style={{ margin: "0 auto", width: 640, height: 20, borderRadius: 10, background: C.accent }} /></Sweep>
         <div style={{ height: 50 }} />

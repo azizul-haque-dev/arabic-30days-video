@@ -6,6 +6,7 @@
     "studio": "remotion studio",
     "render": "node scripts/render.mjs",
     "render:direct": "remotion render src/index.ts Main out/video.mp4",
+    "thumbnail": "remotion still src/index.ts Thumbnail out/thumbnail.png --overwrite",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

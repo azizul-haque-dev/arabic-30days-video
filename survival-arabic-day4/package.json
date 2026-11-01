@@ -6,6 +6,7 @@
   "scripts": {
     "studio": "remotion studio",
     "render": "remotion render src/index.ts Main out/video.mp4",
+    "thumbnail": "remotion still src/index.ts Thumbnail out/thumbnail.png --overwrite",
     "typecheck": "tsc --noEmit",
     "sfx": "node scripts/make-sfx.mjs && node scripts/check-sfx.mjs",
     "timing": "node scripts/gen-timing.mjs"

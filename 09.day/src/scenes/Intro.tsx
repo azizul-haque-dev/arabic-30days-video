@@ -23,6 +23,11 @@ export const HookScene: React.FC<{ dur: number }> = ({ dur }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const reliefP = spring({ frame: frame - 48, fps, config: theme.spring.bouncy });
+  const pulse1 = spring({ frame: frame - 6, fps, config: theme.spring.bouncy });
+  const pulse2 = spring({ frame: frame - 20, fps, config: theme.spring.bouncy });
+
+  const scale1 = interpolate(pulse1, [0, 0.5, 1], [1, 1.05, 1], clamp);
+  const scale2 = interpolate(pulse2, [0, 0.5, 1], [1, 1.04, 1], clamp);
 
   return (
     <SceneExit dur={dur}>
@@ -30,96 +35,84 @@ export const HookScene: React.FC<{ dur: number }> = ({ dur }) => {
       <Sfx name="pop" at={24} />
       <Sfx name="chime" at={48} />
 
-      {/* Top Tag */}
-      <div style={{ position: "absolute", top: 110, width: "100%", display: "flex", justifyContent: "center" }}>
-        <Entrance delay={4} from={-20}>
-          <Pill tone="soft" size={36}>আরব প্রবাসীদের জন্য</Pill>
-        </Entrance>
+      {/* Top Tag - Always visible from frame 0 */}
+      <div style={{ position: "absolute", top: 80, width: "100%", display: "flex", justifyContent: "center", gap: 14 }}>
+        <Pill tone="hero" size={32} style={{ padding: "10px 28px", fontWeight: theme.weights.hero, boxShadow: theme.shadow.hero }}>
+          DAY 09 • নবম দিন
+        </Pill>
+        <Pill tone="accent" size={28} style={{ padding: "10px 24px", fontWeight: theme.weights.strong }}>
+          প্রবাসীদের দৈনন্দিন আরবি
+        </Pill>
       </div>
 
-      {/* Core Hook Question */}
-      <div
+      {/* Core Hook Question Card - Always visible from frame 0 */}
+      <Card
         style={{
           position: "absolute",
-          top: 220,
+          top: 200,
           left: 70,
           right: 70,
+          padding: "48px 40px",
+          textAlign: "center",
+          boxShadow: theme.shadow.card,
+          border: `2px solid ${C.primarySoft}`,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: 16,
-          textAlign: "center",
+          gap: 20,
         }}
       >
-        <WordReveal
-          text="আরব দেশে থাকেন কিন্তু"
-          delay={6}
-          per={4}
-          justify="center"
-          gap={18}
-          style={textStyle(58, theme.weights.strong, C.textDim)}
-        />
-        <WordReveal
-          text="আরবি বলতে গিয়ে আটকে যান?"
-          delay={18}
-          per={4}
-          justify="center"
-          gap={20}
-          style={textStyle(76, theme.weights.hero, C.text)}
-          wordStyle={(i) => (i === 3 || i === 4 ? { color: C.primaryDeep } : {})}
-        />
-      </div>
-
-      {/* "চিন্তা নেই!" Relief Card */}
-      {frame >= 44 && (
         <div
           style={{
-            position: "absolute",
-            bottom: 180,
-            left: 0,
-            right: 0,
-            display: "flex",
-            justifyContent: "center",
+            ...textStyle(68, theme.weights.hero, C.text),
+            transform: `scale(${scale1})`,
+            transformOrigin: "center center",
           }}
         >
-          <div
-            style={{
-              transform: `scale(${interpolate(reliefP, [0, 1], [0.7, 1])}) translateY(${interpolate(
-                reliefP,
-                [0, 1],
-                [40, 0]
-              )}px)`,
-              opacity: interpolate(reliefP, [0, 0.4], [0, 1], clamp),
-              background: C.surface,
-              borderRadius: 44,
-              padding: "28px 56px",
-              boxShadow: `${theme.shadow.card}, 0 0 50px ${C.glow}`,
-              border: `2px solid ${C.primary}`,
-              display: "flex",
-              alignItems: "center",
-              gap: 22,
-            }}
-          >
-            <div
-              style={{
-                width: 58,
-                height: 58,
-                borderRadius: 29,
-                background: C.primary,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: `0 8px 20px ${C.glow}`,
-              }}
-            >
-              <svg viewBox="0 0 24 24" width={34} height={34} fill="none" stroke={C.white} strokeWidth={3.5} strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-            <div style={textStyle(62, theme.weights.hero, C.primaryDeep)}>চিন্তা নেই!</div>
-          </div>
+          <span style={{ color: C.primary, textShadow: `0 0 24px ${C.glow}` }}>আরব</span> দেশে থাকেন?
         </div>
-      )}
+
+        <div
+          style={{
+            ...textStyle(50, theme.weights.strong, C.textDim),
+            transform: `scale(${scale2})`,
+            transformOrigin: "center center",
+          }}
+        >
+          কিন্তু আরবি বলতে গিয়ে <span style={{ color: C.accent, fontWeight: theme.weights.hero }}>আটকে</span> যান?
+        </div>
+
+        <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center", marginTop: 8 }}>
+          <Pill tone="soft" size={26} style={{ padding: "8px 20px" }}>✓ বাক্য ৮১ – ৯০</Pill>
+          <Pill tone="white" size={26} style={{ padding: "8px 20px", border: `1.5px solid ${C.line}` }}>✓ ৩০ দিনের সহজ কোর্স</Pill>
+          <Pill tone="soft" size={26} style={{ padding: "8px 20px" }}>✓ Arabic Master</Pill>
+        </div>
+      </Card>
+
+      {/* "চিন্তা নেই!" Relief Card - Visible from frame 0 */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 150,
+          left: 0,
+          right: 0,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Pill
+          tone="hero"
+          size={46}
+          style={{
+            padding: "18px 56px",
+            boxShadow: theme.shadow.hero,
+            fontWeight: theme.weights.hero,
+            transform: `scale(${frame < 44 ? 1 : interpolate(reliefP, [0, 0.6, 1], [1, 1.15, 1], clamp)})`,
+          }}
+        >
+          চিন্তা নেই! সহজে শিখুন
+        </Pill>
+      </div>
     </SceneExit>
   );
 };

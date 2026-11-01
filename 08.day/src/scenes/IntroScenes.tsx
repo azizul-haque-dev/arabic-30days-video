@@ -14,7 +14,7 @@ export const HookScene: React.FC = () => {
   const R = (s: number) => rel("hook", s);
   const tBut = R(M.but.t);
   const tRelax = R(M.relax.t);
-  const iconP = spring({frame: frame - 2, fps: 30, config: theme.spring.bouncy});
+  const iconP = frame < 2 ? 1 : spring({frame: frame - 2, fps: 30, config: theme.spring.bouncy});
   const pinOut = interpolate(frame, [tBut - 2, tBut + 7], [1, 0], clamp);
   const bubbleIn = interpolate(frame, [tBut + 2, tBut + 12], [0, 1], clamp);
   const done = frame >= tRelax ? 1 : 0;
@@ -22,25 +22,42 @@ export const HookScene: React.FC = () => {
   const bob = Math.sin(frame / 18) * 6;
   return (
     <div style={fill}>
-      <TopBar />
-      <div style={{position: "absolute", left: 0, right: 0, top: 130, display: "flex", justifyContent: "center", transform: `translateY(${bob}px) scale(${interpolate(iconP, [0, 1], [0.5, 1]) * pulse})`, opacity: Math.min(1, iconP)}}>
-        <div style={{position: "relative", width: 380, height: 380}}>
-          <div style={{position: "absolute", inset: 0, opacity: pinOut}}><Pin size={380} t={frame} /></div>
-          <div style={{position: "absolute", inset: 0, opacity: bubbleIn}}><BubbleDots size={380} t={frame} done={done} /></div>
+      {/* Top Header */}
+      <div style={{position: "absolute", top: 44, left: 70, right: 70, display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 10}}>
+        <div style={{display: "flex", alignItems: "center", gap: 14}}>
+          <span style={{fontFamily: theme.fonts.ar, fontWeight: 900, fontSize: 30, color: theme.colors.text}}>Arabic Master</span>
+          <span style={{fontFamily: theme.fonts.bn, fontWeight: 700, fontSize: 24, color: "#FFFFFF", background: theme.colors.primary, padding: "6px 20px", borderRadius: 999}}>DAY 08 • অষ্টম দিন</span>
+        </div>
+        <span style={{fontFamily: theme.fonts.bn, fontWeight: 600, fontSize: 24, color: theme.colors.textDim}}>প্রবাসীদের দৈনন্দিন আরবি</span>
+      </div>
+
+      <div style={{position: "absolute", left: 0, right: 0, top: 120, display: "flex", justifyContent: "center", transform: `translateY(${bob}px) scale(${interpolate(iconP, [0, 1], [0.5, 1]) * pulse})`, opacity: Math.min(1, iconP)}}>
+        <div style={{position: "relative", width: 340, height: 340}}>
+          <div style={{position: "absolute", inset: 0, opacity: pinOut}}><Pin size={340} t={frame} /></div>
+          <div style={{position: "absolute", inset: 0, opacity: bubbleIn}}><BubbleDots size={340} t={frame} done={done} /></div>
         </div>
       </div>
-      <div style={{position: "absolute", left: 70, right: 70, top: 560, height: 420}}>
-        <div style={{position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center"}}>
-          <WordStagger text="আরব দেশে থাকেন" delay={R(0.6) + 0} size={118} per={5} exitAt={tBut - 4} />
-        </div>
-        <div style={{position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center"}}>
-          <WordStagger text="আরবি বলতে গিয়ে আটকে যান?" delay={tBut} size={96} per={4} hi={[3, 4]} hiColor={theme.colors.accent} exitAt={tRelax - 4} gap={22} />
-        </div>
-        <div style={{position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center"}}>
-          <Pop delay={tRelax} preset="bouncy" from={0.6} dist={30}>
-            <div style={{fontFamily: theme.fonts.bn, fontWeight: 700, fontSize: 190, lineHeight: 1.2, color: theme.colors.primary, letterSpacing: 0, textShadow: `0 18px 50px ${theme.colors.glow}`}}>চিন্তা নেই!</div>
-          </Pop>
-        </div>
+      <div style={{position: "absolute", left: 70, right: 70, top: 490, height: 490}}>
+        {frame < tRelax ? (
+          <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: 14, textAlign: "center"}}>
+            <div style={{fontSize: 76, fontWeight: 700, color: theme.colors.text, fontFamily: theme.fonts.bn}}>
+              <span style={{color: theme.colors.primary}}>আরব</span> দেশে থাকেন?
+            </div>
+            <div style={{fontSize: 52, fontWeight: 600, color: theme.colors.textDim, fontFamily: theme.fonts.bn}}>
+              কিন্তু আরবি বলতে গিয়ে <span style={{color: theme.colors.accent, fontWeight: 700}}>আটকে</span> যান?
+            </div>
+            <div style={{display: "flex", gap: 14, marginTop: 14}}>
+              <span style={{padding: "8px 20px", borderRadius: theme.radius.pill, background: theme.colors.mint, color: theme.colors.primary, fontSize: 24, fontWeight: 600}}>✓ বাক্য ৭১ – ৮০</span>
+              <span style={{padding: "8px 20px", borderRadius: theme.radius.pill, background: "#FFFFFF", color: theme.colors.text, fontSize: 24, fontWeight: 600, border: `1.5px solid ${theme.colors.line}`}}>✓ ৩০ দিনের কোর্স</span>
+            </div>
+          </div>
+        ) : (
+          <div style={{position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center"}}>
+            <Pop delay={tRelax} preset="bouncy" from={0.6} dist={30}>
+              <div style={{fontFamily: theme.fonts.bn, fontWeight: 700, fontSize: 170, lineHeight: 1.2, color: theme.colors.primary, letterSpacing: 0, textShadow: `0 18px 50px ${theme.colors.glow}`}}>চিন্তা নেই!</div>
+            </Pop>
+          </div>
+        )}
       </div>
       <Sfx name="whoosh" at={R(0.6) - 1} vol={0.22} />
       <Sfx name="thud" at={tRelax} vol={0.26} />

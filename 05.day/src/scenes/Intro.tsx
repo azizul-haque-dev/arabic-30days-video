@@ -37,36 +37,58 @@ const Bubble: React.FC<{ w: number; h: number; fill: string; delay: number; tail
 export const HookScene: React.FC<{ dur: number }> = ({ dur }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const R = 262;
+  const R = 240;
   const numP = spring({ frame: frame - 14, fps, config: theme.spring.bouncy });
+  const pulse = interpolate(numP, [0, 0.5, 1], [1, 1.08, 1], clamp);
+
   return (
     <SceneExit dur={dur}>
       <Sfx name="thud" at={2} />
       <Sfx name="chime" at={44} />
-      <div style={{ position: "absolute", top: 96, width: "100%", display: "flex", justifyContent: "center" }}>
-        <WordReveal text="৩০ দিনের" per={5} justify="center" gap={22} style={text(92)} />
+
+      {/* Top Header Pill - Visible from Frame 0 */}
+      <div style={{ position: "absolute", top: 76, width: "100%", display: "flex", justifyContent: "center", gap: 14 }}>
+        <Pill tone="hero" size={32} style={{ padding: "10px 28px", fontWeight: theme.weights.hero, boxShadow: theme.shadow.hero }}>
+          DAY 05 • পঞ্চম দিন
+        </Pill>
+        <Pill tone="accent" size={28} style={{ padding: "10px 24px", fontWeight: theme.weights.strong }}>
+          প্রবাসীদের দৈনন্দিন আরবি
+        </Pill>
       </div>
-      <div style={{ position: "absolute", left: 540 - R - 40, top: 540 - R - 40 + 10, width: (R + 40) * 2, height: (R + 40) * 2 }}>
+
+      {/* Center 30-day Ring + Day 5 - Visible from Frame 0 */}
+      <div style={{ position: "absolute", left: 540 - R - 40, top: 490 - R - 40, width: (R + 40) * 2, height: (R + 40) * 2 }}>
         <svg viewBox={`${-R - 40} ${-R - 40} ${(R + 40) * 2} ${(R + 40) * 2}`} width={(R + 40) * 2} height={(R + 40) * 2}>
           {Array.from({ length: 30 }).map((_, i) => {
-            const p = spring({ frame: frame - 6 - i * 1.1, fps, config: theme.spring.snappy });
+            const p = spring({ frame: frame - i * 0.8, fps, config: theme.spring.snappy });
             const lit = i < 5;
-            const litP = lit ? spring({ frame: frame - 26 - i * 3.2, fps, config: theme.spring.snappy }) : 0;
+            const litP = lit ? spring({ frame: frame - 20 - i * 3.2, fps, config: theme.spring.snappy }) : 0;
+            const barH = interpolate(p, [0, 1], [36, 56], clamp);
             return (
-              <rect key={i} x={-9} y={-R} width={18} height={interpolate(p, [0, 1], [0, 56])} rx={9}
-                fill={lit && litP > 0.5 ? C.primary : C.primarySoft} transform={`rotate(${i * 12}) scale(${1 + litP * 0.0}) translate(0 ${-litP * 8})`}
-                style={{ filter: lit && litP > 0.5 ? `drop-shadow(0 0 10px ${C.glow})` : undefined }} />
+              <rect key={i} x={-9} y={-R} width={18} height={barH} rx={9}
+                fill={lit && (frame === 0 || litP > 0.5) ? C.primary : C.primarySoft}
+                transform={`rotate(${i * 12}) translate(0 ${lit && litP > 0.5 ? -litP * 6 : 0})`}
+                style={{ filter: lit ? `drop-shadow(0 0 10px ${C.glow})` : undefined }} />
             );
           })}
         </svg>
-        <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", transform: `scale(${interpolate(numP, [0, 1], [0.6, 1])})`, opacity: interpolate(numP, [0, 0.5], [0, 1], clamp) }}>
-          <div style={text(66, theme.weights.strong, C.textDim)}>Day</div>
-          <div style={{ ...text(290), marginTop: -34 }}>5</div>
+        <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", transform: `scale(${pulse})` }}>
+          <div style={text(56, theme.weights.strong, C.textDim)}>Day</div>
+          <div style={{ ...text(240), marginTop: -28, color: C.primary, textShadow: `0 0 30px ${C.glow}` }}>৫</div>
         </div>
       </div>
-      <div style={{ position: "absolute", bottom: 78, width: "100%", display: "flex", justifyContent: "center" }}>
-        <WordReveal text="Survival Arabic" delay={22} per={6} justify="center" gap={26} style={text(112)}
-          wordStyle={(i) => (i === 1 ? { color: C.primary } : {})} />
+
+      {/* Bottom Title & Highlights - Visible from Frame 0 */}
+      <div style={{ position: "absolute", bottom: 74, width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
+        <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+          <span style={text(56, theme.weights.hero, C.text)}>৩০ দিনের</span>
+          <span style={text(56, theme.weights.hero, C.primary)}>Survival Arabic</span>
+        </div>
+        <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+          <Pill tone="soft" size={26} style={{ padding: "8px 20px" }}>✓ বাক্য ৪১ – ৫০</Pill>
+          <Pill tone="white" size={26} style={{ padding: "8px 20px" }}>✓ কথ্য আরবি</Pill>
+          <Pill tone="soft" size={26} style={{ padding: "8px 20px" }}>✓ Arabic Master</Pill>
+        </div>
       </div>
     </SceneExit>
   );

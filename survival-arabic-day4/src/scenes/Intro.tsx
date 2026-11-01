@@ -14,7 +14,18 @@ export const HookScene: React.FC<{ duration: number }> = ({ duration }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const breath = useBreath();
+
+  // Voiceover hits:
+  // 0.28s (f=8): "আরব দেশে থাকেন?"
+  // 1.62s (f=48): "কিন্তু আরবি বলতে গিয়ে আটকে যান?"
+  // 3.66s (f=102): "চিন্তা নেই!"
+  const pulse1 = spring({ frame: frame - 8, fps, config: theme.spring.bouncy });
+  const pulse2 = spring({ frame: frame - 48, fps, config: theme.spring.bouncy });
   const pop = spring({ frame: frame - 102, fps, config: theme.spring.bouncy });
+
+  const scale1 = interpolate(pulse1, [0, 0.5, 1], [1, 1.05, 1], clamp);
+  const scale2 = interpolate(pulse2, [0, 0.5, 1], [1, 1.04, 1], clamp);
+  const popScale = interpolate(pop, [0, 0.6, 1], [1, 1.15, 1], clamp);
 
   return (
     <SceneExit durationInFrames={duration}>
@@ -23,69 +34,176 @@ export const HookScene: React.FC<{ duration: number }> = ({ duration }) => {
       <Sfx name="chime" at={102} />
       <AbsoluteFill
         style={{
-          padding: 72,
-          justifyContent: "center",
+          padding: "68px 56px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
           alignItems: "center",
           fontFamily: theme.fonts.display,
         }}
       >
-        <Entrance delay={0}>
-          <Pill tone="accent" style={{ marginBottom: 28 }}>
-            প্রবাসীদের দৈনন্দিন আরবি
-          </Pill>
-        </Entrance>
-
-        <Card
-          style={{
-            width: "100%",
-            padding: "48px 44px",
-            textAlign: "center",
-            ...breath,
-          }}
-        >
-          <WordReveal
-            text="আরব দেশে থাকেন?"
-            delay={4}
-            per={4}
-            highlightWord="আরব"
-            style={{
-              fontSize: 64,
-              fontWeight: theme.weights.hero,
-              color: theme.colors.text,
-              justifyContent: "center",
-              marginBottom: 20,
-            }}
-          />
-          <WordReveal
-            text="কিন্তু আরবি বলতে গিয়ে আটকে যান?"
-            delay={44}
-            per={4}
-            highlightWord="আটকে"
-            style={{
-              fontSize: 46,
-              fontWeight: theme.weights.strong,
-              color: theme.colors.textDim,
-              justifyContent: "center",
-            }}
-          />
-        </Card>
-
+        {/* Top Header / Day Pill - Always crisp and visible at frame 0 */}
         <div
           style={{
-            marginTop: 36,
-            opacity: pop,
-            transform: `scale(${interpolate(pop, [0, 1], [0.8, 1], clamp)})`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 16,
+            width: "100%",
+            marginTop: 8,
           }}
         >
           <Pill
             tone="hero"
             style={{
-              fontSize: 44,
-              padding: "18px 48px",
+              fontSize: 32,
+              padding: "12px 32px",
+              fontWeight: theme.weights.hero,
               boxShadow: theme.shadows.hero,
+              letterSpacing: 0.5,
             }}
           >
-            চিন্তা নেই!
+            DAY 04 • চতুর্থ দিন
+          </Pill>
+
+          <Pill
+            tone="accent"
+            style={{
+              fontSize: 28,
+              padding: "12px 28px",
+              fontWeight: theme.weights.strong,
+            }}
+          >
+            প্রবাসীদের দৈনন্দিন আরবি
+          </Pill>
+        </div>
+
+        {/* Center Card - Always fully formed and readable at frame 0 */}
+        <Card
+          style={{
+            width: "100%",
+            padding: "52px 46px",
+            textAlign: "center",
+            boxShadow: theme.shadows.card,
+            border: `2px solid ${theme.colors.primarySoft}`,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 24,
+            ...breath,
+          }}
+        >
+          <div
+            style={{
+              fontSize: 68,
+              fontWeight: theme.weights.hero,
+              color: theme.colors.text,
+              lineHeight: 1.22,
+              letterSpacing: 0,
+              transform: `scale(${scale1})`,
+              transformOrigin: "center center",
+            }}
+          >
+            <span
+              style={{
+                color: theme.colors.primary,
+                textShadow: `0 0 24px ${theme.colors.glow}`,
+              }}
+            >
+              আরব
+            </span>{" "}
+            দেশে থাকেন?
+          </div>
+
+          <div
+            style={{
+              fontSize: 50,
+              fontWeight: theme.weights.strong,
+              color: theme.colors.textDim,
+              lineHeight: 1.25,
+              letterSpacing: 0,
+              transform: `scale(${scale2})`,
+              transformOrigin: "center center",
+            }}
+          >
+            কিন্তু আরবি বলতে গিয়ে{" "}
+            <span
+              style={{
+                color: theme.colors.accent,
+                fontWeight: theme.weights.hero,
+              }}
+            >
+              আটকে
+            </span>{" "}
+            যান?
+          </div>
+
+          {/* Highlights Row */}
+          <div
+            style={{
+              display: "flex",
+              gap: 14,
+              flexWrap: "wrap",
+              justifyContent: "center",
+              marginTop: 10,
+            }}
+          >
+            <Pill
+              tone="soft"
+              style={{
+                fontSize: 26,
+                padding: "10px 22px",
+                fontWeight: theme.weights.strong,
+              }}
+            >
+              ✓ বাক্য ৩১ – ৪০
+            </Pill>
+            <Pill
+              tone="white"
+              style={{
+                fontSize: 26,
+                padding: "10px 22px",
+                fontWeight: theme.weights.strong,
+                border: `1.5px solid ${theme.colors.line}`,
+              }}
+            >
+              ✓ ৩০ দিনের সহজ কোর্স
+            </Pill>
+            <Pill
+              tone="soft"
+              style={{
+                fontSize: 26,
+                padding: "10px 22px",
+                fontWeight: theme.weights.strong,
+              }}
+            >
+              ✓ Arabic Master
+            </Pill>
+          </div>
+        </Card>
+
+        {/* Bottom Relief / Callout */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 14,
+            marginBottom: 12,
+            transform: `scale(${popScale})`,
+            transformOrigin: "center center",
+          }}
+        >
+          <Pill
+            tone="hero"
+            style={{
+              fontSize: 46,
+              padding: "18px 56px",
+              boxShadow: theme.shadows.hero,
+              fontWeight: theme.weights.hero,
+            }}
+          >
+            চিন্তা নেই! সহজে শিখুন
           </Pill>
         </div>
       </AbsoluteFill>

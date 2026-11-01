@@ -20,46 +20,59 @@ export const HookScene: React.FC = () => {
   const dayPop = useEnter(tDay, theme.springs.pop);
   const br = useBreathe(2.6, 0.03);
 
+  const dayScale = f < tDay ? 1 : 1 + dayPop * 0.12;
+
   return (
     <SceneShell dur={dur('hook')}>
       <Sfx at={tTitle + 2} name="thud" />
       <Sfx at={tSurv + 2} name="pop" rate={1.05} />
       <Sfx at={tDay + 2} name="chime" />
-      <Reveal start={2} from={0.5} cfg={theme.springs.pop} y={20} style={{position: 'absolute', left: 70, top: 64}}>
-        <Pill bg={c.accent} color={c.text} size={52} style={{transform: `rotate(${-4 + hi * 0}deg)`}}>Hi!</Pill>
-      </Reveal>
+
+      {/* Top Header - Visible from Frame 0 */}
+      <div style={{position: 'absolute', top: 64, width: '100%', display: 'flex', justifyContent: 'center', gap: 14}}>
+        <Pill bg={c.hero} color={c.white} size={32} style={{padding: '10px 28px', boxShadow: theme.shadow.pop}}>
+          DAY 06 • ষষ্ঠ দিন
+        </Pill>
+        <Pill bg={c.accentSoft} color={c.text} size={28} style={{padding: '10px 24px'}}>
+          প্রবাসীদের দৈনন্দিন আরবি
+        </Pill>
+      </div>
 
       <div style={{position: 'absolute', top: 176, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{display: 'flex', alignItems: 'baseline', gap: 28, lineHeight: 1}}>
-          <Reveal start={tTitle} cfg={theme.springs.pop} y={50} from={0.7}>
-            <span style={{fontFamily: theme.fonts.family, fontWeight: 700, fontSize: 214, color: c.hero, letterSpacing: 0}}><Counter to={30} start={tTitle} dur={22} /></span>
-          </Reveal>
-          <WordStagger text="দিনে" start={tTitle + 6} size={110} color={c.text} />
+          <span style={{fontFamily: theme.fonts.family, fontWeight: 700, fontSize: 160, color: c.hero, letterSpacing: 0}}>৩০</span>
+          <span style={{fontFamily: theme.fonts.family, fontWeight: 700, fontSize: 90, color: c.text}}>দিনে</span>
         </div>
         <div style={{marginTop: 6}}>
-          <WordStagger text="Survival Arabic" start={tSurv} size={118} color={c.text} stagger={6} hi={[1]} hiStart={tSurv + 16} />
+          <span style={{fontFamily: theme.fonts.family, fontWeight: 700, fontSize: 96, color: c.text}}>Survival <span style={{color: c.hero}}>Arabic</span></span>
         </div>
-        <Reveal start={tDay} cfg={theme.springs.pop} from={0.5} y={30} style={{marginTop: 16}}>
-          <Pill bg={c.hero} color={c.white} size={64} style={{transform: `scale(${br * dayPop})`, boxShadow: theme.shadow.pop}}>
+        <div style={{marginTop: 18}}>
+          <Pill bg={c.hero} color={c.white} size={56} style={{transform: `scale(${br * dayScale})`, boxShadow: theme.shadow.pop}}>
             <span>Day</span>
             <span style={{background: c.accent, color: c.text, borderRadius: 999, padding: '0 22px'}}>6</span>
           </Pill>
-        </Reveal>
+        </div>
       </div>
 
       {/* ৩০টি ডট: প্রতিটি একটি দিন; ষষ্ঠটি = Day 6 */}
-      <div style={{position: 'absolute', left: 116, top: 722, width: 848, display: 'grid', gridTemplateColumns: 'repeat(10, 1fr)', gap: 30}}>
+      <div style={{position: 'absolute', left: 116, top: 680, width: 848, display: 'grid', gridTemplateColumns: 'repeat(10, 1fr)', gap: 30}}>
         {Array.from({length: 30}).map((_, i) => {
-          const p = interpolate(f, [tTitle + 4 + i * 1.5, tTitle + 4 + i * 1.5 + 10], [0, 1], {easing: theme.easings.out, ...clamp});
-          const lit = i < 5 ? interpolate(f, [tDay - 14 + i * 3, tDay - 8 + i * 3], [0, 1], clamp) : 0;
+          const lit = i < 6;
           const six = i === 5;
           const sp = six ? dayPop : 0;
           return (
-            <div key={i} style={{aspectRatio: '1', borderRadius: '50%', opacity: p, transform: `scale(${(0.5 + 0.5 * p) * (six ? 1 + 0.28 * sp : 1)})`,
-              background: six && sp > 0.05 ? c.accent : lit > 0.5 ? c.hero : c.heroSoft,
-              boxShadow: six && sp > 0.05 ? `0 0 0 8px ${c.accentSoft}` : 'none'}} />
+            <div key={i} style={{aspectRatio: '1', borderRadius: '50%', opacity: 1, transform: `scale(${six ? 1 + 0.28 * sp : 1})`,
+              background: six ? c.accent : lit ? c.hero : c.heroSoft,
+              boxShadow: six ? `0 0 0 8px ${c.accentSoft}` : 'none'}} />
           );
         })}
+      </div>
+
+      {/* Highlights Tag Row */}
+      <div style={{position: 'absolute', bottom: 64, width: '100%', display: 'flex', justifyContent: 'center', gap: 12}}>
+        <Pill bg={c.heroSoft} color={c.heroDeep} size={26} style={{padding: '8px 20px'}}>✓ বাক্য ৫১ – ৬০</Pill>
+        <Pill bg={c.white} color={c.text} size={26} style={{padding: '8px 20px', border: `1.5px solid ${c.line}`}}>✓ ৩০ দিনের কোর্স</Pill>
+        <Pill bg={c.heroSoft} color={c.heroDeep} size={26} style={{padding: '8px 20px'}}>✓ Arabic Master</Pill>
       </div>
     </SceneShell>
   );

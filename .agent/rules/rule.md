@@ -224,6 +224,12 @@ Sentence scenes rotate sequentially across 3 layouts to maintain visual rhythm (
    - Checkmark icon: at least `32px × 32px`
    - Grid layout: `columnGap: 20`, `rowGap: 18`
    - Bangla instruction: Recap Grid সিনের ১০টি বাক্যের কার্ডে পর্যাপ্ত প্যাডিং (padding: 24px 26px), বড় টেক্সট (fontSize: 32px) এবং স্পষ্ট ব্যাজ রাখবে, যাতে কার্ডগুলো ছোট বা চাপা না দেখায় এবং সহজে পড়া যায়।
+10. **Video Start & Frame 0 Thumbnail Invariant (MANDATORY)**:
+    Never start a video with a blank scene, empty card, or 0-opacity fade-in! When videos are uploaded to social media platforms (Facebook, YouTube Shorts, Reels, TikTok), platforms automatically capture frame 0 as the video preview/thumbnail. If frame 0 is blank or fading in, users see an empty screen and lose interest.
+    - **Frame 0 Must Be a Full Thumbnail**: The initial frame (frame 0) of `Main` / `HookScene` must be fully formed, 100% visible, perfectly styled, and click-worthy (Day badge, series pill, bold hook question, feature badges, solution tag).
+    - **Synchronized Kinetic Animation**: As the voiceover starts (e.g. frame ~8, frame ~48, frame ~102), the text elements pulse/highlight to sync with speech, rather than fading in from invisible.
+    - **Dedicated Thumbnail Composition**: Every project must register a `<Composition id="Thumbnail" component={Thumbnail} durationInFrames={1} fps={FPS} width={1080} height={1080} />` in `Root.tsx` and have a `"thumbnail"` script in `package.json` (`remotion still src/index.ts Thumbnail out/thumbnail.png --overwrite`) so users can export a standalone high-res cover image anytime.
+    - Bangla instruction: কোনো ভিডিওর প্রথম ফ্রেম (Frame 0) কখনোই ফাঁকা বা ব্ল্যাঙ্ক রাখা যাবে না। Frame 0-তেই সুন্দর থাম্বনেইল লেআউট (Day ব্যাজ, মূল হুক প্রশ্ন, টপিক ব্যাজ) স্পষ্ট দৃশ্যমান থাকতে হবে, যাতে সোশ্যাল মিডিয়ায় আপলোড করার পর থাম্বনেইল হিসেবে ব্ল্যাঙ্ক স্ক্রিন না দেখায়।
 
 ---
 

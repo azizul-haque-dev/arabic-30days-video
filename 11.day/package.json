@@ -5,6 +5,7 @@
   "scripts": {
     "studio": "remotion studio",
     "render": "node scripts/render.mjs",
+    "thumbnail": "remotion still src/index.ts Thumbnail out/thumbnail.png --overwrite",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
