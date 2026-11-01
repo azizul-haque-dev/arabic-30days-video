@@ -216,6 +216,14 @@ Sentence scenes rotate sequentially across 3 layouts to maintain visual rhythm (
 6. **Low Volume for Audio Additions**: Any new sound effect additions must keep gain levels below `0.35` to preserve speech intelligibility.
 7. **Smallest Viable Diff**: Implement focused changes without refactoring unrelated layout components or re-ordering timing sequences.
 8. **Never Commit Secrets**: Keep configuration free of private API keys, credentials, or personal tokens.
+9. **Recap Grid Readability Invariant**: When displaying the 10-sentence summary grid (`RecapScene` / Recap Grid), the cards must have generous padding, readable text, and clear badges so they never look cramped:
+   - Card padding: `padding: "24px 26px"`
+   - Card border radius: `borderRadius: 30`
+   - Text size: `fontSize: 32px` (hero/strong weight)
+   - Number badge: at least `56px × 44px` with `fontSize: 24px`
+   - Checkmark icon: at least `32px × 32px`
+   - Grid layout: `columnGap: 20`, `rowGap: 18`
+   - Bangla instruction: Recap Grid সিনের ১০টি বাক্যের কার্ডে পর্যাপ্ত প্যাডিং (padding: 24px 26px), বড় টেক্সট (fontSize: 32px) এবং স্পষ্ট ব্যাজ রাখবে, যাতে কার্ডগুলো ছোট বা চাপা না দেখায় এবং সহজে পড়া যায়।
 
 ---
 
@@ -270,4 +278,3 @@ After making changes:
 - [ ] If new SFX was added, check that playback volume does not exceed `0.35`.
 - [ ] Verify that scene transitions continue to cut seamlessly without overlapping audio or visual artifacts.
 - [ ] Ensure `MEMORY.md` remains updated if architectural decisions or tokens were modified.
-

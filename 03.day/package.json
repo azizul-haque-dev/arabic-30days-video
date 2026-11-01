@@ -1,25 +1,22 @@
 {
-  "name": "day3-survival-arabic",
+  "name": "survival-arabic-day3",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
   "scripts": {
     "studio": "remotion studio",
     "render": "node scripts/render.mjs",
-    "render:remotion": "remotion render src/index.ts Main out/video.mp4",
-    "tsc": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "@remotion/bundler": "4.0.539",
-    "@remotion/cli": "4.0.539",
-    "@remotion/renderer": "4.0.539",
-    "@types/react": "^19.3.0",
+    "@remotion/cli": "^4.0.539",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "remotion": "4.0.539",
-    "typescript": "^7.0.2"
+    "remotion": "^4.0.539"
   },
-  "private": true
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^7.0.2"
+  }
 }
+

@@ -1,28 +1,42 @@
-// theme.ts — single source of truth: colors, fonts, easings, spring presets, motion constants.
 import { Easing } from "remotion";
 
 export const theme = {
   colors: {
-    // Scheme: মিন্ট ফ্রেশ
     bg: "#EEF8F5",
-    bgAlt: "#DDF1EA",
-    primary: "#0E9F6E", // hero
-    primaryDeep: "#0A7A55",
-    primarySoft: "rgba(14, 159, 110, 0.12)",
-    accent: "#F59E0B",
-    accentSoft: "rgba(245, 158, 11, 0.18)",
-    text: "#10231D",
-    textDim: "#4F6F64",
+    bgAlt: "#DDF0EA",
     surface: "#FFFFFF",
-    onPrimary: "#FFFFFF",
+    primary: "#0E9F6E",
+    primaryDeep: "#0A7A55",
+    primarySoft: "#CDEBDF",
+    accent: "#F59E0B",
+    accentSoft: "#FDE8BD",
+    text: "#10231D",
+    textDim: "#4D6A60",
     line: "rgba(16, 35, 29, 0.10)",
     glow: "rgba(14, 159, 110, 0.35)",
     shadow: "rgba(16, 35, 29, 0.16)",
   },
-  fonts: { display: "HindSiliguri, sans-serif", body: "HindSiliguri, sans-serif" },
-  weight: { body: 600, display: 700 },
-  radius: { card: 40, small: 24, pill: 999 },
-  size: { w: 1080, h: 1080, margin: 72 },
+  fonts: {
+    display: "'Hind Siliguri', 'Noto Sans Bengali', sans-serif",
+    body: "'Hind Siliguri', 'Noto Sans Bengali', sans-serif",
+    arabic: "'Noto Naskh Arabic', 'Noto Sans Arabic', sans-serif",
+  },
+  weights: {
+    hero: 700,
+    strong: 600,
+    body: 400,
+  },
+  radii: {
+    sm: 20,
+    md: 32,
+    lg: 44,
+    pill: 999,
+  },
+  shadows: {
+    card: "0 24px 60px -16px rgba(16, 35, 29, 0.16), 0 4px 16px rgba(16, 35, 29, 0.06)",
+    soft: "0 10px 28px -8px rgba(16, 35, 29, 0.12)",
+    hero: "0 24px 64px -12px rgba(14, 159, 110, 0.35)",
+  },
   ease: {
     out: Easing.bezier(0.16, 1, 0.3, 1),
     inOut: Easing.bezier(0.83, 0, 0.17, 1),
@@ -33,12 +47,4 @@ export const theme = {
     smooth: { damping: 20, stiffness: 90, mass: 1 },
     bouncy: { damping: 11, stiffness: 170, mass: 0.7 },
   },
-  motion: {
-    staggerWord: 3, staggerCard: 5, staggerBlock: 6,
-    exit: 9, // frames, faster than entrances
-    overlap: 6, // scene overlap frames
-    lead: 5, // visuals land this many frames before the narration
-  },
 } as const;
-
-export type SpringName = keyof typeof theme.spring;

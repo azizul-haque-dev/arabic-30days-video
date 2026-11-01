@@ -2,21 +2,22 @@
   "name": "survival-arabic-day4",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "studio": "remotion studio",
-    "render": "node scripts/render.mjs",
-    "typecheck": "tsc --noEmit"
+    "render": "remotion render src/index.ts Main out/video.mp4",
+    "typecheck": "tsc --noEmit",
+    "sfx": "node scripts/make-sfx.mjs && node scripts/check-sfx.mjs",
+    "timing": "node scripts/gen-timing.mjs"
   },
   "dependencies": {
-    "@remotion/cli": "^4.0.539",
-    "@remotion/transitions": "^4.0.539",
-    "react": "^19.3.1",
-    "react-dom": "^19.3.1",
-    "remotion": "^4.0.539"
+    "@remotion/cli": "^4.0.240",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.240"
   },
   "devDependencies": {
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "typescript": "^7.0.2"
+    "@types/react": "^19.0.0",
+    "typescript": "^5.7.0"
   }
 }

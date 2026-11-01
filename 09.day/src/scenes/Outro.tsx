@@ -36,7 +36,7 @@ export const RecapScene: React.FC<{ dur: number }> = ({ dur }) => {
       <Sfx name="chime" at={40} rate={1.05} />
 
       {/* Top Header */}
-      <div style={{ position: "absolute", top: 70, width: "100%", display: "flex", justifyContent: "center" }}>
+      <div style={{ position: "absolute", top: 44, width: "100%", display: "flex", justifyContent: "center" }}>
         <Entrance delay={4} from={-20}>
           <Pill tone="hero" size={34}>আজকের ১০টি বাক্য সম্পন্ন!</Pill>
         </Entrance>
@@ -46,12 +46,13 @@ export const RecapScene: React.FC<{ dur: number }> = ({ dur }) => {
       <div
         style={{
           position: "absolute",
-          top: 150,
-          left: 70,
-          right: 70,
+          top: 124,
+          left: 56,
+          right: 56,
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          gap: 12,
+          columnGap: 20,
+          rowGap: 18,
         }}
       >
         {SENTENCES.map((s, idx) => {
@@ -61,9 +62,9 @@ export const RecapScene: React.FC<{ dur: number }> = ({ dur }) => {
               key={s.n}
               style={{
                 background: C.surface,
-                padding: "12px 18px",
-                borderRadius: 22,
-                border: `1px solid ${C.line}`,
+                padding: "24px 26px",
+                borderRadius: 30,
+                border: `1.5px solid ${C.primarySoft}`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -72,30 +73,31 @@ export const RecapScene: React.FC<{ dur: number }> = ({ dur }) => {
                 boxShadow: theme.shadow.soft,
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
                 <div
                   style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: 16,
+                    width: 56,
+                    height: 44,
+                    borderRadius: 22,
                     background: C.primarySoft,
                     color: C.primaryDeep,
-                    fontSize: 18,
+                    fontSize: 24,
                     fontWeight: 700,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    flexShrink: 0,
                   }}
                 >
                   {s.nBn}
                 </div>
-                <div style={{ ...textStyle(26, theme.weights.strong, C.text), maxWidth: 300, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                <div style={{ ...textStyle(32, theme.weights.strong, C.text), maxWidth: 320, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                   {s.recap}
                 </div>
               </div>
               {/* Checkmark */}
-              <div style={{ width: 22, height: 22, borderRadius: 11, background: C.primary, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <svg viewBox="0 0 24 24" width={14} height={14} fill="none" stroke={C.white} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round">
+              <div style={{ width: 32, height: 32, borderRadius: 16, background: C.primary, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <svg viewBox="0 0 24 24" width={18} height={18} fill="none" stroke={C.white} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
@@ -105,11 +107,11 @@ export const RecapScene: React.FC<{ dur: number }> = ({ dur }) => {
       </div>
 
       {/* 90 / 300 Milestone Banner */}
-      <div style={{ position: "absolute", bottom: 70, left: 70, right: 70 }}>
+      <div style={{ position: "absolute", bottom: 44, left: 56, right: 56 }}>
         <Entrance delay={30} from={36} config={theme.spring.snappy}>
           <Card
             style={{
-              padding: "26px 36px",
+              padding: "24px 36px",
               borderRadius: 38,
               border: `2px solid ${C.primary}`,
               background: `linear-gradient(135deg, ${C.surface}, ${C.bgAlt})`,
@@ -119,14 +121,14 @@ export const RecapScene: React.FC<{ dur: number }> = ({ dur }) => {
             }}
           >
             <div>
-              <div style={textStyle(32, theme.weights.strong, C.textDim)}>আলহামদুলিল্লাহ মোট অগ্রগতি</div>
-              <div style={{ ...textStyle(62, theme.weights.hero, C.primaryDeep), marginTop: 2 }}>
+              <div style={textStyle(30, theme.weights.strong, C.textDim)}>আলহামদুলিল্লাহ মোট অগ্রগতি</div>
+              <div style={{ ...textStyle(58, theme.weights.hero, C.primaryDeep), marginTop: 2 }}>
                 <span style={{ fontVariantNumeric: "tabular-nums" }}>{count}</span> / ৩০০টি বাক্য
               </div>
             </div>
             <div style={{ textAlign: "right" }}>
-              <Pill tone="accent" size={32}>৩০% সম্পন্ন</Pill>
-              <div style={{ ...textStyle(26, theme.weights.strong, C.textDim), marginTop: 6 }}>
+              <Pill tone="accent" size={30}>৩০% সম্পন্ন</Pill>
+              <div style={{ ...textStyle(24, theme.weights.strong, C.textDim), marginTop: 6 }}>
                 ৯ দিন সফলভাবে শেষ
               </div>
             </div>

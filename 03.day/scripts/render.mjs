@@ -1,144 +1,123 @@
-import { spawn } from "node:child_process";
-import fs from "node:fs";
-import net from "node:net";
+import { spawnSync } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, rmSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { RenderInternals } from "@remotion/renderer";
 
-const projectDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const audioConfig = JSON.parse(fs.readFileSync(path.join(projectDir, "src/audio-config.json"), "utf8"));
-const publicDir = path.join(projectDir, "public");
-const output = path.join(projectDir, "out/video.mp4");
+const projectRoot = fileURLToPath(new URL("../", import.meta.url));
+const outputPath = path.join(projectRoot, "out", "video.mp4");
+const configPath = path.join(projectRoot, "src", "config.ts");
+const requiredAudioFiles = [
+  "public/voiceover.wav",
+  "public/sfx/pop.wav",
+  "public/sfx/click.wav",
+  "public/sfx/tick.wav",
+  "public/sfx/whoosh.wav",
+  "public/sfx/chime.wav",
+  "public/sfx/thud.wav",
+];
 
-const requireAudioFile = (file) => {
-  const fullPath = path.resolve(publicDir, file);
-  const relative = path.relative(publicDir, fullPath);
-  if (relative.startsWith("..") || path.isAbsolute(relative)) {
-    throw new Error(`Audio asset path is outside public/: ${file}`);
+const requireEnabledConfig = (source, name) => {
+  const match = source.match(new RegExp(`export const ${name} = (true|false);`));
+  if (!match) {
+    throw new Error(`Could not verify ${name} in src/config.ts.`);
   }
-  if (!fs.existsSync(fullPath) || !fs.statSync(fullPath).isFile() || fs.statSync(fullPath).size === 0) {
-    throw new Error(`Required audio file is missing or empty: ${fullPath}`);
+  if (match[1] !== "true") {
+    throw new Error(`${name} must be true for a render with mandatory audio.`);
   }
 };
 
-const readBox = async (handle, offset, parentEnd) => {
-  if (offset + 8 > parentEnd) throw new Error("Invalid MP4 box header.");
-  const header = Buffer.alloc(8);
-  const { bytesRead } = await handle.read(header, 0, header.length, offset);
-  if (bytesRead !== header.length) throw new Error("Could not read MP4 box header.");
-
-  let size = header.readUInt32BE(0);
-  const type = header.toString("ascii", 4, 8);
-  let headerSize = 8;
-  if (size === 1) {
-    const extendedSize = Buffer.alloc(8);
-    const extendedRead = await handle.read(extendedSize, 0, 8, offset + 8);
-    if (extendedRead.bytesRead !== 8) throw new Error("Could not read extended MP4 box size.");
-    const largeSize = extendedSize.readBigUInt64BE(0);
-    if (largeSize > BigInt(Number.MAX_SAFE_INTEGER)) throw new Error("MP4 box is too large to inspect.");
-    size = Number(largeSize);
-    headerSize = 16;
-  } else if (size === 0) {
-    size = parentEnd - offset;
+const requireAudioFile = (relativePath) => {
+  const absolutePath = path.join(projectRoot, relativePath);
+  if (!existsSync(absolutePath) || !statSync(absolutePath).isFile() || statSync(absolutePath).size === 0) {
+    throw new Error(`Required audio file is missing or empty: ${relativePath}`);
   }
-  if (size < headerSize || offset + size > parentEnd) throw new Error(`Invalid MP4 ${type} box size.`);
-  return { type, start: offset, end: offset + size, headerSize };
 };
 
-const children = async (handle, parent) => {
-  const result = [];
-  let offset = parent.start + parent.headerSize;
-  while (offset < parent.end) {
-    const box = await readBox(handle, offset, parent.end);
-    result.push(box);
-    offset = box.end;
+const render = () => {
+  const cliPath = path.join(projectRoot, "node_modules", "@remotion", "cli", "remotion-cli.js");
+  if (!existsSync(cliPath)) {
+    throw new Error(`Remotion CLI was not found at ${cliPath}. Install project dependencies before rendering.`);
   }
-  return result;
+
+  const result = spawnSync(
+    process.execPath,
+    [
+      cliPath,
+      "render",
+      "src/index.ts",
+      "Main",
+      outputPath,
+      "--codec",
+      "h264",
+      "--audio-codec",
+      "aac",
+      "--enforce-audio-track",
+      "--overwrite",
+    ],
+    { cwd: projectRoot, stdio: "inherit" },
+  );
+  if (result.error) {
+    throw result.error;
+  }
+  if (result.status !== 0) {
+    throw new Error(`Remotion render failed with exit code ${result.status ?? "unknown"}.`);
+  }
 };
 
-const hasAudioTrack = async (filename) => {
-  const handle = await fs.promises.open(filename, "r");
+const verifyAudioStream = () => {
+  if (!existsSync(outputPath) || statSync(outputPath).size === 0) {
+    throw new Error(`Render did not produce a non-empty MP4: ${outputPath}`);
+  }
+
+  const ffprobePath = RenderInternals.getExecutablePath({
+    indent: false,
+    logLevel: "error",
+    type: "ffprobe",
+    binariesDirectory: null,
+  });
+  if (!existsSync(ffprobePath)) {
+    throw new Error(`Cannot verify rendered audio: Remotion ffprobe was not found at ${ffprobePath}`);
+  }
+
+  const probe = spawnSync(
+    ffprobePath,
+    ["-v", "error", "-select_streams", "a", "-show_entries", "stream=codec_type", "-of", "json", outputPath],
+    { cwd: projectRoot, encoding: "utf8" },
+  );
+  if (probe.error) {
+    throw probe.error;
+  }
+  if (probe.status !== 0) {
+    throw new Error(`Could not verify the rendered MP4 audio stream: ${probe.stderr || "ffprobe failed"}`);
+  }
+
+  let streams;
   try {
-    const { size } = await handle.stat();
-    const topLevel = [];
-    for (let offset = 0; offset < size;) {
-      const box = await readBox(handle, offset, size);
-      topLevel.push(box);
-      offset = box.end;
-    }
-
-    for (const moov of topLevel.filter((box) => box.type === "moov")) {
-      for (const trak of (await children(handle, moov)).filter((box) => box.type === "trak")) {
-        for (const mdia of (await children(handle, trak)).filter((box) => box.type === "mdia")) {
-          for (const hdlr of (await children(handle, mdia)).filter((box) => box.type === "hdlr")) {
-            const handler = Buffer.alloc(4);
-            const position = hdlr.start + hdlr.headerSize + 8;
-            const { bytesRead } = await handle.read(handler, 0, 4, position);
-            if (bytesRead === 4 && handler.toString("ascii") === "soun") return true;
-          }
-        }
-      }
-    }
-    return false;
-  } finally {
-    await handle.close();
+    streams = JSON.parse(probe.stdout).streams;
+  } catch (error) {
+    throw new Error("Could not parse ffprobe output while verifying the rendered MP4 audio stream.", { cause: error });
   }
-};
+  if (!Array.isArray(streams) || streams.length === 0) {
+    throw new Error(`Rendered MP4 has no audio stream: ${outputPath}`);
+  }
 
-const findAvailablePort = () => new Promise((resolve, reject) => {
-  const server = net.createServer();
-  server.once("error", reject);
-  server.listen(0, "127.0.0.1", () => {
-    const address = server.address();
-    if (!address || typeof address === "string") {
-      server.close();
-      reject(new Error("Could not determine an available render port."));
-      return;
-    }
-    server.close((error) => error ? reject(error) : resolve(address.port));
-  });
-});
-
-const runRender = async () => {
-  const port = await findAvailablePort();
-  const command = process.platform === "win32" ? (process.env.ComSpec ?? "cmd.exe") : "npm";
-  const args = process.platform === "win32"
-    ? ["/d", "/s", "/c", `npm run render:remotion -- --port ${port} --enforce-audio-track`]
-    : ["run", "render:remotion", "--", "--port", String(port), "--enforce-audio-track"];
-  await new Promise((resolve, reject) => {
-    const child = spawn(command, args, { cwd: projectDir, stdio: "inherit" });
-    child.once("error", reject);
-    child.once("exit", (code, signal) => {
-      if (code === 0) resolve();
-      else reject(new Error(`Remotion render failed${signal ? ` with signal ${signal}` : ` with exit code ${code}`}.`));
-    });
-  });
+  console.log(`Verified ${streams.length} audio stream(s) in ${outputPath}`);
 };
 
 try {
-  if (audioConfig.voiceover?.enabled !== true || audioConfig.voiceover?.includeInRender !== true) {
-    throw new Error("Voiceover must be enabled and included in renders in src/audio-config.json.");
-  }
-  if (audioConfig.sfx?.enabled !== true || audioConfig.sfx?.includeInRender !== true) {
-    throw new Error("Sound effects must be enabled and included in renders in src/audio-config.json.");
-  }
-  if (!Array.isArray(audioConfig.sfx.files) || audioConfig.sfx.files.length === 0) {
-    throw new Error("No required sound-effect files are configured in src/audio-config.json.");
-  }
+  const config = readFileSync(configPath, "utf8");
+  requireEnabledConfig(config, "RENDER_VOICEOVER");
+  requireEnabledConfig(config, "SFX_ENABLED");
+  requiredAudioFiles.forEach(requireAudioFile);
+  console.log("Audio preflight passed: voiceover and sound effects are enabled and all required files are present.");
 
-  requireAudioFile(audioConfig.voiceover.file);
-  audioConfig.sfx.files.forEach((file) => requireAudioFile(path.join("sfx", file)));
-  fs.mkdirSync(path.dirname(output), { recursive: true });
-
-  console.log(`Audio preflight passed: voiceover and ${audioConfig.sfx.files.length} sound-effect files are enabled and present.`);
-  await runRender();
-  if (!fs.existsSync(output) || fs.statSync(output).size === 0) {
-    throw new Error(`Render completed without producing a non-empty MP4: ${output}`);
-  }
-  if (!(await hasAudioTrack(output))) {
-    throw new Error(`Audio verification failed: ${output} contains no audio stream.`);
-  }
-  console.log(`Render verified: ${output} contains an audio stream.`);
+  mkdirSync(path.dirname(outputPath), { recursive: true });
+  rmSync(outputPath, { force: true });
+  render();
+  verifyAudioStream();
 } catch (error) {
   console.error(`Render failed: ${error instanceof Error ? error.message : String(error)}`);
   process.exitCode = 1;
 }
+

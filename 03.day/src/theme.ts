@@ -1,37 +1,51 @@
-// theme.ts — single source of truth: colors, fonts, easing, springs, shape, shadows.
+// theme.ts — single source of truth for colors, fonts, easings, and spring presets.
+// Color scheme: মিন্ট ফ্রেশ (হালকা, ঠান্ডা) — bg #EEF8F5, hero #0E9F6E, accent #F59E0B, text #10231D.
+// Never inline hex colors or easings directly inside components.
 import { Easing } from "remotion";
-
-export const VIDEO = { width: 1080, height: 1080, fps: 30 } as const;
 
 export const theme = {
   colors: {
-    // মিন্ট ফ্রেশ
-    bg: "#EEF8F5",
-    bgAlt: "#E1F2EC",
-    primary: "#0E9F6E", // hero
-    primaryDark: "#0A7A55",
-    primarySoft: "#D3EEE3",
-    accent: "#F59E0B",
-    accentSoft: "#FDEBC8",
-    text: "#10231D",
-    textDim: "#4F6B62",
-    card: "#FFFFFF",
-    line: "#BFE0D3",
-    onPrimary: "#FFFFFF",
+    bg: "#EEF8F5", // Mint Fresh Soft Background
+    bgAlt: "#DDF0EA",
+    surface: "#FFFFFF",
+    primary: "#0E9F6E", // Hero color: Mint Fresh Emerald
+    primaryDeep: "#0A7A55",
+    primarySoft: "#CDEBDF",
+    accent: "#F59E0B", // Accent color: Warm Amber
+    accentSoft: "#FDE8BD",
+    text: "#10231D", // Deep Forest Slate
+    textDim: "#4D6A60",
+    line: "rgba(16, 35, 29, 0.10)",
     glow: "rgba(14, 159, 110, 0.35)",
     shadow: "rgba(16, 35, 29, 0.16)",
-    shade: "rgba(16, 35, 29, 0.10)",
+    white: "#FFFFFF",
+    arabic: "#08503C", // Deep readable tone for Arabic calligraphy
   },
   fonts: {
-    display: "'Hind Siliguri', sans-serif",
-    body: "'Hind Siliguri', sans-serif",
+    display: "'Hind Siliguri', 'Noto Sans Bengali', sans-serif",
+    body: "'Hind Siliguri', 'Noto Sans Bengali', sans-serif",
+    arabic: "'Amiri', 'Scheherazade New', 'Traditional Arabic', 'Segoe UI', Tahoma, sans-serif",
   },
-  weight: { body: 500, display: 700 },
-  radius: { card: 40, bubble: 44, pill: 999, small: 22 },
+  weights: {
+    hero: 700,
+    strong: 600,
+    body: 400,
+  },
+  radius: {
+    sm: 20,
+    md: 32,
+    lg: 44,
+    pill: 999,
+  },
   shadow: {
-    card: "0 28px 56px -22px rgba(16, 35, 29, 0.22), 0 2px 0 rgba(255,255,255,0.8) inset",
-    soft: "0 14px 30px -14px rgba(16, 35, 29, 0.20)",
-    hero: "0 30px 60px -22px rgba(14, 159, 110, 0.55)",
+    card: "0 30px 60px -24px rgba(16, 35, 29, 0.28), 0 6px 16px -6px rgba(16, 35, 29, 0.10)",
+    soft: "0 14px 30px -14px rgba(16, 35, 29, 0.22)",
+    hero: "0 24px 50px -16px rgba(14, 159, 110, 0.55)",
+  },
+  size: {
+    w: 1080,
+    h: 1080,
+    pad: 80,
   },
   ease: {
     out: Easing.bezier(0.16, 1, 0.3, 1),
@@ -43,10 +57,5 @@ export const theme = {
     smooth: { damping: 20, stiffness: 90, mass: 1 },
     bouncy: { damping: 11, stiffness: 170, mass: 0.7 },
   },
-  motion: {
-    lead: 5, // frames visuals enter before the related speech
-    wordGap: 4, // stagger between words (3–6)
-    exit: 10, // exit frames (faster than entrances)
-    overlap: 10,
-  },
 } as const;
+

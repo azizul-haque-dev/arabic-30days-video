@@ -1,295 +1,501 @@
 import React from "react";
-import { interpolate, useCurrentFrame } from "remotion";
+import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { theme } from "../theme";
-import { rel, Sentence as S } from "../content";
-import {
-  bn, fitSize, GlassCard, HeroCard, Icon, Pop, Shine, Tag, Waveform, Words, useBreathe, usePulse,
-} from "../components/kit";
+import { BEATS, SCENES } from "../timing";
+import { SENTENCES } from "../content";
+import { Card, Counter, Entrance, Pill, SceneExit, WordReveal, clamp, useBreath } from "../components/kit";
+import { Icon } from "../components/Icons";
+import { Sfx } from "../components/Sfx";
 
-const clampOpt = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
+const C = theme.colors;
 
-type T = { sit: number; hint: number; phrase: number; echo: number; meaning: number; say: number };
-type LayoutProps = { s: S; t: T };
-
-const useT = (s: S, from: number): T => ({
-  sit: rel(from, s.situationAt),
-  hint: s.hintAt ? rel(from, s.hintAt) : 0,
-  phrase: rel(from, s.phraseAt),
-  echo: rel(from, s.echoAt),
-  meaning: rel(from, s.meaningAt),
-  say: s.sayAt ? rel(from, s.sayAt) : 0,
+const textStyle = (
+  size: number,
+  weight: number = theme.weights.hero,
+  color: string = C.text
+): React.CSSProperties => ({
+  fontFamily: theme.fonts.display,
+  fontSize: size,
+  fontWeight: weight,
+  color,
+  lineHeight: 1.16,
+  letterSpacing: 0,
 });
 
-/* ───────── header: Sentence N + 10-step progress ───────── */
-const Header: React.FC<{ n: number }> = ({ n }) => (
-  <div style={{ position: "absolute", left: 64, right: 64, top: 44, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-    <Pop at={0} dir="left" dist={30}>
-      <Tag tone="hero" size={38}>Sentence {n}</Tag>
-    </Pop>
-    <Pop at={4} dir="right" dist={30}>
-      <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
-        {Array.from({ length: 10 }).map((_, i) => {
-          const cur = i + 1 === n;
-          const done = i + 1 < n;
-          return (
-            <div key={i} style={{
-              width: cur ? 46 : 18, height: 18, borderRadius: 9,
-              background: cur ? theme.colors.accent : done ? theme.colors.primary : theme.colors.line,
-            }} />
-          );
-        })}
-      </div>
-    </Pop>
-  </div>
-);
+const arabicStyle = (size: number, color: string = C.primaryDeep): React.CSSProperties => ({
+  fontFamily: theme.fonts.arabic,
+  fontSize: size,
+  fontWeight: 700,
+  color,
+  lineHeight: 1.25,
+  direction: "rtl",
+  textAlign: "center",
+});
 
-const Meaning: React.FC<{ s: S; at: number; size?: number; row?: boolean }> = ({ s, at, size = 52, row }) => (
-  <Pop at={at} dir="up" cfg="smooth">
-    <GlassCard style={{ padding: "26px 36px 28px 44px", overflow: "hidden" }}>
-      <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 14, background: theme.colors.accent }} />
-      <div style={{ display: "flex", flexDirection: row ? "row" : "column", alignItems: row ? "center" : "flex-start", gap: row ? 22 : 8 }}>
-        <Tag tone="amber" size={34}>মানে</Tag>
-        <div>
-          <Words text={s.meaning} at={at + 4} size={size} lineHeight={1.3} />
-          {s.sub && (
-            <Pop at={at + 14} dir="up" dist={16}>
-              <div style={{ fontFamily: theme.fonts.body, fontWeight: 500, fontSize: 38, color: theme.colors.textDim, letterSpacing: 0, marginTop: 4 }}>{s.sub}</div>
-            </Pop>
+const CHIME_RATES = [1, 1.08, 0.95, 1.04];
+
+type SentenceProps = { i: number; dur: number };
+
+const useBeats = (i: number) => {
+  const from = SCENES.find((s) => s.id === `s${i + 21}`)!.from;
+  return {
+    say: Math.max(8, BEATS[i].say - from),
+    mean: Math.max(24, BEATS[i].mean - from),
+  };
+};
+
+/** Highlight sweep that animates across the Arabic phrase while spoken. */
+const RepeatSweep: React.FC<{ say: number; mean: number; color: string; height?: number }> = ({
+  say,
+  mean,
+  color,
+  height = 8,
+}) => {
+  const frame = useCurrentFrame();
+  const half = Math.max(18, (mean - say) / 2);
+  const k = (frame - say - 6) / half;
+  const s = k < 0 || k >= 2 ? 0 : interpolate(k % 1, [0, 0.85], [0, 1], { ...clamp, easing: theme.ease.out });
+  const fade = k < 0 || k >= 2 ? 0 : 1 - interpolate(k % 1, [0.85, 1], [0, 1], clamp) * 0.7;
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        left: 0,
+        right: 0,
+        bottom: -4,
+        height,
+        borderRadius: height,
+        background: color,
+        opacity: fade,
+        clipPath: `inset(0 ${100 - s * 100}% 0 0)`,
+      }}
+    />
+  );
+};
+
+const MeaningBadge: React.FC<{ text: string; delay: number; size: number; tone?: "accent" | "white" | "soft" }> = ({
+  text,
+  delay,
+  size,
+  tone = "accent",
+}) => {
+  const actualSize = text.length > 26 ? Math.round(size * 0.88) : size;
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 20, justifyContent: "center", flexWrap: "wrap" }}>
+      <Entrance delay={delay} config={theme.spring.bouncy} from={20} scaleFrom={0.7}>
+        <Pill tone={tone} size={actualSize * 0.58}>অর্থ</Pill>
+      </Entrance>
+      <WordReveal
+        text={text}
+        delay={delay + 4}
+        per={3}
+        justify="center"
+        gap={actualSize * 0.24}
+        style={textStyle(actualSize, theme.weights.strong)}
+      />
+    </div>
+  );
+};
+
+/* ───── Layout 1 · Glossy Chat Mockup (Sentence 21, 24, 27, 30) ───── */
+export const ChatLayout: React.FC<SentenceProps> = ({ i, dur }) => {
+  const s = SENTENCES[i];
+  const { say, mean } = useBeats(i);
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const typing = interpolate(frame, [say - 24, say - 16, say - 2, say + 4], [0, 1, 1, 0], clamp);
+  const replyP = spring({ frame: frame - say, fps, config: theme.spring.snappy });
+  const arabicFontSize = s.arabic.length > 22 ? 64 : 80;
+  const pronFontSize = s.pronunciation.length > 22 ? 50 : 64;
+
+  return (
+    <SceneExit dur={dur}>
+      <Sfx name="pop" at={4} />
+      <Sfx name="chime" at={12} rate={CHIME_RATES[i % 4]} gain={0.8} />
+      <Sfx name="pop" at={say} rate={1.04} />
+      <Sfx name="pop" at={mean + 1} rate={1.1} />
+
+      {/* Progress counter */}
+      <div style={{ position: "absolute", left: 80, top: 60 }}>
+        <Counter n={s.n} nBn={s.nBn} />
+      </div>
+
+      {/* Vector Icon */}
+      <div style={{ position: "absolute", left: 70, top: 160 }}>
+        <Icon id={s.icon} size={230} delay={4} />
+      </div>
+
+      {/* Situation Query Bubble (Left side) */}
+      <div style={{ position: "absolute", left: 330, top: 190, width: 670 }}>
+        <Entrance delay={8} from={26} config={theme.spring.snappy}>
+          <Card style={{ padding: "26px 36px", borderRadius: 44, position: "relative" }}>
+            <div
+              style={{
+                position: "absolute",
+                left: -12,
+                top: 54,
+                width: 26,
+                height: 26,
+                background: C.surface,
+                transform: "rotate(45deg)",
+                borderRadius: 5,
+                borderLeft: `1px solid ${C.line}`,
+                borderBottom: `1px solid ${C.line}`,
+              }}
+            />
+            <WordReveal
+              text={s.situation}
+              delay={10}
+              per={3}
+              gap={14}
+              style={textStyle(46, theme.weights.strong)}
+            />
+          </Card>
+        </Entrance>
+      </div>
+
+      {/* Arabic Reply Speech Bubble (Right side) */}
+      <div
+        style={{
+          position: "absolute",
+          right: 70,
+          top: 450,
+          maxWidth: 940,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end",
+          gap: 12,
+        }}
+      >
+        <Entrance delay={Math.max(0, say - 20)} from={16}>
+          <Pill tone="soft" size={34}>আরবিতে বলুন</Pill>
+        </Entrance>
+
+        <div style={{ position: "relative" }}>
+          {/* Typing Indicator */}
+          <div
+            style={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              opacity: typing,
+              display: "flex",
+              gap: 12,
+              padding: "26px 40px",
+              borderRadius: 44,
+              background: C.primary,
+              boxShadow: theme.shadow.hero,
+            }}
+          >
+            {[0, 1, 2].map((d) => (
+              <div
+                key={d}
+                style={{
+                  width: 18,
+                  height: 18,
+                  borderRadius: 18,
+                  background: C.white,
+                  opacity: 0.6 + 0.4 * Math.sin(frame / 4 - d),
+                  transform: `translateY(${Math.sin(frame / 4 - d) * -5}px)`,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Core Response Card */}
+          {frame >= say - 1 && (
+            <div
+              style={{
+                background: C.primary,
+                borderRadius: 48,
+                padding: "32px 48px 36px",
+                boxShadow: `${theme.shadow.hero}, 0 0 70px ${C.glow}`,
+                opacity: interpolate(replyP, [0, 0.4], [0, 1], clamp),
+                transform: `scale(${interpolate(replyP, [0, 1], [0.82, 1])}) translateY(${interpolate(
+                  replyP,
+                  [0, 1],
+                  [20, 0]
+                )}px)`,
+                transformOrigin: "right center",
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              {/* Arabic script */}
+              <div style={{ ...arabicStyle(arabicFontSize, C.white), textShadow: "0 4px 18px rgba(0,0,0,0.2)" }}>
+                {s.arabic}
+              </div>
+
+              {/* Bangla Pronunciation */}
+              <div style={{ position: "relative", display: "inline-block", paddingBottom: 6 }}>
+                <WordReveal
+                  text={s.pronunciation}
+                  delay={say + 2}
+                  per={4}
+                  justify="center"
+                  gap={pronFontSize * 0.26}
+                  style={textStyle(pronFontSize, theme.weights.hero, C.white)}
+                />
+                <RepeatSweep say={say} mean={mean} color={C.accent} height={8} />
+              </div>
+            </div>
           )}
         </div>
       </div>
-    </GlassCard>
-  </Pop>
-);
 
-const PhraseText: React.FC<{ s: S; at: number; size: number; color?: string; align?: "left" | "center" | "right" }> = ({
-  s, at, size, color = theme.colors.onPrimary, align = "left",
-}) => <Words text={s.phrase} at={at + 3} size={size} color={color} align={align} lineHeight={1.25} />;
-
-const SayWithMe: React.FC<{ at: number }> = ({ at }) => (
-  <Pop at={at} dir="up" dist={24} cfg="bouncy">
-    <div style={{ display: "inline-flex", alignItems: "center", gap: 18, padding: "10px 30px 12px", borderRadius: 60, background: theme.colors.card, border: `2px solid ${theme.colors.line}`, boxShadow: theme.shadow.soft }}>
-      <Waveform bars={7} h={38} color={theme.colors.primary} />
-      <span style={{ fontFamily: theme.fonts.display, fontWeight: 700, fontSize: 36, letterSpacing: 0, color: theme.colors.text, lineHeight: 1.3 }}>আমার সাথে বলুন</span>
-    </div>
-  </Pop>
-);
-
-const Hint: React.FC<{ s: S; at: number; size?: number }> = ({ s, at, size = 34 }) =>
-  s.hint ? (
-    <Pop at={at} dir="up" dist={18} cfg="snappy" style={{ marginTop: 10 }}>
-      <Tag tone="amber" size={size}>{s.hint}</Tag>
-    </Pop>
-  ) : null;
-
-/* ───────── A · Glossy chat mockup ───────── */
-const ChatLayout: React.FC<LayoutProps> = ({ s, t }) => {
-  const frame = useCurrentFrame();
-  const pulse = usePulse(t.echo);
-  const size = fitSize(s.phrase, 800, 2, 108, 64);
-  const dots = interpolate(frame, [t.phrase - 26, t.phrase - 20, t.phrase - 2, t.phrase + 2], [0, 1, 1, 0], clampOpt);
-  const br = useBreathe(30, 0.006, 2);
-  return (
-    <div style={{ position: "absolute", left: 64, right: 64, top: 150, bottom: 50, display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
-      <div style={{ display: "flex", gap: 20, alignItems: "flex-end" }}>
-        <Pop at={t.sit} dir="scale" cfg="bouncy">
-          <div style={{ width: 132, height: 132, borderRadius: 66, background: theme.colors.primarySoft, border: `2px solid ${theme.colors.line}`, display: "flex", alignItems: "center", justifyContent: "center", transform: `translateY(${br.y * 2}px)` }}>
-            <Icon kind={s.icon} size={84} />
-          </div>
-        </Pop>
-        <Pop at={t.sit} dir="left" dist={50} style={{ maxWidth: 780 }}>
-          <GlassCard style={{ padding: "24px 34px 28px", borderBottomLeftRadius: 12 }}>
-            <Words text={s.situation} at={t.sit + 4} size={52} lineHeight={1.3} />
-            <Hint s={s} at={t.hint} />
-          </GlassCard>
-        </Pop>
-      </div>
-      <div style={{ position: "relative", alignSelf: "flex-end", maxWidth: 900 }}>
-        <div style={{ position: "absolute", right: 0, bottom: 0, opacity: dots }}>
-          <GlassCard style={{ padding: "22px 34px", borderRadius: 40, display: "flex", gap: 12 }}>
-            {[0, 1, 2].map((i) => (
-              <div key={i} style={{ width: 20, height: 20, borderRadius: 10, background: theme.colors.primary, transform: `translateY(${Math.sin(frame / 4 + i) * -6}px)` }} />
-            ))}
-          </GlassCard>
+      {/* Meaning Card (Bottom) */}
+      {frame >= mean - 2 && (
+        <div style={{ position: "absolute", left: 70, right: 70, bottom: 90 }}>
+          <Entrance delay={mean} from={32} config={theme.spring.snappy}>
+            <Card style={{ padding: "28px 38px", borderRadius: 44 }}>
+              <MeaningBadge text={s.meaning} delay={mean + 2} size={50} />
+            </Card>
+          </Entrance>
         </div>
-        <Pop at={t.phrase} dir="right" dist={60} cfg="bouncy">
-          <HeroCard style={{ padding: "36px 52px 42px", borderBottomRightRadius: 12, borderRadius: 52, transform: `scale(${pulse * br.scale})` }}>
-            <PhraseText s={s} at={t.phrase} size={size} />
-            <Shine at={t.echo} />
-            <Shine at={t.meaning + 40} every={96} />
-          </HeroCard>
-        </Pop>
-      </div>
-      {s.sayAt && <div style={{ alignSelf: "flex-end" }}><SayWithMe at={t.say} /></div>}
-      <Meaning s={s} at={t.meaning} />
-    </div>
+      )}
+    </SceneExit>
   );
 };
 
-/* ───────── B · Glass cards ───────── */
-const GlassLayout: React.FC<LayoutProps> = ({ s, t }) => {
-  const pulse = usePulse(t.echo);
-  const br = useBreathe(28, 0.01, 6);
-  const size = fitSize(s.phrase, 840, 2, 116, 64);
-  return (
-    <div style={{ position: "absolute", left: 64, right: 64, top: 150, bottom: 50, display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
-      <div style={{ display: "flex", gap: 24, alignItems: "stretch" }}>
-        <Pop at={t.sit} dir="left" style={{ flex: 1.45 }}>
-          <GlassCard style={{ padding: "28px 32px 30px", height: "100%", boxSizing: "border-box" }}>
-            <Words text={s.situation} at={t.sit + 4} size={44} lineHeight={1.3} />
-            <Hint s={s} at={t.hint} size={30} />
-          </GlassCard>
-        </Pop>
-        <Pop at={t.sit + 4} dir="right" cfg="bouncy" style={{ flex: 1 }}>
-          <GlassCard style={{ height: "100%", boxSizing: "border-box", background: theme.colors.primarySoft, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ transform: `translateY(${br.y}px) scale(${br.scale})` }}><Icon kind={s.icon} size={190} /></div>
-          </GlassCard>
-        </Pop>
-      </div>
-      <Pop at={t.phrase} dir="up" cfg="bouncy">
-        <HeroCard style={{ padding: "52px 40px 58px", transform: `scale(${pulse})`, textAlign: "center" }}>
-          <PhraseText s={s} at={t.phrase} size={size} align="center" />
-          <Shine at={t.echo} />
-            <Shine at={t.meaning + 40} every={96} />
-        </HeroCard>
-      </Pop>
-      <Meaning s={s} at={t.meaning} row />
-    </div>
-  );
-};
-
-/* ───────── C · Bento grid ───────── */
-const BentoLayout: React.FC<LayoutProps> = ({ s, t }) => {
-  const pulse = usePulse(t.echo);
-  const br = useBreathe(26, 0.012, 6);
-  const size = fitSize(s.phrase, 410, 5, 100, 60);
-  return (
-    <div style={{ position: "absolute", left: 64, right: 64, top: 150, bottom: 50, display: "grid", gridTemplateColumns: "1.15fr 1fr", gridTemplateRows: "270px 350px auto", gap: 22 }}>
-      <Pop at={t.phrase} dir="scale" cfg="bouncy" style={{ gridColumn: 1, gridRow: "1 / span 2" }}>
-        <HeroCard style={{ height: "100%", boxSizing: "border-box", padding: "36px 34px", display: "flex", alignItems: "center", transform: `scale(${pulse})` }}>
-          <PhraseText s={s} at={t.phrase} size={size} />
-          <Shine at={t.echo} />
-            <Shine at={t.meaning + 40} every={96} />
-        </HeroCard>
-      </Pop>
-      <Pop at={t.sit} dir="down" cfg="bouncy" style={{ gridColumn: 2, gridRow: 1 }}>
-        <GlassCard style={{ height: "100%", boxSizing: "border-box", background: theme.colors.primarySoft, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ transform: `translateY(${br.y}px) scale(${br.scale})` }}><Icon kind={s.icon} size={160} /></div>
-        </GlassCard>
-      </Pop>
-      <Pop at={t.sit + 3} dir="right" style={{ gridColumn: 2, gridRow: 2 }}>
-        <GlassCard style={{ height: "100%", boxSizing: "border-box", padding: "26px 28px" }}>
-          <Words text={s.situation} at={t.sit + 7} size={40} lineHeight={1.3} />
-          <Hint s={s} at={t.hint} size={28} />
-        </GlassCard>
-      </Pop>
-      <div style={{ gridColumn: "1 / span 2", gridRow: 3 }}>
-        <Meaning s={s} at={t.meaning} size={48} row />
-      </div>
-    </div>
-  );
-};
-
-/* ───────── D · Statement card ───────── */
-const StatementLayout: React.FC<LayoutProps> = ({ s, t }) => {
+/* ───── Layout 2 · Glass Stage Card (Sentence 22, 25, 28) ───── */
+export const GlassLayout: React.FC<SentenceProps> = ({ i, dur }) => {
+  const s = SENTENCES[i];
+  const { say, mean } = useBeats(i);
   const frame = useCurrentFrame();
-  const pulse = usePulse(t.echo, 0.03);
-  const br = useBreathe(26, 0.012, 7);
-  const size = fitSize(s.phrase, 780, 2, 108, 64);
-  const bar = interpolate(frame, [t.echo, t.echo + 16], [0, 1], { ...clampOpt, easing: theme.ease.out });
+  const { fps } = useVideoConfig();
+  const breath = useBreath(28, 0.012);
+
+  const heroP = spring({ frame: frame - say, fps, config: theme.spring.snappy });
+  const arabicFontSize = s.arabic.length > 20 ? 64 : 84;
+  const pronFontSize = s.pronunciation.length > 22 ? 50 : 68;
+
   return (
-    <div style={{ position: "absolute", left: 64, right: 64, top: 140, bottom: 40, display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <Words text={s.situation} at={t.sit} size={46} align="center" color={theme.colors.textDim} lineHeight={1.3} />
-      <Hint s={s} at={t.hint} size={32} />
-      <div style={{ position: "relative", width: 900, marginTop: 96 }}>
-        <div style={{ position: "absolute", inset: 0, transform: "translateY(16px) rotate(-2.4deg)", borderRadius: 56, background: theme.colors.primarySoft, border: `2px solid ${theme.colors.line}` }} />
-        <Pop at={t.phrase} dir="up" cfg="bouncy">
-          <div style={{ position: "relative", background: theme.colors.card, borderRadius: 56, boxShadow: theme.shadow.card, border: `2px solid ${theme.colors.line}`, padding: "92px 44px 50px", textAlign: "center", transform: `scale(${pulse})`, overflow: "visible" }}>
-            <div style={{ position: "absolute", top: -78, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
-              <div style={{ width: 156, height: 156, borderRadius: 78, background: theme.colors.card, border: `3px solid ${theme.colors.line}`, boxShadow: theme.shadow.soft, display: "flex", alignItems: "center", justifyContent: "center", transform: `translateY(${br.y}px) scale(${br.scale})` }}>
-                <Icon kind={s.icon} size={96} />
+    <SceneExit dur={dur}>
+      <Sfx name="whoosh" at={2} />
+      <Sfx name="pop" at={10} rate={1.05} />
+      <Sfx name="chime" at={say} rate={CHIME_RATES[i % 4]} gain={0.85} />
+      <Sfx name="pop" at={mean} rate={1.1} />
+
+      {/* Header Counter & Situation */}
+      <div style={{ position: "absolute", left: 80, right: 80, top: 60, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Counter n={s.n} nBn={s.nBn} />
+        <Pill tone="soft" size={32}>আড্ডা ও আপ্যায়ন</Pill>
+      </div>
+
+      {/* Central Glassmorphic Main Card */}
+      <div
+        style={{
+          position: "absolute",
+          top: 170,
+          left: 70,
+          right: 70,
+          transform: `scale(${breath.scale})`,
+        }}
+      >
+        <Card
+          style={{
+            padding: "44px 44px 48px",
+            borderRadius: 52,
+            background: `linear-gradient(180deg, ${C.surface} 0%, ${C.bgAlt} 100%)`,
+            border: `2px solid ${C.primarySoft}`,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            position: "relative",
+            boxShadow: theme.shadow.card,
+          }}
+        >
+          {/* Top Floating Icon */}
+          <div style={{ marginTop: -8, marginBottom: 12 }}>
+            <Icon id={s.icon} size={180} delay={6} />
+          </div>
+
+          {/* Context Tag */}
+          <Entrance delay={8} from={16}>
+            <Pill tone="white" size={34}>
+              <span style={{ color: C.textDim }}>{s.situation}</span>
+            </Pill>
+          </Entrance>
+
+          {/* Arabic phrase hero box */}
+          {frame >= say - 2 && (
+            <div
+              style={{
+                marginTop: 24,
+                width: "100%",
+                padding: "24px 20px 28px",
+                borderRadius: 40,
+                background: C.primarySoft,
+                border: `1.5px solid ${C.primary}`,
+                transform: `scale(${interpolate(heroP, [0, 1], [0.85, 1])})`,
+                opacity: interpolate(heroP, [0, 0.4], [0, 1], clamp),
+              }}
+            >
+              {/* Arabic script */}
+              <div style={arabicStyle(arabicFontSize, C.primaryDeep)}>
+                {s.arabic}
+              </div>
+
+              {/* Bangla Pronunciation */}
+              <div style={{ position: "relative", display: "inline-block", marginTop: 8, paddingBottom: 6 }}>
+                <WordReveal
+                  text={s.pronunciation}
+                  delay={say + 2}
+                  per={4}
+                  justify="center"
+                  gap={pronFontSize * 0.24}
+                  style={textStyle(pronFontSize, theme.weights.hero, C.text)}
+                />
+                <RepeatSweep say={say} mean={mean} color={C.accent} height={8} />
               </div>
             </div>
-            <div style={{ position: "relative", display: "inline-block" }}>
-              <div style={{ position: "absolute", left: 0, bottom: 6, height: 20, width: `${bar * 100}%`, background: `${theme.colors.accent}88`, borderRadius: 10 }} />
-              <div style={{ position: "relative" }}>
-                <PhraseText s={s} at={t.phrase} size={size} color={theme.colors.primary} align="center" />
-              </div>
-            </div>
-            <Shine at={t.echo} tone="amber" />
-            <Shine at={t.meaning + 40} every={96} tone="amber" />
-          </div>
-        </Pop>
+          )}
+        </Card>
       </div>
-      <Pop at={t.meaning} dir="up" cfg="bouncy" style={{ marginTop: 48, width: 900 }}>
-        <div style={{ background: theme.colors.accent, borderRadius: 44, padding: "24px 40px 28px", textAlign: "center", boxShadow: theme.shadow.soft }}>
-          <Words text={s.meaning} at={t.meaning + 4} size={48} align="center" color={theme.colors.text} lineHeight={1.3} />
-          {s.sub && <div style={{ fontFamily: theme.fonts.body, fontWeight: 500, fontSize: 36, letterSpacing: 0, color: theme.colors.text, opacity: 0.8 }}>{s.sub}</div>}
+
+      {/* Meaning Banner (Bottom) */}
+      {frame >= mean - 2 && (
+        <div style={{ position: "absolute", left: 70, right: 70, bottom: 84 }}>
+          <Entrance delay={mean} from={32} config={theme.spring.snappy}>
+            <Card style={{ padding: "26px 36px", borderRadius: 44, background: C.surface }}>
+              <MeaningBadge text={s.meaning} delay={mean + 2} size={52} tone="accent" />
+            </Card>
+          </Entrance>
         </div>
-      </Pop>
-    </div>
+      )}
+    </SceneExit>
   );
 };
 
-/* ───────── E · Timeline process flow ───────── */
-const TimelineLayout: React.FC<LayoutProps> = ({ s, t }) => {
+/* ───── Layout 3 · Modern Bento Grid (Sentence 23, 26, 29) ───── */
+export const BentoLayout: React.FC<SentenceProps> = ({ i, dur }) => {
+  const s = SENTENCES[i];
+  const { say, mean } = useBeats(i);
   const frame = useCurrentFrame();
-  const pulse = usePulse(t.echo);
-  const br = useBreathe(26, 0.012, 5);
-  const size = fitSize(s.phrase, 640, 2, 100, 60);
-  const rail = interpolate(frame, [t.sit, t.meaning + 20], [0, 1], { ...clampOpt, easing: theme.ease.inOut });
-  const Node: React.FC<{ n: number; at: number; hero?: boolean }> = ({ n, at, hero }) => (
-    <Pop at={at} dir="scale" cfg="bouncy">
-      <div style={{ width: 66, height: 66, borderRadius: 33, background: hero ? theme.colors.accent : theme.colors.primary, color: hero ? theme.colors.text : theme.colors.onPrimary, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: theme.fonts.display, fontWeight: 700, fontSize: 38, lineHeight: 1, paddingBottom: 6, letterSpacing: 0, boxShadow: theme.shadow.soft, border: `4px solid ${theme.colors.bg}` }}>
-        {bn(n)}
-      </div>
-    </Pop>
-  );
+  const { fps } = useVideoConfig();
+
+  const heroP = spring({ frame: frame - say, fps, config: theme.spring.bouncy });
+  const arabicFontSize = s.arabic.length > 22 ? 62 : 78;
+  const pronFontSize = s.pronunciation.length > 22 ? 48 : 62;
+
   return (
-    <div style={{ position: "absolute", left: 64, right: 64, top: 150, bottom: 50 }}>
-      <div style={{ position: "absolute", left: 31, top: 30, bottom: 60, width: 6, borderRadius: 3, background: theme.colors.line }} />
-      <div style={{ position: "absolute", left: 31, top: 30, bottom: 60, width: 6, borderRadius: 3, background: theme.colors.primary, transformOrigin: "top", transform: `scaleY(${rail})` }} />
-      <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
-        <div style={{ display: "flex", gap: 26, alignItems: "flex-start" }}>
-          <Node n={1} at={t.sit} />
-          <Pop at={t.sit} dir="right" style={{ flex: 1 }}>
-            <GlassCard style={{ padding: "26px 32px 30px", display: "flex", gap: 24, alignItems: "center" }}>
-              <div style={{ flex: 1 }}>
-                <Words text={s.situation} at={t.sit + 4} size={48} lineHeight={1.3} />
-                <Hint s={s} at={t.hint} />
+    <SceneExit dur={dur}>
+      <Sfx name="pop" at={4} />
+      <Sfx name="click" at={12} rate={1.1} />
+      <Sfx name="chime" at={say} rate={CHIME_RATES[i % 4]} gain={0.8} />
+      <Sfx name="pop" at={mean} rate={1.08} />
+
+      {/* Header Counter */}
+      <div style={{ position: "absolute", left: 80, top: 60 }}>
+        <Counter n={s.n} nBn={s.nBn} />
+      </div>
+
+      {/* Top Bento Row: Icon Card (left) + Context Card (right) */}
+      <div style={{ position: "absolute", top: 160, left: 70, right: 70, display: "flex", gap: 24, height: 260 }}>
+        {/* Left: Icon Bento Tile */}
+        <Entrance delay={4} from={26} style={{ width: 260, height: 260 }}>
+          <Card
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: 44,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: `linear-gradient(135deg, ${C.surface}, ${C.primarySoft})`,
+            }}
+          >
+            <Icon id={s.icon} size={190} delay={6} />
+          </Card>
+        </Entrance>
+
+        {/* Right: Situation Tile */}
+        <Entrance delay={8} from={26} style={{ flex: 1, height: 260 }}>
+          <Card
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: 44,
+              padding: "34px 38px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              gap: 12,
+            }}
+          >
+            <Pill tone="soft" size={32}>পরিস্থিতি</Pill>
+            <WordReveal
+              text={s.situation}
+              delay={12}
+              per={3}
+              gap={14}
+              style={textStyle(46, theme.weights.strong)}
+            />
+          </Card>
+        </Entrance>
+      </div>
+
+      {/* Middle Bento Tile: Arabic Phrase + Pronunciation */}
+      <div style={{ position: "absolute", top: 450, left: 70, right: 70 }}>
+        {frame >= say - 2 && (
+          <Entrance delay={say} from={34} config={theme.spring.snappy}>
+            <Card
+              style={{
+                padding: "36px 44px 42px",
+                borderRadius: 48,
+                background: C.surface,
+                border: `2px solid ${C.primary}`,
+                boxShadow: `${theme.shadow.card}, 0 0 50px ${C.glow}`,
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 10,
+                transform: `scale(${interpolate(heroP, [0, 1], [0.88, 1])})`,
+              }}
+            >
+              {/* Top Label */}
+              <Pill tone="hero" size={32}>আরবিতে বলুন</Pill>
+
+              {/* Arabic script */}
+              <div style={{ ...arabicStyle(arabicFontSize, C.primaryDeep), marginTop: 6 }}>
+                {s.arabic}
               </div>
-              <div style={{ transform: `translateY(${br.y}px)` }}><Icon kind={s.icon} size={124} /></div>
-            </GlassCard>
-          </Pop>
-        </div>
-        <div style={{ display: "flex", gap: 26, alignItems: "flex-start" }}>
-          <Node n={2} at={t.phrase} />
-          <Pop at={t.phrase} dir="right" cfg="bouncy" style={{ flex: 1 }}>
-            <HeroCard style={{ padding: "40px 44px 46px", transform: `scale(${pulse})` }}>
-              <PhraseText s={s} at={t.phrase} size={size} />
-              <Shine at={t.echo} />
-            <Shine at={t.meaning + 40} every={96} />
-            </HeroCard>
-          </Pop>
-        </div>
-        <div style={{ display: "flex", gap: 26, alignItems: "flex-start" }}>
-          <Node n={3} at={t.meaning} hero />
-          <div style={{ flex: 1 }}><Meaning s={s} at={t.meaning} /></div>
-        </div>
+
+              {/* Bangla Pronunciation */}
+              <div style={{ position: "relative", display: "inline-block", paddingBottom: 6 }}>
+                <WordReveal
+                  text={s.pronunciation}
+                  delay={say + 2}
+                  per={4}
+                  justify="center"
+                  gap={pronFontSize * 0.26}
+                  style={textStyle(pronFontSize, theme.weights.hero, C.text)}
+                />
+                <RepeatSweep say={say} mean={mean} color={C.accent} height={8} />
+              </div>
+            </Card>
+          </Entrance>
+        )}
       </div>
-    </div>
+
+      {/* Bottom Bento Tile: Meaning */}
+      {frame >= mean - 2 && (
+        <div style={{ position: "absolute", left: 70, right: 70, bottom: 84 }}>
+          <Entrance delay={mean} from={30} config={theme.spring.snappy}>
+            <Card style={{ padding: "26px 36px", borderRadius: 44, background: C.bgAlt }}>
+              <MeaningBadge text={s.meaning} delay={mean + 2} size={50} tone="accent" />
+            </Card>
+          </Entrance>
+        </div>
+      )}
+    </SceneExit>
   );
 };
 
-const LAYOUTS = { chat: ChatLayout, glass: GlassLayout, bento: BentoLayout, statement: StatementLayout, timeline: TimelineLayout };
-
-export const SentenceScene: React.FC<{ s: S; from: number }> = ({ s, from }) => {
-  const t = useT(s, from);
-  const Layout = LAYOUTS[s.layout];
-  return (
-    <div style={{ position: "absolute", inset: 0 }}>
-      <Header n={s.n} />
-      <Layout s={s} t={t} />
-    </div>
-  );
-};
