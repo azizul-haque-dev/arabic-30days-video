@@ -1,0 +1,25 @@
+{
+  "name": "arabic-master-day13",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "node scripts/render.mjs",
+    "render:direct": "remotion render src/index.ts Main out/video.mp4",
+    "thumbnail": "remotion still src/index.ts Thumbnail out/thumbnail.png --overwrite",
+    "typecheck": "tsc --noEmit",
+    "sfx": "node scripts/make-sfx.mjs",
+    "cues": "node scripts/srt-to-cues.mjs"
+  },
+  "dependencies": {
+    "@fontsource/hind-siliguri": "^5.3.0",
+    "@remotion/cli": "^4.0.540",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.540"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "typescript": "^7.0.2"
+  }
+}
