@@ -1,0 +1,70 @@
+import { Easing } from "remotion";
+
+export const theme = {
+  colors: {
+    bg: "#EEF8F5",
+    bgAlt: "#DDF0EA",
+    surface: "#FFFFFF",
+    primary: "#0E9F6E",
+    primaryDeep: "#0A7A55",
+    primarySoft: "#CDEBDF",
+    accent: "#F59E0B",
+    accentSoft: "#FDE8BD",
+    text: "#10231D",
+    textDim: "#4D6A60",
+    line: "rgba(16, 35, 29, 0.10)",
+    lineLight: "rgba(255, 255, 255, 0.75)",
+    glow: "rgba(14, 159, 110, 0.35)",
+    shadow: "rgba(16, 35, 29, 0.16)",
+    white: "#FFFFFF",
+  },
+  shadow: {
+    card: "0 30px 60px -24px rgba(16, 35, 29, 0.28), 0 6px 16px -6px rgba(16, 35, 29, 0.10)",
+    soft: "0 14px 30px -14px rgba(16, 35, 29, 0.22)",
+    hero: "0 24px 50px -16px rgba(14, 159, 110, 0.55)",
+  },
+  gradients: {
+    primary: "linear-gradient(135deg, #0E9F6E 0%, #0A7A55 100%)",
+    primarySoft: "linear-gradient(135deg, #E6F7F0 0%, #CDEBDF 100%)",
+    accent: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+    accentSoft: "linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)",
+    surface: "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 252, 250, 0.92) 100%)",
+    glass: "linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.65) 100%)",
+    heroGlow: "radial-gradient(circle, rgba(14, 159, 110, 0.22) 0%, transparent 70%)",
+  },
+  shadows: {
+    card: "0 24px 48px -10px rgba(16, 35, 29, 0.08), 0 4px 12px rgba(16, 35, 29, 0.03)",
+    floating: "0 30px 60px -12px rgba(14, 159, 110, 0.18), 0 8px 24px -4px rgba(16, 35, 29, 0.06)",
+    glow: "0 16px 36px -6px rgba(14, 159, 110, 0.35)",
+    accentGlow: "0 16px 36px -6px rgba(245, 158, 11, 0.35)",
+    innerLight: "inset 0 1px 1px rgba(255, 255, 255, 0.9)",
+  },
+  fonts: {
+    display: "'Hind Siliguri', 'Noto Sans Bengali', sans-serif",
+    body: "'Hind Siliguri', 'Noto Sans Bengali', sans-serif",
+    bengali: "'Hind Siliguri', 'Noto Sans Bengali', sans-serif",
+    arabic: "'Noto Sans Arabic', 'Segoe UI', system-ui, sans-serif",
+    english: "'Plus Jakarta Sans', sans-serif",
+  },
+  weights: {
+    hero: 700,
+    strong: 600,
+    body: 400,
+  },
+  radius: {
+    sm: 20,
+    md: 32,
+    lg: 44,
+    pill: 999,
+  },
+  spring: {
+    snappy: { damping: 14, stiffness: 160, mass: 0.6 },
+    smooth: { damping: 20, stiffness: 90, mass: 1 },
+    bouncy: { damping: 11, stiffness: 170, mass: 0.7 },
+  },
+  ease: {
+    out: Easing.bezier(0.16, 1, 0.3, 1),
+    inOut: Easing.bezier(0.83, 0, 0.17, 1),
+    in: Easing.bezier(0.7, 0, 0.84, 0),
+  },
+} as const;
