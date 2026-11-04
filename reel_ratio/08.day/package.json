@@ -1,0 +1,32 @@
+{
+  "name": "arabic-day8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "remotion studio src/index.ts",
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts Day8 out/day8.mp4",
+    "render:audio": "remotion render src/index.ts Day8 out/day8.mp3",
+    "render:still": "remotion still src/index.ts Day8 out/day8.png",
+    "build": "remotion render src/index.ts Day8 out/day8.mp4",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remotion/cli": "^4.0.540",
+    "@remotion/fonts": "^4.0.540",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.540"
+  },
+  "devDependencies": {
+    "@fontsource/hind-siliguri": "^5.3.0",
+    "@fontsource/noto-sans-arabic": "^5.3.0",
+    "@fontsource/poppins": "^5.3.0",
+    "@types/react": "^18.3.31",
+    "typescript": "^7.0.2"
+  }
+}
