@@ -1,0 +1,29 @@
+{
+  "brandName": "Arabic Master",
+  "dialectLabel": "Gulf Arabic",
+  "arabicPlaceholder": "[আরবি",
+  "meaningMarker": "অর্থ",
+  "thumbnailEndAnchor": "চিন্তা",
+  "introAnchors": ["চিন্তা", "আপনার", "তিরিশ", "আলহামদুলিল্লাহ", "শিখব", "চলুন"],
+  "introVisuals": ["logo", "logo", "dayGrid", "progressBefore", "progressRange", "journey"],
+  "outroStartAnchor": "Masterের",
+  "outroAnchors": ["Masterের", "আলহামদুলিল্লাহ", "এখন", "প্রতিদিন", "কমেন্টে", "দেখা"],
+  "outroVisuals": ["checkRing", "progressAfter", "practice", "follow", "comment", "next"],
+  "textNormalizations": [
+    { "find": "সৌদি আরবি", "replace": "আরবি", "reason": "Gulf Arabic terminology rule; narration says only 'আরবি'" },
+    { "find": " ?", "replace": "?", "reason": "stray space before question mark" }
+  ],
+  "illustrations": {
+    "91": "takeaway-order",
+    "92": "fridge-groceries",
+    "93": "empty-bread-basket",
+    "94": "milk-eggs",
+    "95": "cold-tea",
+    "96": "salt-food",
+    "97": "dinner-question",
+    "98": "light-meal",
+    "99": "wash-hands",
+    "100": "enjoy-meal"
+  },
+  "tailSec": 1
+}

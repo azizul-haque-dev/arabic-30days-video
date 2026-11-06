@@ -1,0 +1,66 @@
+import { Easing } from "remotion";
+
+// Single source of truth for brand colors, easing and spring presets.
+export const theme = {
+  colors: {
+    bg: "#EEF8F5",
+    primary: "#0E9F6E",
+    primaryDark: "#0B7F58",
+    accent: "#F59E0B",
+    accentDark: "#D98206",
+    accentSoft: "#FDE9BE",
+    text: "#10231D",
+    textDim: "#64748B",
+    white: "#FFFFFF",
+    mint: "#D7F0E6",
+    mintSoft: "#E4F5EE",
+    line: "#CFE4DB",
+    shadow: "rgba(16, 35, 29, 0.10)",
+    shadowSoft: "rgba(16, 35, 29, 0.06)",
+  },
+  fonts: {
+    stack: '"HindSiliguriLatin", "HindSiliguriBn", system-ui, sans-serif',
+  },
+  ease: {
+    out: Easing.bezier(0.16, 1, 0.3, 1),
+    inOut: Easing.bezier(0.83, 0, 0.17, 1),
+    in: Easing.bezier(0.7, 0, 0.84, 0),
+  },
+  spring: {
+    snappy: { damping: 14, stiffness: 160, mass: 0.6 },
+    smooth: { damping: 20, stiffness: 90, mass: 1 },
+    bouncy: { damping: 11, stiffness: 170, mass: 0.7 },
+  },
+  // Illustration palette (flat vector style)
+  ill: {
+    wood: "#C98F57",
+    woodDark: "#A26B38",
+    kraft: "#E3A857",
+    kraftDark: "#C98B36",
+    fridge: "#E6EDF2",
+    fridgeInner: "#F8FCFE",
+    fridgeShade: "#C7D4DD",
+    red: "#E5484D",
+    redSoft: "#FDE3E4",
+    blue: "#4F9BE8",
+    blueSoft: "#DCEBFB",
+    blueDeep: "#2F73BE",
+    cream: "#FFF4D9",
+    bread: "#DDA15E",
+    breadDark: "#B97A34",
+    skin: "#F1C6A0",
+    skinDark: "#DFA97F",
+    hair: "#2B2A33",
+    leaf: "#43B581",
+    tea: "#B8753A",
+    rice: "#FFFBEF",
+    steam: "#FFFFFF",
+    plate: "#FFFFFF",
+    plateRim: "#E3ECE8",
+  },
+  radius: { card: 48, pill: 999 },
+  shadow: {
+    card: "0 24px 60px rgba(16, 35, 29, 0.10), 0 4px 12px rgba(16, 35, 29, 0.05)",
+    glow: "0 18px 44px rgba(14, 159, 110, 0.35)",
+  },
+} as const;

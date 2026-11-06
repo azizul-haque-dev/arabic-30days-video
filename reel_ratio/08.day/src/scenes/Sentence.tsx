@@ -11,7 +11,8 @@ const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
 const pronSize = (t: string) => {
   const n = [...t].length;
-  return n <= 19 ? theme.type.pronLarge : n <= 24 ? theme.type.pronMid : theme.type.pronSmall;
+  if (t.includes("\n")) return 86;
+  return n <= 19 ? theme.type.pronLarge : n <= 24 ? theme.type.pronMid : 86;
 };
 
 export const SentenceScene: React.FC<{ s: SentenceData; index: number }> = ({ s, index }) => {
@@ -48,7 +49,7 @@ export const SentenceScene: React.FC<{ s: SentenceData; index: number }> = ({ s,
       </Enter>
 
       {/* Arabic (smaller) */}
-      <div style={{ position: "absolute", top: 1062, left: 0, right: 0, height: 126, display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div style={{ position: "absolute", top: 1046, left: 0, right: 0, height: 116, display: "flex", justifyContent: "center", alignItems: "center" }}>
         <div style={{ position: "absolute" }}><SoundBars opacity={bars} /></div>
         <Enter delay={dA - 2} y={30} config={theme.spring.snappy}>
           <div dir="rtl" style={{ fontFamily: theme.fonts.ar, fontWeight: 600, fontSize: theme.type.arabic, lineHeight: 1.5, color: c.text, background: c.card,
@@ -59,7 +60,7 @@ export const SentenceScene: React.FC<{ s: SentenceData; index: number }> = ({ s,
       </div>
 
       {/* Bengali pronunciation (hero) */}
-      <div style={{ position: "absolute", top: 1204, left: 70, right: 70, height: 286, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ position: "absolute", top: 1194, left: 70, right: 70, height: 280, display: "flex", alignItems: "center", justifyContent: "center" }}>
         <WordReveal text={s.pron} delay={dA + 4} per={4} gap={26}
           style={{ fontFamily: theme.fonts.bn, fontWeight: 700, fontSize: pronSize(s.pron), lineHeight: 1.2, color: c.primary, textAlign: "center" }} />
       </div>

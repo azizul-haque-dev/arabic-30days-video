@@ -1,0 +1,24 @@
+{
+  "compositionId": "ArabicMasterDay09",
+  "stillCompositionId": "ArabicMasterDay09Thumbnail",
+  "entryPoint": "src/index.ts",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "aspectRatio": "9:16",
+  "durationSec": 126.3255,
+  "durationInFrames": 3790,
+  "render": {
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "crf": 18,
+    "imageFormat": "jpeg",
+    "jpegQuality": 92,
+    "audioCodec": "aac",
+    "audioBitrate": "192k",
+    "enforceAudioTrack": true,
+    "muted": false,
+    "concurrency": null,
+    "defaultOutput": "out/arabic-master-day-09.mp4"
+  }
+}

@@ -23,21 +23,43 @@ export const Enter: React.FC<{
 };
 
 // Word-by-word reveal; pixel gaps (not em) for big type.
-export const WordReveal: React.FC<{ text: string; delay?: number; per?: number; style?: React.CSSProperties; gap?: number }> = ({
-  text, delay = 0, per = 3, style, gap = 22,
+export const WordReveal: React.FC<{
+  text: string;
+  delay?: number;
+  per?: number;
+  style?: React.CSSProperties;
+  gap?: number;
+  wordStyle?: (i: number, w: string) => React.CSSProperties;
+}> = ({
+  text, delay = 0, per = 3, style, gap = 22, wordStyle,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const lines = text.split("\n");
+  let wordIndex = 0;
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", columnGap: gap, rowGap: 0, ...style }}>
-      {text.split(" ").map((word, i) => {
-        const p = spring({ frame: frame - delay - i * per, fps, config: theme.spring.snappy });
-        return (
-          <span key={i} style={{ display: "inline-block", opacity: Math.min(1, p * 1.5), transform: `translateY(${interpolate(p, [0, 1], [34, 0])}px) scale(${interpolate(p, [0, 1], [0.92, 1])})` }}>
-            {word}
-          </span>
-        );
-      })}
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, ...style }}>
+      {lines.map((line, lineIdx) => (
+        <div key={lineIdx} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", columnGap: gap, rowGap: 4 }}>
+          {line.split(" ").filter(Boolean).map((word) => {
+            const i = wordIndex++;
+            const p = spring({ frame: frame - delay - i * per, fps, config: theme.spring.snappy });
+            return (
+              <span
+                key={i}
+                style={{
+                  display: "inline-block",
+                  opacity: Math.min(1, p * 1.5),
+                  transform: `translateY(${interpolate(p, [0, 1], [34, 0])}px) scale(${interpolate(p, [0, 1], [0.92, 1])})`,
+                  ...(wordStyle ? wordStyle(i, word) : {}),
+                }}
+              >
+                {word}
+              </span>
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 };

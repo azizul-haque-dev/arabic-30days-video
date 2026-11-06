@@ -1,0 +1,201 @@
+{
+  "episodeNumber": 10,
+  "brandName": "Arabic Master",
+  "dialectLabel": "Gulf Arabic",
+  "seriesTitle": "৩০ দিনের Survival Arabic",
+  "totalDays": 30,
+  "totalSentences": 300,
+  "completedBefore": 90,
+  "completedSentences": 100,
+  "sentenceStartNumber": 91,
+  "sentenceEndNumber": 100,
+  "hook": "আরব দেশে থাকেন কিন্তু আরবি বলতে গিয়ে আটকে যান?",
+  "hookHighlight": "আটকে যান?",
+  "ctaText": "DAY 10 DONE!",
+  "nextEpisodeNumber": 11,
+  "introStages": [
+    {
+      "text": "চিন্তা নেই!",
+      "startSec": 4.203291139240506,
+      "visual": "logo"
+    },
+    {
+      "text": "আপনার প্রতিদিনের আরবি শেখার সঙ্গী Arabic Master!",
+      "startSec": 4.917215189873417,
+      "visual": "logo"
+    },
+    {
+      "text": "৩০ দিনের Survival Arabic সিরিজের আজ দশম দিন।",
+      "startSec": 8.114698795180722,
+      "visual": "dayGrid"
+    },
+    {
+      "text": "আলহামদুলিল্লাহ, আমরা ইতিমধ্যে ৩০০টি দরকারি বাক্যের মধ্যে ৯০টি শিখেছি!",
+      "startSec": 11.795421686746987,
+      "visual": "progressBefore"
+    },
+    {
+      "text": "আজ শিখব 91 থেকে 100 নম্বর বাক্য।",
+      "startSec": 17.35875,
+      "visual": "progressRange"
+    },
+    {
+      "text": "চলুন, আরবি শেখার যাত্রা আরো এক এগিয়ে নিয়ে যাই!",
+      "startSec": 19.796,
+      "visual": "journey"
+    }
+  ],
+  "outroStages": [
+    {
+      "text": "Arabic Master-এর সঙ্গে আজকের ১০টি দরকারি আরবি বাক্য শেখা শেষ!",
+      "startSec": 125.58857142857143,
+      "visual": "checkRing"
+    },
+    {
+      "text": "আলহামদুলিল্লাহ, ৩০০টি বাক্যের মধ্যে আমরা ইতিমধ্যে ১০০টি বাক্য শিখে ফেলেছি!",
+      "startSec": 129.62630136986303,
+      "visual": "progressAfter"
+    },
+    {
+      "text": "এখন থেকে প্রতিদিনের জীবনে এই বাক্যগুলো ব্যবহার করার চেষ্টা করুন। মনে রাখবেন, শুধু মুখস্থ করলেই হবে না—কথা বলার সময় ব্যবহার করতে হবে।",
+      "startSec": 135.28666666666666,
+      "visual": "practice"
+    },
+    {
+      "text": "প্রতিদিন নতুন নতুন আরবি বাক্য শিখতে Arabic Master পেজটি ফলো করুন।",
+      "startSec": 144.41777777777776,
+      "visual": "follow"
+    },
+    {
+      "text": "আর কমেন্টে লিখুন: DAY 10 DONE!",
+      "startSec": 149.55555555555554,
+      "visual": "comment"
+    },
+    {
+      "text": "দেখা হবে Day 11-এ, ইনশাআল্লাহ!",
+      "startSec": 152.12528301886792,
+      "visual": "next"
+    }
+  ],
+  "sentences": [
+    {
+      "number": 91,
+      "pronunciation": "হাদা তালব মিন আল-মাতআম।",
+      "meaning": "এটা রেস্টুরেন্ট থেকে আনা অর্ডার।",
+      "illustration": "takeaway-order",
+      "startSec": 23.86,
+      "pronStartSec": 25.18,
+      "repeatSec": 27.071914893617024,
+      "meaningStartSec": 28.963829787234044,
+      "endSec": 33.4664
+    },
+    {
+      "number": 92,
+      "pronunciation": "হুত্ত আল-আগরাদ ফিথ-থাল্লাজা।",
+      "meaning": "জিনিসগুলো ফ্রিজে রাখুন।",
+      "illustration": "fridge-groceries",
+      "startSec": 33.4664,
+      "pronStartSec": 35.3648,
+      "repeatSec": 36.54,
+      "meaningStartSec": 38.85111111111111,
+      "endSec": 43.462666666666664
+    },
+    {
+      "number": 93,
+      "pronunciation": "খালাস আল-আয়েশ মিন আল-বেইত।",
+      "meaning": "বাসায় রুটি শেষ হয়ে গেছে।",
+      "illustration": "empty-bread-basket",
+      "startSec": 43.462666666666664,
+      "pronStartSec": 45.84,
+      "repeatSec": 47.429433962264156,
+      "meaningStartSec": 49.0188679245283,
+      "endSec": 52.791428571428575
+    },
+    {
+      "number": 94,
+      "pronunciation": "জীব মা'আক হালীব ও বেদ।",
+      "meaning": "আসার সময় দুধ আর ডিম নিয়ে আসবেন।",
+      "illustration": "milk-eggs",
+      "startSec": 52.791428571428575,
+      "pronStartSec": 54.52,
+      "repeatSec": 57.23375,
+      "meaningStartSec": 59.947500000000005,
+      "endSec": 64.375
+    },
+    {
+      "number": 95,
+      "pronunciation": "আশ-শাহী বারিদ, সাওই গাই’য়েরাহ।",
+      "meaning": "চা ঠান্ডা হয়ে গেছে, আরেক কাপ বানান।",
+      "illustration": "cold-tea",
+      "startSec": 64.375,
+      "pronStartSec": 65.86,
+      "repeatSec": 69.95810126582279,
+      "meaningStartSec": 74.05620253164557,
+      "endSec": 76.6253164556962
+    },
+    {
+      "number": 96,
+      "pronunciation": "লাত কাত’তের আল-মালাহ ফিল-আকেল।",
+      "meaning": "খাবারে বেশি লবণ দেবেন না।",
+      "illustration": "salt-food",
+      "startSec": 76.6253164556962,
+      "pronStartSec": 77.88,
+      "repeatSec": 81.61872340425532,
+      "meaningStartSec": 83.0404255319149,
+      "endSec": 87.28
+    },
+    {
+      "number": 97,
+      "pronunciation": "এইশ তিবগা তিত’আশশা?",
+      "meaning": "রাতে কী খেতে চান?",
+      "illustration": "dinner-question",
+      "startSec": 87.28,
+      "pronStartSec": 89.3,
+      "repeatSec": 91.0888,
+      "meaningStartSec": 92.8776,
+      "endSec": 96.18
+    },
+    {
+      "number": 98,
+      "pronunciation": "আই শাই খাফীফ।",
+      "meaning": "হালকা কিছু হলেই হবে।",
+      "illustration": "light-meal",
+      "startSec": 96.18,
+      "pronStartSec": 98.60545454545455,
+      "repeatSec": 99.97636363636364,
+      "meaningStartSec": 101.34727272727272,
+      "endSec": 103.9525
+    },
+    {
+      "number": 99,
+      "pronunciation": "গাসসিল ইয়াদ’দাক গাবল আল-আকল।",
+      "meaning": "খাওয়ার আগে হাত ধুয়ে নিন।",
+      "illustration": "wash-hands",
+      "startSec": 103.9525,
+      "pronStartSec": 105.74,
+      "repeatSec": 107.79636363636364,
+      "meaningStartSec": 109.85272727272728,
+      "endSec": 114.47966101694915
+    },
+    {
+      "number": 100,
+      "pronunciation": "বিল-আফিয়া আলাইকুম।",
+      "meaning": "আপনারা তৃপ্তি করে খান / আপনাদের জন্য খাবারটি উপভোগ্য হোক।",
+      "illustration": "enjoy-meal",
+      "startSec": 114.47966101694915,
+      "pronStartSec": 116.61525423728814,
+      "repeatSec": 118.15762711864407,
+      "meaningStartSec": 119.7,
+      "endSec": 125.58857142857143
+    }
+  ],
+  "timing": {
+    "thumbnailEndSec": 4.203291139240506,
+    "introEndSec": 23.86,
+    "outroStartSec": 125.58857142857143,
+    "endSec": 156.12
+  },
+  "warnings": [
+    "Sentence 95: both Arabic repetitions share one SRT cue; repeat time set to midpoint (estimate)"
+  ]
+}

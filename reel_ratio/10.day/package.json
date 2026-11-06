@@ -1,0 +1,32 @@
+{
+  "name": "arabic-master-video-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reusable Remotion engine for Arabic Master episodes",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "build:episode": "tsx scripts/build-episode.ts episodes/episode-10",
+    "typecheck": "tsc --noEmit",
+    "still": "remotion still src/index.ts ArabicMaster",
+    "render": "remotion render src/index.ts ArabicMaster out/arabic-master-day-10.mp4 --codec h264 --crf 18",
+    "validate:episode": "tsx scripts/validate-episode.ts episodes/episode-10",
+    "package:episode": "tsx scripts/package-episode.ts episodes/episode-10"
+  },
+  "dependencies": {
+    "@fontsource/hind-siliguri": "5.3.0",
+    "@remotion/bundler": "4.0.540",
+    "@remotion/cli": "4.0.540",
+    "@remotion/renderer": "4.0.540",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.540"
+  },
+  "devDependencies": {
+    "@types/archiver": "^8.0.0",
+    "@types/node": "*",
+    "@types/react": "*",
+    "archiver": "^8.0.0",
+    "tsx": "*",
+    "typescript": "*"
+  }
+}

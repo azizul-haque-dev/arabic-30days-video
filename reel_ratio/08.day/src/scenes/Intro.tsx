@@ -1,6 +1,6 @@
 import React from "react";
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { Enter, WordReveal } from "../components/Motion";
+import { Enter } from "../components/Motion";
 import { LogoMark, Pill, TopLabel } from "../components/Ui";
 import { Person } from "../illustrations/primitives";
 import { theme } from "../theme";
@@ -36,9 +36,35 @@ export const IntroHook: React.FC = () => {
   return (
     <>
       <TopLabel delay={3} />
-      <div style={{ ...center, top: 330 }}>
-        <WordReveal text="আরব দেশে থাকেন কিন্তু আরবি কথা বলতে গিয়ে আটকে যান?" delay={4} per={3} gap={20}
-          style={{ fontFamily: bn, fontWeight: 700, fontSize: 78, lineHeight: 1.3, color: c.text, width: 920 }} />
+      <div
+        style={{
+          position: "absolute",
+          top: 310,
+          left: 0,
+          right: 0,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 14,
+          padding: "0 60px",
+          textAlign: "center",
+        }}
+      >
+        <Enter delay={2} y={28}>
+          <div style={{ fontFamily: bn, fontWeight: 700, fontSize: 74, lineHeight: 1.25, color: c.text }}>
+            <span style={{ color: c.primary }}>আরব দেশে</span> থাকেন?
+          </div>
+        </Enter>
+        <Enter delay={14} y={28}>
+          <div style={{ fontFamily: bn, fontWeight: 600, fontSize: 62, lineHeight: 1.25, color: c.textDim }}>
+            কিন্তু আরবি কথা বলতে গিয়ে
+          </div>
+        </Enter>
+        <Enter delay={26} y={28}>
+          <div style={{ fontFamily: bn, fontWeight: 800, fontSize: 72, lineHeight: 1.25, color: c.accent }}>
+            আটকে যান?
+          </div>
+        </Enter>
       </div>
       <div style={{ position: "absolute", left: 140, top: 760, width: 800, height: 560 }}>
         <Enter delay={14} y={40}>

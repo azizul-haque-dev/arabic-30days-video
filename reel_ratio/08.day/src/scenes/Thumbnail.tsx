@@ -52,17 +52,17 @@ export const Thumbnail: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ position: "absolute", top: 1230, left: 60, right: 60, display: "flex", justifyContent: "center" }}>
+      <div style={{ position: "absolute", top: 1230, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
         <div style={{ background: c.card, borderRadius: 44, padding: "18px 44px", boxShadow: "0 24px 44px -22px rgba(16,35,29,0.4)",
           fontFamily: theme.fonts.bn, fontWeight: 700, fontSize: 68, lineHeight: 1.3, color: c.text, textAlign: "center" }}>
           আজ শিখুন <span style={{ color: c.primary }}>১০টি</span><br />দরকারি আরবি বাক্য!
         </div>
       </div>
 
-      <Bubble x={36} y={1470} phase={0} tint={c.accentSoft} vb="-210 -210 420 420"><AlarmClock x={0} y={0} r={140} frame={frame} hourDeg={180} minDeg={360} ring /></Bubble>
-      <Bubble x={284} y={1500} phase={1.2} tint={c.primarySoft} vb="-200 -390 400 420"><WashingMachine x={0} y={0} frame={frame} /></Bubble>
-      <Bubble x={532} y={1470} phase={2.4} tint={c.accentSoft} vb="-300 -430 600 460"><Mosque x={0} y={0} frame={frame} idp="thumb" /></Bubble>
-      <Bubble x={780} y={1500} phase={3.6} tint={c.primarySoft} vb="-190 -310 380 340"><House x={0} y={0} /></Bubble>
+      <Bubble x={56} y={1470} phase={0} tint={c.accentSoft} vb="-210 -210 420 420"><AlarmClock x={0} y={0} r={140} frame={frame} hourDeg={180} minDeg={360} ring /></Bubble>
+      <Bubble x={304} y={1500} phase={1.2} tint={c.primarySoft} vb="-200 -390 400 420"><WashingMachine x={0} y={0} frame={frame} /></Bubble>
+      <Bubble x={552} y={1470} phase={2.4} tint={c.accentSoft} vb="-300 -430 600 460"><Mosque x={0} y={0} frame={frame} idp="thumb" /></Bubble>
+      <Bubble x={800} y={1500} phase={3.6} tint={c.primarySoft} vb="-190 -310 380 340"><House x={0} y={0} /></Bubble>
     </>
   );
 };

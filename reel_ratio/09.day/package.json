@@ -1,0 +1,29 @@
+{
+  "name": "arabic-master-day-09",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Arabic Master - 30 Days Survival Arabic - Day 09 (Remotion)",
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "validate": "tsx scripts/validate.ts",
+    "stills": "tsx scripts/stills.ts",
+    "render": "tsx scripts/render.ts",
+    "still": "remotion still src/index.ts ArabicMasterDay09"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.290",
+    "@remotion/cli": "4.0.290",
+    "@remotion/renderer": "4.0.290",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@fontsource/hind-siliguri": "5.1.0",
+    "@fontsource/noto-sans-arabic": "5.1.0",
+    "@types/node": "^22.20.5",
+    "@types/react": "18.3.12",
+    "tsx": "4.19.2",
+    "typescript": "5.6.3"
+  }
+}

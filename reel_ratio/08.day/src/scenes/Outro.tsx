@@ -98,7 +98,7 @@ export const OutroEnd: React.FC = () => {
   return (
     <>
       <TopLabel delay={3} />
-      <div style={{ opacity: aOut, transform: `translateY(${interpolate(aOut, [0, 1], [-40, 0])}px)` }}>
+      <div style={{ position: "absolute", inset: 0, opacity: aOut, transform: `translateY(${interpolate(aOut, [0, 1], [-40, 0])}px)` }}>
         <div style={{ ...center, top: 460, flexDirection: "column", alignItems: "center" }}>
           <Enter delay={4}><div style={{ fontFamily: en, fontWeight: 800, fontSize: 100, lineHeight: 1.15, color: c.text }}>COMMENT:</div></Enter>
           <Enter delay={10}><div style={{ fontFamily: en, fontWeight: 800, fontSize: 112, lineHeight: 1.2, color: c.primary }}>DAY 8 DONE!</div></Enter>

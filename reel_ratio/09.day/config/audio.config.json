@@ -1,0 +1,15 @@
+{
+  "_comment": "Narration is the ORIGINAL supplied voice-over, unmodified. Enabled by default. Replace `source` (file inside /public) to reuse for another day.",
+  "source": "audio/original-voice.wav",
+  "originalUploadName": "voiceover.mp3 (RIFF/WAVE PCM 16-bit, 48 kHz, stereo - extension was .mp3 but the container is WAV)",
+  "enabled": true,
+  "volume": 1,
+  "startAtSec": 0,
+  "startFromSec": 0,
+  "durationSec": 126.3255,
+  "sampleRate": 48000,
+  "channels": 2,
+  "renderAudioCodec": "aac",
+  "renderAudioBitrate": "192k",
+  "backgroundMusic": { "enabled": false, "source": null, "volume": 0.12, "loop": true }
+}
