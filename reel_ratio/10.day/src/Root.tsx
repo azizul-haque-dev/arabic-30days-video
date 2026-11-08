@@ -16,7 +16,7 @@ export const Root: React.FC = () => (
     height={video.height}
     fps={video.fps}
     durationInFrames={totalFrames(defaultEpisode)}
-    defaultProps={{ episode: defaultEpisode } satisfies CompositionProps}
+    defaultProps={{ episode: defaultEpisode, audioSrc: "voiceover.wav" } satisfies CompositionProps}
     // Any episode passed via --props / API drives the duration.
     calculateMetadata={({ props }) => ({ durationInFrames: totalFrames((props as CompositionProps).episode) })}
   />

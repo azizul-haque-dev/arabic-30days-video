@@ -19,7 +19,7 @@ export const secondsToFrames = (s: number): number => Math.round(s * video.fps);
 
 export const totalFrames = (ep: EpisodeConfig): number => secondsToFrames(ep.timing.endSec);
 
-export const ArabicMasterComposition: React.FC<CompositionProps> = ({ episode: ep, audioSrc }) => {
+export const ArabicMasterComposition: React.FC<CompositionProps> = ({ episode: ep, audioSrc = "voiceover.wav" }) => {
   const [handle] = useState(() => delayRender("Loading fonts"));
   useEffect(() => {
     loadFonts().then(() => continueRender(handle)).catch((e) => cancelRender(e));

@@ -17,7 +17,7 @@ export interface RenderOptions {
   episodeDir: string;
   outputPath: string;
   compositionId?: string;
-  audioSrc?: string; // path inside public/ or an http(s) URL; omit for a silent video
+  audioSrc?: string; // path inside public/ or an http(s) URL; defaults to "voiceover.wav"
   crf?: number;
   browserExecutable?: string;
 }
@@ -25,7 +25,8 @@ export interface RenderOptions {
 export async function renderEpisode(o: RenderOptions): Promise<string> {
   const episode = JSON.parse(readFileSync(join(o.episodeDir, "episode.config.json"), "utf8")) as EpisodeConfig;
   const serveUrl = await bundle({ entryPoint: resolve("src/index.ts") });
-  const inputProps = { episode, ...(o.audioSrc ? { audioSrc: o.audioSrc } : {}) };
+  const audioSrc = o.audioSrc ?? "voiceover.wav";
+  const inputProps = { episode, audioSrc };
   const composition = await selectComposition({
     serveUrl,
     id: o.compositionId ?? video.compositionId,
