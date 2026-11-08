@@ -1,0 +1,1268 @@
+{
+  "brandName": "Arabic Master",
+  "seriesName": "30 Days Survival Arabic",
+  "compositionId": "ArabicMasterComposition",
+  "episodeNumber": 12,
+  "topic": "Shopping Part 2",
+  "topicBn": "কেনাকাটা, পার্ট ২",
+  "sentenceStart": 111,
+  "sentenceEnd": 120,
+  "totalSentences": 300,
+  "previousCompletedSentences": 110,
+  "completedSentences": 120,
+  "progressPercentage": 40,
+  "ctaText": "DAY 12 DONE!",
+  "nextEpisodeNumber": 13,
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "aspectRatio": "9:16"
+  },
+  "srtFile": "subtitles.srt",
+  "audio": {
+    "enabled": true,
+    "src": "audio/voiceover.wav",
+    "volume": 1,
+    "startOffsetSeconds": 0
+  },
+  "tailSeconds": 0.5,
+  "copy": {
+    "labels": {
+      "day": "DAY",
+      "sentence": "বাক্য",
+      "pronunciation": "উচ্চারণ",
+      "meaning": "অর্থ",
+      "or": "অথবা",
+      "follow": "FOLLOW",
+      "save": "Save",
+      "share": "Share",
+      "done": "সম্পন্ন"
+    },
+    "thumb": {
+      "title": [
+        "৩০ দিনে ৩০০টি",
+        "Survival Arabic"
+      ],
+      "hook": "আরব দেশে থাকেন?",
+      "sub": "কেনাকাটা করতে গিয়ে আরবি বলতে আটকে যান?"
+    },
+    "story": {
+      "headline": "চিন্তা নেই!"
+    },
+    "brand": {
+      "tagline": "আপনার প্রতিদিনের আরবি শেখার সঙ্গী"
+    },
+    "episode": {
+      "line": "৩০ দিনের Survival Arabic সিরিজের আজ ১২তম দিন"
+    },
+    "progressDone": {
+      "lead": "আলহামদুলিল্লাহ!",
+      "line": "১১০টি বাক্য আমরা শিখে ফেলেছি"
+    },
+    "topic": {
+      "lead": "আজ শিখব",
+      "go": "চলুন শুরু করি!"
+    },
+    "outro": {
+      "done": [
+        "আজকের ১০টি দরকারি",
+        "আরবি বাক্য শেখা শেষ!"
+      ],
+      "progressLead": "আলহামদুলিল্লাহ!",
+      "practice": "এখন এগুলো বাস্তবে ব্যবহার করুন",
+      "practiceSub": "শুধু মুখস্থ করলে হবে না, কথা বলতে হবে",
+      "follow": "প্রতিদিন নতুন বাক্য শিখতে Arabic Master পেজটি follow করুন",
+      "commentLead": "কমেন্টে লিখুন",
+      "seeYou": "দেখা হবে",
+      "insha": "ইনশাআল্লাহ!"
+    }
+  },
+  "timeline": {
+    "scenes": [
+      {
+        "id": "thumbnail",
+        "kind": "thumbnail",
+        "group": "hook",
+        "start": {
+          "sec": 0
+        }
+      },
+      {
+        "id": "story",
+        "kind": "story",
+        "group": "brandIntro",
+        "start": {
+          "entry": 1,
+          "text": "চিন্তা নেই"
+        }
+      },
+      {
+        "id": "brand",
+        "kind": "brand",
+        "group": "brandIntro",
+        "start": {
+          "entry": 2
+        }
+      },
+      {
+        "id": "episode",
+        "kind": "episode",
+        "group": "episodeIntro",
+        "start": {
+          "entry": 2,
+          "text": "30 দিনের"
+        }
+      },
+      {
+        "id": "progressDone",
+        "kind": "progressDone",
+        "group": "episodeIntro",
+        "start": {
+          "entry": 3
+        }
+      },
+      {
+        "id": "topic",
+        "kind": "topic",
+        "group": "topicIntro",
+        "start": {
+          "entry": 4
+        },
+        "cues": {
+          "title": {
+            "entry": 4,
+            "text": "topic"
+          },
+          "go": {
+            "entry": 5,
+            "text": "চলুন"
+          }
+        }
+      },
+      {
+        "id": "s111",
+        "kind": "sentence",
+        "group": "sentence",
+        "sentence": 111,
+        "start": {
+          "entry": 5,
+          "text": "Sentence 111"
+        },
+        "cues": {
+          "pron": {
+            "entry": 5,
+            "text": "জিব হাদা বাস"
+          },
+          "meaning": {
+            "entry": 6,
+            "text": "অর্থ"
+          }
+        }
+      },
+      {
+        "id": "s112",
+        "kind": "sentence",
+        "group": "sentence",
+        "sentence": 112,
+        "start": {
+          "entry": 6,
+          "text": "Sentence 112"
+        },
+        "cues": {
+          "pron": {
+            "entry": 6,
+            "text": "अबगा"
+          },
+          "meaning": {
+            "entry": 8,
+            "text": "অর্থ"
+          }
+        }
+      },
+      {
+        "id": "s113",
+        "kind": "sentence",
+        "group": "sentence",
+        "sentence": 113,
+        "start": {
+          "entry": 8,
+          "text": "Sentence 113"
+        },
+        "cues": {
+          "pron": {
+            "entry": 9,
+            "text": "तकबलून"
+          },
+          "meaning": {
+            "entry": 9,
+            "text": "অর্থ"
+          }
+        }
+      },
+      {
+        "id": "s114",
+        "kind": "sentence",
+        "group": "sentence",
+        "sentence": 114,
+        "start": {
+          "entry": 10,
+          "text": "Sentence 114"
+        },
+        "cues": {
+          "pron": {
+            "entry": 10,
+            "text": "अथवा"
+          },
+          "meaning": {
+            "entry": 10,
+            "text": "অর্থ"
+          }
+        }
+      },
+      {
+        "id": "s115",
+        "kind": "sentence",
+        "group": "sentence",
+        "sentence": 115,
+        "start": {
+          "entry": 11,
+          "text": "Sentence 115"
+        },
+        "cues": {
+          "pron": {
+            "entry": 11,
+            "text": "माक फुक्का"
+          },
+          "alt": {
+            "entry": 12,
+            "text": "অথবা"
+          },
+          "meaning": {
+            "entry": 15,
+            "text": "অর্থ"
+          }
+        }
+      },
+      {
+        "id": "s116",
+        "kind": "sentence",
+        "group": "sentence",
+        "sentence": 116,
+        "start": {
+          "entry": 16,
+          "text": "Sentence 116"
+        },
+        "cues": {
+          "pron": {
+            "entry": 16,
+            "text": "अल"
+          },
+          "meaning": {
+            "entry": 16,
+            "text": "অর্থ"
+          }
+        }
+      },
+      {
+        "id": "s117",
+        "kind": "sentence",
+        "group": "sentence",
+        "sentence": 117,
+        "start": {
+          "entry": 17,
+          "text": "Sentence 117"
+        },
+        "cues": {
+          "pron": {
+            "entry": 17,
+            "text": "अबगा"
+          },
+          "meaning": {
+            "entry": 18,
+            "text": "আমি রসিদটা"
+          }
+        }
+      },
+      {
+        "id": "s118",
+        "kind": "sentence",
+        "group": "sentence",
+        "sentence": 118,
+        "start": {
+          "entry": 18,
+          "text": "Sentence 118"
+        },
+        "cues": {
+          "pron": {
+            "entry": 18,
+            "text": "हादा"
+          },
+          "meaning": {
+            "entry": 19,
+            "text": "অর্থ"
+          }
+        }
+      },
+      {
+        "id": "s119",
+        "kind": "sentence",
+        "group": "sentence",
+        "sentence": 119,
+        "start": {
+          "entry": 21,
+          "text": "Sentence 119"
+        },
+        "cues": {
+          "pron": {
+            "entry": 21,
+            "text": "अबगा"
+          },
+          "meaning": {
+            "entry": 22
+          }
+        }
+      },
+      {
+        "id": "s120",
+        "kind": "sentence",
+        "group": "sentence",
+        "sentence": 120,
+        "start": {
+          "entry": 23,
+          "text": "Sentence 120"
+        },
+        "cues": {
+          "pron": {
+            "entry": 23,
+            "text": "फी"
+          },
+          "meaning": {
+            "entry": 24,
+            "text": "অর্থ"
+          }
+        }
+      },
+      {
+        "id": "outroDone",
+        "kind": "outroDone",
+        "group": "outro",
+        "start": {
+          "entry": 25
+        }
+      },
+      {
+        "id": "outroProgress",
+        "kind": "outroProgress",
+        "group": "outro",
+        "start": {
+          "entry": 25,
+          "text": "আলহামদুলিল্লাহ"
+        }
+      },
+      {
+        "id": "outroPractice",
+        "kind": "outroPractice",
+        "group": "outro",
+        "start": {
+          "entry": 26,
+          "text": "এখন"
+        },
+        "cues": {
+          "sub": {
+            "entry": 26,
+            "text": "শুধু মুখস্থ"
+          }
+        }
+      },
+      {
+        "id": "outroFollow",
+        "kind": "outroFollow",
+        "group": "outro",
+        "start": {
+          "entry": 27,
+          "text": "প্রতিদিন"
+        }
+      },
+      {
+        "id": "outroComment",
+        "kind": "outroComment",
+        "group": "outro",
+        "start": {
+          "entry": 27,
+          "text": "কমেন্টে"
+        },
+        "cues": {
+          "cta": {
+            "entry": 28,
+            "text": "Day 12"
+          }
+        }
+      },
+      {
+        "id": "outroGoodbye",
+        "kind": "outroGoodbye",
+        "group": "outro",
+        "start": {
+          "entry": 29
+        }
+      }
+    ]
+  },
+  "sentences": [
+    {
+      "number": 111,
+      "pron": [
+        "জিব হাদা বাস।"
+      ],
+      "meaning": "শুধু এটা দিন।",
+      "layers": [
+        {
+          "a": "storeInterior",
+          "x": 0,
+          "y": 0,
+          "w": 940,
+          "enter": "none"
+        },
+        {
+          "a": "shelf",
+          "x": 520,
+          "y": 40,
+          "w": 380,
+          "enter": "right",
+          "d": 4
+        },
+        {
+          "a": "customer",
+          "x": 60,
+          "y": 120,
+          "w": 230,
+          "enter": "left",
+          "d": 0,
+          "bob": 3
+        },
+        {
+          "a": "product",
+          "x": 350,
+          "y": 300,
+          "w": 120,
+          "enter": "pop",
+          "d": 18,
+          "ring": true,
+          "bob": 4
+        },
+        {
+          "a": "cashier",
+          "x": 640,
+          "y": 290,
+          "w": 190,
+          "enter": "right",
+          "d": 8
+        },
+        {
+          "a": "counter",
+          "x": 500,
+          "y": 400,
+          "w": 420,
+          "enter": "up",
+          "d": 12
+        }
+      ]
+    },
+    {
+      "number": 112,
+      "pron": [
+        "আবগা কীস লাউ সামাহত।"
+      ],
+      "meaning": "দয়া করে একটা ব্যাগ দিন।",
+      "layers": [
+        {
+          "a": "storeInterior",
+          "x": 0,
+          "y": 0,
+          "w": 940,
+          "enter": "none"
+        },
+        {
+          "a": "customer",
+          "x": 60,
+          "y": 120,
+          "w": 230,
+          "enter": "left",
+          "d": 0,
+          "bob": 3
+        },
+        {
+          "a": "cashier",
+          "x": 640,
+          "y": 290,
+          "w": 190,
+          "enter": "right",
+          "d": 8
+        },
+        {
+          "a": "counter",
+          "x": 500,
+          "y": 400,
+          "w": 420,
+          "enter": "up",
+          "d": 12
+        },
+        {
+          "a": "bag",
+          "x": 430,
+          "y": 300,
+          "w": 130,
+          "enter": "pop",
+          "d": 20,
+          "bob": 5
+        }
+      ]
+    },
+    {
+      "number": 113,
+      "pron": [
+        "তাকবালুন কার্ত?"
+      ],
+      "meaning": "আপনারা কি কার্ড গ্রহণ করেন?",
+      "layers": [
+        {
+          "a": "storeInterior",
+          "x": 0,
+          "y": 0,
+          "w": 940,
+          "enter": "none"
+        },
+        {
+          "a": "customer",
+          "x": 60,
+          "y": 120,
+          "w": 230,
+          "enter": "left",
+          "d": 0,
+          "bob": 3
+        },
+        {
+          "a": "cashier",
+          "x": 640,
+          "y": 290,
+          "w": 190,
+          "enter": "right",
+          "d": 8
+        },
+        {
+          "a": "counter",
+          "x": 500,
+          "y": 400,
+          "w": 420,
+          "enter": "up",
+          "d": 12
+        },
+        {
+          "a": "pos",
+          "x": 540,
+          "y": 270,
+          "w": 130,
+          "enter": "pop",
+          "d": 20
+        },
+        {
+          "a": "card",
+          "x": 330,
+          "y": 330,
+          "w": 150,
+          "enter": "left",
+          "d": 24,
+          "bob": 5
+        }
+      ]
+    },
+    {
+      "number": 114,
+      "pron": [
+        "আদফা' ক্যাশ।"
+      ],
+      "meaning": "আমি নগদ দেব।",
+      "layers": [
+        {
+          "a": "storeInterior",
+          "x": 0,
+          "y": 0,
+          "w": 940,
+          "enter": "none"
+        },
+        {
+          "a": "customer",
+          "x": 60,
+          "y": 120,
+          "w": 230,
+          "enter": "left",
+          "d": 0,
+          "bob": 3
+        },
+        {
+          "a": "cashier",
+          "x": 640,
+          "y": 290,
+          "w": 190,
+          "enter": "right",
+          "d": 8
+        },
+        {
+          "a": "counter",
+          "x": 500,
+          "y": 400,
+          "w": 420,
+          "enter": "up",
+          "d": 12
+        },
+        {
+          "a": "cash",
+          "x": 330,
+          "y": 340,
+          "w": 190,
+          "enter": "left",
+          "d": 22,
+          "bob": 5
+        }
+      ]
+    },
+    {
+      "number": 115,
+      "pron": [
+        "মাআক ফুক্কা?",
+        "মাআক সার্ফ"
+      ],
+      "meaning": "আপনার কাছে খুচরা আছে?",
+      "layers": [
+        {
+          "a": "storeInterior",
+          "x": 0,
+          "y": 0,
+          "w": 940,
+          "enter": "none"
+        },
+        {
+          "a": "customer",
+          "x": 60,
+          "y": 120,
+          "w": 230,
+          "enter": "left",
+          "d": 0,
+          "bob": 3
+        },
+        {
+          "a": "cashier",
+          "x": 640,
+          "y": 290,
+          "w": 190,
+          "enter": "right",
+          "d": 8
+        },
+        {
+          "a": "counter",
+          "x": 500,
+          "y": 400,
+          "w": 420,
+          "enter": "up",
+          "d": 12
+        },
+        {
+          "a": "cash",
+          "x": 300,
+          "y": 250,
+          "w": 230,
+          "enter": "left",
+          "d": 22,
+          "bob": 5
+        },
+        {
+          "a": "coins",
+          "x": 520,
+          "y": 330,
+          "w": 110,
+          "enter": "pop",
+          "d": 30
+        }
+      ]
+    },
+    {
+      "number": 116,
+      "pron": [
+        "আল-বাগি লাক।"
+      ],
+      "meaning": "বাকিটা আপনার।",
+      "layers": [
+        {
+          "a": "storeInterior",
+          "x": 0,
+          "y": 0,
+          "w": 940,
+          "enter": "none"
+        },
+        {
+          "a": "customer",
+          "x": 60,
+          "y": 120,
+          "w": 230,
+          "enter": "left",
+          "d": 0,
+          "bob": 3
+        },
+        {
+          "a": "cashier",
+          "x": 640,
+          "y": 290,
+          "w": 190,
+          "enter": "right",
+          "d": 8
+        },
+        {
+          "a": "counter",
+          "x": 500,
+          "y": 400,
+          "w": 420,
+          "enter": "up",
+          "d": 12
+        },
+        {
+          "a": "cash",
+          "x": 350,
+          "y": 290,
+          "w": 170,
+          "enter": "left",
+          "d": 20,
+          "bob": 4
+        },
+        {
+          "a": "coins",
+          "x": 380,
+          "y": 380,
+          "w": 140,
+          "enter": "pop",
+          "d": 28
+        },
+        {
+          "a": "checkBadge",
+          "x": 720,
+          "y": 110,
+          "w": 120,
+          "enter": "pop",
+          "d": 44
+        }
+      ]
+    },
+    {
+      "number": 117,
+      "pron": [
+        "আবগা ফাতুরা।"
+      ],
+      "meaning": "আমি রসিদ চাই।",
+      "layers": [
+        {
+          "a": "storeInterior",
+          "x": 0,
+          "y": 0,
+          "w": 940,
+          "enter": "none"
+        },
+        {
+          "a": "customer",
+          "x": 60,
+          "y": 120,
+          "w": 230,
+          "enter": "left",
+          "d": 0,
+          "bob": 3
+        },
+        {
+          "a": "cashier",
+          "x": 680,
+          "y": 290,
+          "w": 190,
+          "enter": "right",
+          "d": 8
+        },
+        {
+          "a": "counter",
+          "x": 500,
+          "y": 400,
+          "w": 420,
+          "enter": "up",
+          "d": 12
+        },
+        {
+          "a": "printer",
+          "x": 520,
+          "y": 300,
+          "w": 150,
+          "enter": "pop",
+          "d": 20
+        },
+        {
+          "a": "receipt",
+          "x": 560,
+          "y": 170,
+          "w": 70,
+          "enter": "down",
+          "d": 30,
+          "bob": 4
+        }
+      ]
+    },
+    {
+      "number": 118,
+      "pron": [
+        "হাদা ফীহ দামান?"
+      ],
+      "meaning": "এটার কি ওয়ারেন্টি আছে?",
+      "layers": [
+        {
+          "a": "storeInterior",
+          "x": 0,
+          "y": 0,
+          "w": 940,
+          "enter": "none"
+        },
+        {
+          "a": "customer",
+          "x": 60,
+          "y": 120,
+          "w": 230,
+          "enter": "left",
+          "d": 0,
+          "bob": 3
+        },
+        {
+          "a": "tv",
+          "x": 330,
+          "y": 260,
+          "w": 250,
+          "enter": "pop",
+          "d": 14
+        },
+        {
+          "a": "warranty",
+          "x": 620,
+          "y": 80,
+          "w": 150,
+          "enter": "down",
+          "d": 24,
+          "bob": 4
+        },
+        {
+          "a": "cashier",
+          "x": 700,
+          "y": 290,
+          "w": 190,
+          "enter": "right",
+          "d": 8
+        },
+        {
+          "a": "bubble",
+          "x": 300,
+          "y": 110,
+          "w": 130,
+          "enter": "pop",
+          "d": 34
+        }
+      ]
+    },
+    {
+      "number": 119,
+      "pron": [
+        "আবগা আরাজ্জা হাদা।"
+      ],
+      "meaning": "আমি এটা ফেরত দিতে চাই।",
+      "layers": [
+        {
+          "a": "storeInterior",
+          "x": 0,
+          "y": 0,
+          "w": 940,
+          "enter": "none"
+        },
+        {
+          "a": "customer",
+          "x": 60,
+          "y": 120,
+          "w": 230,
+          "enter": "left",
+          "d": 0,
+          "bob": 3
+        },
+        {
+          "a": "cashier",
+          "x": 690,
+          "y": 150,
+          "w": 190,
+          "enter": "right",
+          "d": 8
+        },
+        {
+          "a": "returnCounter",
+          "x": 520,
+          "y": 300,
+          "w": 380,
+          "enter": "up",
+          "d": 12
+        },
+        {
+          "a": "product",
+          "x": 340,
+          "y": 340,
+          "w": 120,
+          "enter": "left",
+          "d": 20,
+          "bob": 4
+        },
+        {
+          "a": "arrowReturn",
+          "x": 470,
+          "y": 380,
+          "w": 80,
+          "enter": "pop",
+          "d": 30
+        }
+      ]
+    },
+    {
+      "number": 120,
+      "pron": [
+        "ফীহ খাসম আল-ইওম?"
+      ],
+      "meaning": "আজ কি কোন ছাড় / ডিসকাউন্ট আছে?",
+      "layers": [
+        {
+          "a": "storeInterior",
+          "x": 0,
+          "y": 0,
+          "w": 940,
+          "enter": "none"
+        },
+        {
+          "a": "discountBanner",
+          "x": 170,
+          "y": 20,
+          "w": 600,
+          "enter": "down",
+          "d": 6
+        },
+        {
+          "a": "customer",
+          "x": 60,
+          "y": 170,
+          "w": 230,
+          "enter": "left",
+          "d": 0,
+          "bob": 3
+        },
+        {
+          "a": "cashier",
+          "x": 640,
+          "y": 300,
+          "w": 190,
+          "enter": "right",
+          "d": 8
+        },
+        {
+          "a": "counter",
+          "x": 500,
+          "y": 420,
+          "w": 420,
+          "enter": "up",
+          "d": 12
+        },
+        {
+          "a": "product",
+          "x": 340,
+          "y": 420,
+          "w": 110,
+          "enter": "pop",
+          "d": 18
+        },
+        {
+          "a": "priceTag",
+          "x": 470,
+          "y": 260,
+          "w": 140,
+          "enter": "pop",
+          "d": 26,
+          "bob": 4
+        }
+      ]
+    }
+  ],
+  "illustrations": {
+    "thumbnail": [
+      {
+        "a": "storeFront",
+        "x": 70,
+        "y": 0,
+        "w": 800,
+        "enter": "none"
+      },
+      {
+        "a": "discountBanner",
+        "x": 260,
+        "y": 14,
+        "w": 420,
+        "enter": "down",
+        "d": 4
+      },
+      {
+        "a": "customer",
+        "x": 20,
+        "y": 230,
+        "w": 190,
+        "enter": "left",
+        "d": 2,
+        "bob": 3
+      },
+      {
+        "a": "cart",
+        "x": 210,
+        "y": 440,
+        "w": 200,
+        "enter": "up",
+        "d": 6
+      },
+      {
+        "a": "bag",
+        "x": 420,
+        "y": 470,
+        "w": 100,
+        "enter": "pop",
+        "d": 8,
+        "bob": 4
+      },
+      {
+        "a": "cashier",
+        "x": 650,
+        "y": 300,
+        "w": 150,
+        "enter": "right",
+        "d": 4
+      },
+      {
+        "a": "counter",
+        "x": 560,
+        "y": 440,
+        "w": 340,
+        "enter": "up",
+        "d": 6
+      },
+      {
+        "a": "pos",
+        "x": 600,
+        "y": 345,
+        "w": 90,
+        "enter": "pop",
+        "d": 10
+      },
+      {
+        "a": "receipt",
+        "x": 790,
+        "y": 310,
+        "w": 60,
+        "enter": "pop",
+        "d": 12
+      },
+      {
+        "a": "priceTag",
+        "x": 790,
+        "y": 120,
+        "w": 130,
+        "enter": "pop",
+        "d": 14,
+        "bob": 4
+      },
+      {
+        "a": "arrowReturn",
+        "x": 450,
+        "y": 330,
+        "w": 80,
+        "enter": "pop",
+        "d": 16
+      }
+    ],
+    "story": [
+      {
+        "a": "storeFront",
+        "x": 70,
+        "y": 20,
+        "w": 800,
+        "enter": "none"
+      },
+      {
+        "a": "cart",
+        "x": 60,
+        "y": 430,
+        "w": 240,
+        "enter": "left",
+        "d": 4
+      },
+      {
+        "a": "customer",
+        "x": 330,
+        "y": 210,
+        "w": 230,
+        "enter": "up",
+        "d": 0,
+        "bob": 3
+      },
+      {
+        "a": "bag",
+        "x": 590,
+        "y": 440,
+        "w": 150,
+        "enter": "pop",
+        "d": 10,
+        "bob": 4
+      },
+      {
+        "a": "bubble",
+        "x": 560,
+        "y": 190,
+        "w": 170,
+        "enter": "pop",
+        "d": 6
+      },
+      {
+        "a": "checkBadge",
+        "x": 720,
+        "y": 120,
+        "w": 110,
+        "enter": "pop",
+        "d": 22
+      },
+      {
+        "a": "basket",
+        "x": 740,
+        "y": 490,
+        "w": 150,
+        "enter": "pop",
+        "d": 14
+      }
+    ],
+    "topicCard": [
+      {
+        "a": "cart",
+        "x": 20,
+        "y": 130,
+        "w": 250,
+        "enter": "left",
+        "d": 4,
+        "bob": 3
+      },
+      {
+        "a": "bag",
+        "x": 190,
+        "y": 10,
+        "w": 100,
+        "enter": "pop",
+        "d": 10,
+        "bob": 4
+      }
+    ],
+    "outroStrip": [
+      {
+        "a": "bag",
+        "x": 38,
+        "y": 80,
+        "w": 140,
+        "enter": "pop",
+        "d": 2,
+        "bob": 3
+      },
+      {
+        "a": "card",
+        "x": 216,
+        "y": 110,
+        "w": 170,
+        "enter": "pop",
+        "d": 6,
+        "bob": 3
+      },
+      {
+        "a": "cash",
+        "x": 424,
+        "y": 116,
+        "w": 170,
+        "enter": "pop",
+        "d": 10,
+        "bob": 3
+      },
+      {
+        "a": "receipt",
+        "x": 632,
+        "y": 70,
+        "w": 100,
+        "enter": "pop",
+        "d": 14,
+        "bob": 3
+      },
+      {
+        "a": "priceTag",
+        "x": 770,
+        "y": 100,
+        "w": 130,
+        "enter": "pop",
+        "d": 18,
+        "bob": 3
+      }
+    ],
+    "outroPractice": [
+      {
+        "a": "storeInterior",
+        "x": 0,
+        "y": 0,
+        "w": 940,
+        "enter": "none"
+      },
+      {
+        "a": "customer",
+        "x": 60,
+        "y": 120,
+        "w": 230,
+        "enter": "left",
+        "d": 0,
+        "bob": 3
+      },
+      {
+        "a": "cashier",
+        "x": 640,
+        "y": 290,
+        "w": 190,
+        "enter": "right",
+        "d": 6
+      },
+      {
+        "a": "counter",
+        "x": 500,
+        "y": 400,
+        "w": 420,
+        "enter": "up",
+        "d": 10
+      },
+      {
+        "a": "bubble",
+        "x": 300,
+        "y": 110,
+        "w": 160,
+        "enter": "pop",
+        "d": 24,
+        "bob": 4
+      },
+      {
+        "a": "bubble",
+        "x": 520,
+        "y": 150,
+        "w": 150,
+        "enter": "pop",
+        "d": 34,
+        "bob": 4
+      }
+    ]
+  }
+}

@@ -1,0 +1,426 @@
+{
+  "brandName": "Arabic Master",
+  "seriesName": "30 Days Survival Arabic",
+  "seriesBn": "৩০ দিনের Survival Arabic",
+  "episodeNumber": 11,
+  "topic": "Shopping",
+  "topicBn": "কেনাকাটা",
+  "sentenceStart": 101,
+  "sentenceEnd": 110,
+  "totalSentences": 300,
+  "completedSentences": 110,
+  "previousCompletedSentences": 100,
+  "progressPercentage": 36.67,
+  "ctaText": "DAY 11 DONE!",
+  "nextEpisodeNumber": 12,
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "aspectRatio": "9:16"
+  },
+  "compositionId": "ArabicMasterComposition",
+  "assets": {
+    "subtitles": "subtitles.srt",
+    "audio": {
+      "file": "voiceover.wav",
+      "enabled": true,
+      "offsetSec": 0,
+      "volume": 1
+    }
+  },
+  "timing": {
+    "tailSec": 1.0,
+    "sceneExitFrames": 10
+  },
+  "scenes": {
+    "thumbnail": {
+      "start": {
+        "sec": 0
+      }
+    },
+    "brand": {
+      "start": {
+        "sec": 3.5,
+        "cue": 1,
+        "estimated": true
+      }
+    },
+    "episode": {
+      "start": {
+        "sec": 7.4,
+        "cue": 2,
+        "estimated": true
+      }
+    },
+    "topic": {
+      "start": {
+        "sec": 18.8,
+        "estimated": true
+      }
+    },
+    "outro": {
+      "start": {
+        "cue": 38,
+        "offsetSec": -0.1
+      }
+    }
+  },
+  "intro": {
+    "lines": [
+      {
+        "id": "hook1",
+        "text": "আরব দেশে থাকেন?",
+        "at": {
+          "sec": 0.44,
+          "cue": 1
+        }
+      },
+      {
+        "id": "hook2",
+        "text": "কিন্তু আরবি বলতে গিয়ে আটকে যান?",
+        "at": {
+          "sec": 1.5,
+          "cue": 1,
+          "estimated": true
+        }
+      },
+      {
+        "id": "relief",
+        "text": "চিন্তা নেই!",
+        "at": {
+          "sec": 3.6,
+          "cue": 1,
+          "estimated": true
+        }
+      },
+      {
+        "id": "companion",
+        "text": "আপনার প্রতিদিনের আরবি শেখার সঙ্গী, Arabic Master!",
+        "at": {
+          "sec": 4.4,
+          "cue": 1,
+          "estimated": true
+        }
+      },
+      {
+        "id": "day",
+        "text": "৩০ দিনের Survival Arabic সিরিজের আজ ১১তম দিন।",
+        "at": {
+          "sec": 7.6,
+          "cue": 2,
+          "estimated": true
+        }
+      },
+      {
+        "id": "learned",
+        "text": "আলহামদুলিল্লাহ, ৩০০টির মধ্যে ১০০টি বাক্য আমরা শিখে ফেলেছি!",
+        "at": {
+          "cue": 3
+        }
+      },
+      {
+        "id": "range",
+        "text": "আজ শিখব ১০১ থেকে ১১০ নম্বর বাক্য।",
+        "at": {
+          "sec": 15.9,
+          "cue": 3,
+          "estimated": true
+        }
+      },
+      {
+        "id": "topic",
+        "text": "আজকের টপিক: কেনাকাটা।",
+        "at": {
+          "cue": 5
+        }
+      },
+      {
+        "id": "start",
+        "text": "চলুন শুরু করি!",
+        "at": {
+          "sec": 20.9,
+          "cue": 5,
+          "estimated": true
+        }
+      }
+    ]
+  },
+  "sentences": [
+    {
+      "number": 101,
+      "arabic": "كم سعر هذا؟",
+      "pronunciation": "কাম সিআর হাদা?",
+      "meaning": "এটার দাম কত?",
+      "illustration": "priceAsk",
+      "start": {
+        "cue": 6,
+        "offsetSec": -0.4
+      },
+      "reveal": {
+        "arabicAt": {
+          "cue": 7,
+          "offsetSec": -0.2
+        },
+        "meaningAt": {
+          "cue": 9,
+          "offsetSec": -0.1
+        }
+      }
+    },
+    {
+      "number": 102,
+      "arabic": "هذا غالي مرة",
+      "pronunciation": "হাদা গালি মাররা।",
+      "meaning": "এটা অনেক দামি।",
+      "illustration": "tooExpensive",
+      "start": {
+        "cue": 10,
+        "offsetSec": -0.4
+      },
+      "reveal": {
+        "arabicAt": {
+          "cue": 11,
+          "offsetSec": -0.2
+        },
+        "meaningAt": {
+          "cue": 12,
+          "offsetSec": -0.1
+        }
+      }
+    },
+    {
+      "number": 103,
+      "arabic": "نزل السعر شوية",
+      "pronunciation": "নাজ্জিল আস-সিআর শুয়াই।",
+      "meaning": "দামটা একটু কমান।",
+      "illustration": "negotiate",
+      "start": {
+        "cue": 13,
+        "offsetSec": -0.4
+      },
+      "reveal": {
+        "arabicAt": {
+          "cue": 14,
+          "offsetSec": -0.2
+        },
+        "meaningAt": {
+          "sec": 45.6,
+          "cue": 15,
+          "estimated": true
+        }
+      }
+    },
+    {
+      "number": 104,
+      "arabic": "آخر سعر كم؟",
+      "pronunciation": "কাম আস সিআর আখের?",
+      "meaning": "শেষ দাম কত?",
+      "illustration": "finalPrice",
+      "start": {
+        "cue": 16,
+        "offsetSec": -0.4
+      },
+      "reveal": {
+        "arabicAt": {
+          "cue": 17,
+          "offsetSec": -0.2
+        },
+        "meaningAt": {
+          "cue": 18,
+          "offsetSec": -0.1
+        }
+      }
+    },
+    {
+      "number": 105,
+      "arabic": "عندك مقاس أكبر؟",
+      "pronunciation": "ইনদাক মাগাস আকবার?",
+      "meaning": "আপনার কাছে বড় সাইজ আছে?",
+      "illustration": "biggerSize",
+      "start": {
+        "cue": 19,
+        "offsetSec": -0.45,
+        "estimated": true
+      },
+      "reveal": {
+        "arabicAt": {
+          "cue": 19,
+          "offsetSec": -0.2
+        },
+        "meaningAt": {
+          "cue": 21,
+          "offsetSec": -0.1
+        }
+      }
+    },
+    {
+      "number": 106,
+      "arabic": "أبغى مقاس أصغر",
+      "pronunciation": "আবগা মাগাস আসগার।",
+      "meaning": "আমি ছোট সাইজ চাই।",
+      "illustration": "smallerSize",
+      "start": {
+        "cue": 22,
+        "offsetSec": -0.4
+      },
+      "reveal": {
+        "arabicAt": {
+          "sec": 65.3,
+          "cue": 22,
+          "estimated": true
+        },
+        "meaningAt": {
+          "sec": 68.6,
+          "cue": 22,
+          "estimated": true
+        }
+      }
+    },
+    {
+      "number": 107,
+      "arabic": "هذا ما يعجبني",
+      "pronunciation": "হাদা মা আজিবনি।",
+      "meaning": "এটা আমার পছন্দ হচ্ছে না।",
+      "illustration": "dislike",
+      "start": {
+        "sec": 72.4,
+        "cue": 23,
+        "estimated": true
+      },
+      "reveal": {
+        "arabicAt": {
+          "cue": 24,
+          "offsetSec": -0.2
+        },
+        "meaningAt": {
+          "cue": 26,
+          "offsetSec": -0.1
+        }
+      }
+    },
+    {
+      "number": 108,
+      "arabic": "عندكم لون ثاني؟",
+      "pronunciation": "ইনদাকুম লওন তানি?",
+      "meaning": "আপনাদের কাছে অন্য রঙ আছে?",
+      "illustration": "colors",
+      "start": {
+        "cue": 27,
+        "offsetSec": -0.4
+      },
+      "reveal": {
+        "arabicAt": {
+          "cue": 28,
+          "offsetSec": -0.2
+        },
+        "meaningAt": {
+          "cue": 30,
+          "offsetSec": -0.1
+        }
+      }
+    },
+    {
+      "number": 109,
+      "arabic": "أبغى أجرب هذا",
+      "pronunciation": "আবগা আজাররিব হাদা।",
+      "meaning": "আমি এটা ট্রাই করতে চাই।",
+      "illustration": "tryOn",
+      "start": {
+        "cue": 31,
+        "offsetSec": -0.4
+      },
+      "reveal": {
+        "arabicAt": {
+          "cue": 32,
+          "offsetSec": -0.2
+        },
+        "meaningAt": {
+          "sec": 96.1,
+          "cue": 33,
+          "estimated": true
+        }
+      }
+    },
+    {
+      "number": 110,
+      "arabic": "وين غرفة القياس؟",
+      "pronunciation": "ওয়েন গুরফাত আল গিয়াস?",
+      "meaning": "ট্রায়াল রুম কোথায়?",
+      "illustration": "fittingRoom",
+      "start": {
+        "cue": 34,
+        "offsetSec": -0.4
+      },
+      "reveal": {
+        "arabicAt": {
+          "cue": 35,
+          "offsetSec": -0.2
+        },
+        "meaningAt": {
+          "cue": 37,
+          "offsetSec": -0.1
+        }
+      }
+    }
+  ],
+  "outro": {
+    "lines": [
+      {
+        "id": "done",
+        "text": "Arabic Master-এর সঙ্গে আজকের ১০টি দরকারি সৌদি আরবি বাক্য শেখা শেষ!",
+        "at": {
+          "cue": 38
+        }
+      },
+      {
+        "id": "progress",
+        "text": "আলহামদুলিল্লাহ, ৩০০টির মধ্যে ১১০টি শেখা হলো!",
+        "at": {
+          "cue": 39
+        }
+      },
+      {
+        "id": "practice",
+        "text": "এখন এগুলো বাস্তবে ব্যবহার করুন।",
+        "at": {
+          "cue": 40
+        }
+      },
+      {
+        "id": "speak",
+        "text": "শুধু মুখস্থ করলে হবে না, কথা বলতে হবে।",
+        "at": {
+          "sec": 118.0,
+          "cue": 40,
+          "estimated": true
+        }
+      },
+      {
+        "id": "follow",
+        "text": "প্রতিদিন নতুন বাক্য শিখতে Arabic Master পেজটি ফলো করুন।",
+        "at": {
+          "sec": 121.4,
+          "cue": 40,
+          "estimated": true
+        }
+      },
+      {
+        "id": "comment",
+        "text": "কমেন্টে লিখুন: DAY 11 DONE!",
+        "at": {
+          "sec": 125.7,
+          "cue": 41,
+          "estimated": true
+        }
+      },
+      {
+        "id": "next",
+        "text": "দেখা হবে Day 12-তে, ইনশাআল্লাহ!",
+        "at": {
+          "cue": 42
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,450 @@
+{
+  "compositionId": "ArabicMasterComposition",
+  "brandName": "Arabic Master",
+  "seriesName": "30 Days Survival Arabic",
+  "episodeNumber": 16,
+  "totalDays": 30,
+  "topic": "Restaurant Food Ordering",
+  "topicBn": "রেস্টুরেন্টে খাবার অর্ডার",
+  "sentenceStart": 151,
+  "sentenceEnd": 160,
+  "totalSentences": 300,
+  "previousCompletedSentences": 150,
+  "completedSentences": 160,
+  "progressPercentage": 53.33,
+  "ctaText": "DAY 16 DONE!",
+  "nextEpisodeNumber": 17,
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "aspectRatio": "9:16"
+  },
+  "srt": {
+    "path": "subtitles.srt",
+    "expectedEntries": 75,
+    "tailSeconds": 0.7
+  },
+  "audio": {
+    "enabled": true,
+    "src": "day16complete.wav",
+    "volume": 1,
+    "offsetSeconds": 0
+  },
+  "thumbnail": {
+    "seriesLine": "৩০ দিনে ৩০০টি Survival Arabic",
+    "lines": [
+      "গালফের রেস্টুরেন্টে ঢুকেছেন?",
+      "ওয়েটার সামনে আসতেই মুখ বন্ধ?"
+    ],
+    "highlight": "মুখ বন্ধ?"
+  },
+  "scenes": [
+    {
+      "id": "thumbnail",
+      "kind": "thumbnail",
+      "startCue": 1
+    },
+    {
+      "id": "intro-entrance",
+      "kind": "introEntrance",
+      "startCue": 2,
+      "splitAt": 0.42
+    },
+    {
+      "id": "intro-waiter",
+      "kind": "introWaiter",
+      "startCue": 3
+    },
+    {
+      "id": "intro-pointing",
+      "kind": "introPointing",
+      "startCue": 4
+    },
+    {
+      "id": "intro-brand",
+      "kind": "introBrand",
+      "startCue": 5
+    },
+    {
+      "id": "intro-episode",
+      "kind": "introEpisode",
+      "startCue": 6
+    },
+    {
+      "id": "intro-topic",
+      "kind": "introTopic",
+      "startCue": 7
+    },
+    {
+      "id": "sentence-151",
+      "kind": "sentence",
+      "startCue": 8,
+      "sentenceNumber": 151
+    },
+    {
+      "id": "sentence-152",
+      "kind": "sentence",
+      "startCue": 15,
+      "sentenceNumber": 152
+    },
+    {
+      "id": "sentence-153",
+      "kind": "sentence",
+      "startCue": 21,
+      "sentenceNumber": 153
+    },
+    {
+      "id": "sentence-154",
+      "kind": "sentence",
+      "startCue": 28,
+      "sentenceNumber": 154
+    },
+    {
+      "id": "sentence-155",
+      "kind": "sentence",
+      "startCue": 34,
+      "sentenceNumber": 155
+    },
+    {
+      "id": "sentence-156",
+      "kind": "sentence",
+      "startCue": 40,
+      "sentenceNumber": 156
+    },
+    {
+      "id": "sentence-157",
+      "kind": "sentence",
+      "startCue": 46,
+      "sentenceNumber": 157
+    },
+    {
+      "id": "sentence-158",
+      "kind": "sentence",
+      "startCue": 51,
+      "sentenceNumber": 158
+    },
+    {
+      "id": "sentence-159",
+      "kind": "sentence",
+      "startCue": 57,
+      "sentenceNumber": 159
+    },
+    {
+      "id": "sentence-160",
+      "kind": "sentence",
+      "startCue": 62,
+      "sentenceNumber": 160
+    },
+    {
+      "id": "outro-summary",
+      "kind": "outroSummary",
+      "startCue": 69
+    },
+    {
+      "id": "outro-comment",
+      "kind": "outroComment",
+      "startCue": 70
+    },
+    {
+      "id": "outro-compare",
+      "kind": "outroCompare",
+      "startCue": 71,
+      "compareLabels": [
+        "দিজাজ মাশউই",
+        "কাবছা লাহাম"
+      ]
+    },
+    {
+      "id": "outro-save-share",
+      "kind": "outroSaveShare",
+      "startCue": 72
+    },
+    {
+      "id": "outro-follow",
+      "kind": "outroFollow",
+      "startCue": 73
+    },
+    {
+      "id": "outro-next",
+      "kind": "outroNext",
+      "startCue": 74
+    },
+    {
+      "id": "outro-goodbye",
+      "kind": "outroGoodbye",
+      "startCue": 75
+    }
+  ],
+  "sentences": [
+    {
+      "number": 151,
+      "pronunciation": "আবগা আল মেনু।",
+      "meaning": "আমি মেনু চাই।",
+      "context": "টেবিলে বসেই প্রথম কাজ মেনু চাওয়া।",
+      "illustration": "menu",
+      "cues": {
+        "label": 8,
+        "context": [
+          9,
+          10
+        ],
+        "pronunciation": [
+          11,
+          12
+        ],
+        "meaning": 13,
+        "words": 14
+      },
+      "words": [
+        {
+          "term": "আবগা",
+          "meaning": "আমি চাই"
+        }
+      ]
+    },
+    {
+      "number": 152,
+      "pronunciation": "এশ ইন্দাকুম আল ইয়াওম?",
+      "meaning": "আজ আপনাদের কি আছে?",
+      "context": "আর যদি দোকানে মেনু কার্ড না থাকে, তখন জিজ্ঞেস করুন।",
+      "illustration": "board",
+      "cues": {
+        "label": 15,
+        "context": [
+          16
+        ],
+        "pronunciation": [
+          17,
+          18
+        ],
+        "meaning": 19,
+        "words": 20
+      },
+      "words": [
+        {
+          "term": "এশ",
+          "meaning": "কি"
+        },
+        {
+          "term": "আল ইয়াওম",
+          "meaning": "আজ"
+        }
+      ],
+      "notes": "Word chips taken verbatim from SRT entry 20 (not listed in the master prompt for this sentence)."
+    },
+    {
+      "number": 153,
+      "pronunciation": "আবগা দিজাজ মাশউই।",
+      "meaning": "আমি গ্রিল করা মুরগি চাই।",
+      "context": "বারবিকিউ বা গ্রিলড করা মুরগি খেতে চাইলে বলুন।",
+      "illustration": "grilledChicken",
+      "cues": {
+        "label": 21,
+        "context": [
+          22,
+          23
+        ],
+        "pronunciation": [
+          24,
+          25
+        ],
+        "meaning": 26,
+        "words": 27
+      },
+      "words": [
+        {
+          "term": "দিজাজ",
+          "meaning": "মুরগি"
+        },
+        {
+          "term": "মাশউই",
+          "meaning": "গ্রিল করা"
+        }
+      ],
+      "notes": "SRT entry 27 says 'পুরানো বা গ্রিল করা'; on-screen label uses the intended meaning 'গ্রিল করা' as instructed. SRT file itself is untouched."
+    },
+    {
+      "number": 154,
+      "pronunciation": "আত্তেনি বিরিয়ানি।",
+      "meaning": "আমাকে বিরিয়ানি দিন।",
+      "context": "বিরিয়ানি খেতে মন চাইলে একটু স্টাইল করে বলুন।",
+      "illustration": "biryani",
+      "cues": {
+        "label": 28,
+        "context": [
+          29
+        ],
+        "pronunciation": [
+          30,
+          31
+        ],
+        "meaning": 32,
+        "words": 33
+      },
+      "words": [
+        {
+          "term": "আবগা",
+          "meaning": "আমি চাই"
+        },
+        {
+          "term": "আত্তেনি",
+          "meaning": "আমাকে দিন"
+        }
+      ]
+    },
+    {
+      "number": 155,
+      "pronunciation": "আবগা কাবছা লাহাম।",
+      "meaning": "আমি মাংসের কাবছা চাই।",
+      "context": "গালফের ট্র্যাডিশনাল গোশতের কাবছা অর্ডার করতে বলুন।",
+      "illustration": "meatKabsa",
+      "cues": {
+        "label": 34,
+        "context": [
+          35
+        ],
+        "pronunciation": [
+          36,
+          37
+        ],
+        "meaning": 38,
+        "words": 39
+      },
+      "words": [
+        {
+          "term": "লাহাম",
+          "meaning": "গোশত বা মাংস"
+        }
+      ]
+    },
+    {
+      "number": 156,
+      "pronunciation": "ফিহ সামাক?",
+      "meaning": "মাছ আছে?",
+      "context": "বাঙালি হয়ে মাছ খুঁজছেন? শুধু দুইটি শব্দে প্রশ্ন করুন।",
+      "illustration": "fish",
+      "cues": {
+        "label": 40,
+        "context": [
+          41
+        ],
+        "pronunciation": [
+          42,
+          43
+        ],
+        "meaning": 44,
+        "words": 45
+      },
+      "words": [
+        {
+          "term": "ফিহ",
+          "meaning": "আছে"
+        },
+        {
+          "term": "সামাক",
+          "meaning": "মাছ"
+        }
+      ]
+    },
+    {
+      "number": 157,
+      "pronunciation": "হাদা হার?",
+      "meaning": "এটা কি ঝাল?",
+      "context": "খাবার দেখে যদি সন্দেহ হয় এটা ঝাল কিনা, তাহলে খাবারটা দেখে জিজ্ঞাসা করুন।",
+      "illustration": "spicy",
+      "cues": {
+        "label": 46,
+        "context": [
+          47
+        ],
+        "pronunciation": [
+          48,
+          49
+        ],
+        "meaning": 50
+      },
+      "words": []
+    },
+    {
+      "number": 158,
+      "pronunciation": "বিদুন হার লাও সামাহাত।",
+      "meaning": "ঝাল ছাড়া দয়া করে।",
+      "context": "আর একদমই ঝাল খেতে না চাইলে অর্ডারের শেষে ভদ্রভাবে জুড়ে দিন।",
+      "illustration": "noSpice",
+      "cues": {
+        "label": 51,
+        "context": [
+          52
+        ],
+        "pronunciation": [
+          53,
+          54
+        ],
+        "meaning": 55,
+        "words": 56
+      },
+      "words": [
+        {
+          "term": "বিদুন",
+          "meaning": "ছাড়া"
+        },
+        {
+          "term": "লাও সামাহাত",
+          "meaning": "প্লিজ বা দয়া করে"
+        }
+      ]
+    },
+    {
+      "number": 159,
+      "pronunciation": "আবগা আসির বুরতুগাল।",
+      "meaning": "আমি কমলার জুস চাই।",
+      "context": "খাবারের সাথে ফ্রেশ কমলার জুস চাইতে বলুন।",
+      "illustration": "orangeJuice",
+      "cues": {
+        "label": 57,
+        "context": [
+          58
+        ],
+        "pronunciation": [
+          59,
+          60
+        ],
+        "meaning": 61,
+        "words": 61
+      },
+      "words": [
+        {
+          "term": "আসির",
+          "meaning": "জুস"
+        },
+        {
+          "term": "বুরতুগাল",
+          "meaning": "কমলা"
+        }
+      ],
+      "notes": "The meaning line is not narrated as its own SRT entry. It is revealed together with the word explanation at SRT entry 61 (documented assumption)."
+    },
+    {
+      "number": 160,
+      "pronunciation": "জিবলি ময়াহ।",
+      "meaning": "আমাকে পানি এনে দিন।",
+      "context": "আর সবচেয়ে দরকারি জিনিস, পানি! গালফে পানিকে সবাই ‘ময়াহ’ বলে। তাই ওয়েটারকে বলুন।",
+      "illustration": "water",
+      "cues": {
+        "label": 62,
+        "context": [
+          63,
+          64,
+          65
+        ],
+        "pronunciation": [
+          66,
+          67
+        ],
+        "meaning": 68
+      },
+      "words": []
+    }
+  ]
+}
