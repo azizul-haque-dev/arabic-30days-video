@@ -1,0 +1,32 @@
+{
+  "name": "arabic-master-day-14",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Arabic Master - Day 14 (Directions & Road Navigation) Remotion project",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts ArabicMasterDay14 out/day14.mp4",
+    "still": "remotion still src/index.ts ArabicMasterDay14 out/still.png --frame=0",
+    "typecheck": "tsc --noEmit",
+    "check:timeline": "tsx scripts/check-timeline.ts",
+    "validate:layout": "tsx scripts/validate-layout.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.290",
+    "@remotion/player": "4.0.290",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@fontsource/hind-siliguri": "5.1.0",
+    "@fontsource/inter": "5.1.0",
+    "@fontsource/noto-sans-arabic": "5.1.0",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "esbuild": "0.24.0",
+    "playwright-core": "1.49.0",
+    "tsx": "4.19.2",
+    "typescript": "5.6.3"
+  }
+}
