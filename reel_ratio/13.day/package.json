@@ -1,0 +1,40 @@
+{
+  "name": "arabic-master-day-13",
+  "version": "1.0.0",
+  "description": "Arabic Master — 30 Days Survival Arabic — Day 13 (Market & Taxi): Remotion project",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "typecheck": "tsc --noEmit -p .",
+    "validate:content": "tsx scripts/validate-content.ts",
+    "validate:layout": "tsx scripts/validate-layout.ts",
+    "validate:zip": "node scripts/validate-zip.mjs",
+    "render": "tsx scripts/render.ts",
+    "validate": "npm run typecheck && npm run validate:content && npm run validate:layout"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fontsource/hind-siliguri": "5.3.0",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/noto-sans-arabic": "5.3.0",
+    "@remotion/cli": "4.0.541",
+    "@remotion/layout-utils": "4.0.541",
+    "@remotion/player": "4.0.541",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.541",
+    "webpack": "^5.98.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "esbuild": "0.28.2",
+    "playwright-core": "1.65.0",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  },
+  "private": true
+}

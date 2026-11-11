@@ -7,6 +7,7 @@
     "validate": "tsx scripts/validate.ts",
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm run validate",
+    "render": "remotion render src/index.ts ArabicMaster out/arabic-master-day-11.mp4 --codec h264 --crf 18",
     "render:future": "remotion render src/index.ts ArabicMasterComposition out/arabic-master-day-11.mp4 --codec h264"
   },
   "dependencies": {
