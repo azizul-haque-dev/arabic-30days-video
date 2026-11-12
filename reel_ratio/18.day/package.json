@@ -1,0 +1,37 @@
+{
+  "name": "arabic-master-day-18",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Arabic Master — 30-Day Survival Arabic — Day 18 (Restaurant & Workplace Communication)",
+  "scripts": {
+    "studio": "npm run discover-audio && remotion studio src/index.ts",
+    "discover-audio": "tsx scripts/discover-audio.ts",
+    "discover-audio:strict": "tsx scripts/discover-audio.ts --require",
+    "parse-subtitles": "tsx scripts/parse-subtitles.ts",
+    "validate-layout": "tsx scripts/validate-layout.ts",
+    "validate-layout:dom": "tsx scripts/validate-layout.ts --dom",
+    "validate": "npm run parse-subtitles && npm run validate-layout && npm run typecheck",
+    "typecheck": "tsc --noEmit",
+    "pre-render": "npm run discover-audio:strict && npm run validate"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.542",
+    "@remotion/media-utils": "^4.0.542",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.542"
+  },
+  "devDependencies": {
+    "@fontsource/hind-siliguri": "^5.3.0",
+    "@fontsource/noto-sans-arabic": "^5.3.0",
+    "@remotion/bundler": "^4.0.542",
+    "@remotion/renderer": "^4.0.542",
+    "@sparticuz/chromium": "^153.0.0",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "music-metadata": "^12.3.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "type": "module"
+}

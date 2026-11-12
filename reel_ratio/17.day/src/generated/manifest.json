@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-11-11T12:02:49.019Z",
+  "episodes": {
+    "day-17": {
+      "episodeId": "day-17",
+      "audio": null,
+      "subtitles": null,
+      "analysis": null,
+      "searched": [
+        "public/audio/day-17.mp3",
+        "public/audio/day-17.wav",
+        "public/audio/day-17.m4a",
+        "public/audio/day-17.aac",
+        "public/audio/day-17.ogg"
+      ]
+    }
+  }
+}
