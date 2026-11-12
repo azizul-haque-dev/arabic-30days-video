@@ -3,21 +3,19 @@
 Editable Remotion project (React + TypeScript). 1080×1920 · 30 fps · sentences 171–180 ·
 progress 170/300 (56.67%) → 180/300 (60%).
 
-**এই প্রজেক্ট ভিডিও render করে না / MP4 তৈরি করে না — শুধু editable source।**
+Studio preview এবং MP4 render—দুটিই এই প্রজেক্ট থেকে করা যাবে।
 
 ## Quick start (Windows PowerShell / macOS / Linux)
 
 ```powershell
 npm install
-# 1) original narration  → public/audio/day-18.mp3  (or day-18.wav)
-# 2) original subtitles  → public/subtitles/day-18.srt
-npm run discover-audio      # reads audio metadata → src/generated/audio-manifest.json
-npm run validate            # cue table, SRT compare, layout (static), TypeScript
-npm run studio              # preview in Remotion Studio
+npm run studio
+npm run render
 ```
 
-Before rendering (done later, via your own API / CLI): `npm run pre-render` — it **fails** if the audio is missing.
-Rendering without audio is also blocked in code (`src/components/AudioPlayer.tsx`): silent videos are not allowed.
+`studio` discovers the narration before opening Remotion Studio. `render` requires audio, checks the subtitle timing,
+layout, and TypeScript, then writes `out/day18.mp4`. The Day 18 narration is at `public/audio/day-18.wav`;
+rendering without audio is blocked in code (`src/components/AudioPlayer.tsx`).
 
 ## Configuration-driven
 | What | Where |
@@ -36,19 +34,18 @@ Learning scene (numbers in `src/lib/layout.ts`): label · illustration (y 324–
 repeat marks · Arabic (≤ 62 px, RTL) · Bengali meaning (≤ 56 px). Horizontal margin ≥ 70 px.
 Text is wrapped/scaled by a deterministic engine (explicit lines, balanced wrapping, no browser-dependent wrapping).
 
-* `npm run validate-layout` — static checks (regions, margins, font scaling, hierarchy). No browser needed.
-* `npm run validate-layout:dom` — renders real sample frames headlessly and runs a **bounding-box guard on the actual DOM**
+* Static layout checks (regions, margins, font scaling, hierarchy) run before every render.
+* `npx tsx scripts/validate-layout.ts --dom` — renders real sample frames headlessly and runs a **bounding-box guard on the actual DOM**
   (text × text, text × art, margins, screen edges). Needs Chrome (Remotion downloads it automatically,
   or pass `-- --browser=/path/to/chrome`). Sample stills go to `out/stills/` (not part of the deliverable).
 
 ## Things you must check / replace
 1. **Original SRT was not available** — the master prompt contained the timestamps, not the file. `cues.ts` was transcribed from the prompt.
-   Put your SRT at `public/subtitles/day-18.srt` and run `npm run parse-subtitles`: it compares all 57 entries and reports every difference.
-2. **Original audio is not included.** Put it at `public/audio/day-18.mp3|wav`.
-3. **Brand logo** — no logo file was supplied; a vector placeholder mark is used. For the real logo set `logo.mode = "image"`
+   Put your SRT at `public/subtitles/day-18.srt` and run `npx tsx scripts/parse-subtitles.ts`: it compares all 57 entries and reports every difference.
+2. **Brand logo** — no logo file was supplied; a vector placeholder mark is used. For the real logo set `logo.mode = "image"`
    in `config.ts` and place `public/assets/logo.png`.
-4. **Arabic text** — see the linguistic notes below. Bengali pronunciations and meanings are verbatim from the brief.
-5. The Day 19 teaser shows only "DAY 19" (no topic was supplied).
+3. **Arabic text** — see the linguistic notes below. Bengali pronunciations and meanings are verbatim from the brief.
+4. The Day 19 teaser shows only "DAY 19" (no topic was supplied).
 
 ## Linguistic notes (Arabic script ↔ Bengali pronunciation, Gulf Arabic)
 All ten renderings are plausible Gulf expressions matching the supplied pronunciation. Points to confirm with an Arabic reviewer —

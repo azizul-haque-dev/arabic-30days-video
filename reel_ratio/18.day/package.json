@@ -4,15 +4,8 @@
   "private": true,
   "description": "Arabic Master — 30-Day Survival Arabic — Day 18 (Restaurant & Workplace Communication)",
   "scripts": {
-    "studio": "npm run discover-audio && remotion studio src/index.ts",
-    "discover-audio": "tsx scripts/discover-audio.ts",
-    "discover-audio:strict": "tsx scripts/discover-audio.ts --require",
-    "parse-subtitles": "tsx scripts/parse-subtitles.ts",
-    "validate-layout": "tsx scripts/validate-layout.ts",
-    "validate-layout:dom": "tsx scripts/validate-layout.ts --dom",
-    "validate": "npm run parse-subtitles && npm run validate-layout && npm run typecheck",
-    "typecheck": "tsc --noEmit",
-    "pre-render": "npm run discover-audio:strict && npm run validate"
+    "studio": "tsx scripts/discover-audio.ts && remotion studio src/index.ts",
+    "render": "tsx scripts/discover-audio.ts --require && tsx scripts/parse-subtitles.ts && tsx scripts/validate-layout.ts && tsc --noEmit && remotion render src/index.ts Day18 out/day18.mp4 --codec h264 --crf 17 --overwrite"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.542",

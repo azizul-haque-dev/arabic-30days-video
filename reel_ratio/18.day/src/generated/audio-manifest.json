@@ -1,6 +1,9 @@
 {
-  "found": false,
-  "file": null,
-  "durationSeconds": null,
-  "message": "Audio NOT found. Expected one of: public/audio/day-18.mp3  |  public/audio/day-18.wav."
+  "found": true,
+  "file": "audio/day-18.wav",
+  "durationSeconds": 145.453,
+  "codec": "PCM",
+  "sampleRate": 48000,
+  "channels": 2,
+  "warnings": []
 }
