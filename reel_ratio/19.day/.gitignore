@@ -1,0 +1,6 @@
+node_modules
+out
+src/generated/*.json
+public/audio/*.mp3
+public/audio/*.wav
+.DS_Store

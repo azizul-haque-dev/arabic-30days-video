@@ -1,0 +1,35 @@
+{
+  "name": "arabic-master-day19",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Arabic Master - 30-Day Survival Arabic - Day 19 (Remotion project, 9:16)",
+  "scripts": {
+    "prepare:dev": "tsx scripts/prepare-episode.ts --episode 19 --lenient",
+    "prepare:build": "tsx scripts/prepare-episode.ts --episode 19",
+    "dev": "npm run prepare:dev && remotion studio src/index.ts",
+    "demo": "tsx scripts/prepare-episode.ts --episode 19 --lenient --srt scripts/__tests__/fixtures/day-19.sample.srt && remotion studio src/index.ts",
+    "qa:stills": "npm run prepare:dev && tsx scripts/qa-stills.ts",
+    "build": "npm run prepare:build && remotion render src/index.ts Day19 out/day-19.mp4 --codec h264 --crf 17",
+    "typecheck": "tsx scripts/prepare-episode.ts --episode 19 --lenient --srt scripts/__tests__/fixtures/day-19.sample.srt && tsc --noEmit",
+    "test": "tsx --test scripts/__tests__/*.test.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.542",
+    "@remotion/layout-utils": "4.0.542",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.542"
+  },
+  "devDependencies": {
+    "@fontsource/hind-siliguri": "5.3.0",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/noto-sans-arabic": "5.3.0",
+    "@remotion/bundler": "4.0.542",
+    "@remotion/renderer": "4.0.542",
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "music-metadata": "12.3.5",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}
