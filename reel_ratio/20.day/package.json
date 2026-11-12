@@ -1,0 +1,27 @@
+{
+  "name": "arabic-master-day20",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Arabic Master — 30-Day Survival Arabic — Day 20 (Remotion project)",
+  "scripts": {
+    "studio": "node scripts/prepare-episode.mjs && remotion studio src/index.ts",
+    "render": "node scripts/prepare-episode.mjs --strict && remotion render src/index.ts Day20 out/day-20.mp4 --codec=h264 --crf=17",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.543",
+    "@remotion/fonts": "4.0.543",
+    "@remotion/layout-utils": "4.0.543",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "4.0.543"
+  },
+  "devDependencies": {
+    "@fontsource/hind-siliguri": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/noto-sans-arabic": "^5.3.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^7.0.2"
+  }
+}
