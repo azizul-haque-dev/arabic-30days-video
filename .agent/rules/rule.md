@@ -136,7 +136,7 @@ The visual design follows a clean, premium **Mint Fresh ("মিন্ট ফ্
   - `glow`: `rgba(14, 159, 110, 0.35)` (Primary shadow glow)
   - `shadow`: `rgba(16, 35, 29, 0.16)` (Soft ambient shadow)
 - **Typography**:
-  - Fonts: `'Hind Siliguri', 'Noto Sans Bengali', sans-serif`
+  - Fonts: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif
   - Weights: `hero: 700`, `strong: 600`, `body: 400`
 - **Border Radii**:
   - `sm: 20px`, `md: 32px`, `lg: 44px`, `pill: 999px`
@@ -284,3 +284,5 @@ After making changes:
 - [ ] If new SFX was added, check that playback volume does not exceed `0.35`.
 - [ ] Verify that scene transitions continue to cut seamlessly without overlapping audio or visual artifacts.
 - [ ] Ensure `MEMORY.md` remains updated if architectural decisions or tokens were modified.
+
+

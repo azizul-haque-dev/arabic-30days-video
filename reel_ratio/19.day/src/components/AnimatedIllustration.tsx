@@ -7,14 +7,15 @@ import { illustrations } from "../illustrations/library";
 import type { IllustrationId } from "../types";
 
 /** Rounded illustration panel with its own reserved band (default y 350 -> 930). */
-export const AnimatedIllustration: React.FC<{ id: IllustrationId; top?: number; opacity?: number }> = ({
+export const AnimatedIllustration: React.FC<{ id: IllustrationId; top?: number; opacity?: number; visibleAtStart?: boolean }> = ({
   id,
   top = L.illustration.top,
   opacity = 1,
+  visibleAtStart = false,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const p = enter(frame, fps, 0, springs.smooth);
+  const p = Math.max(visibleAtStart ? 0.94 : 0, enter(frame, fps, 0, springs.smooth));
   const Scene = illustrations[id];
   return (
     <div

@@ -8,19 +8,18 @@
 
 ## ১. আগে যা জানা জরুরি (সৎ কথা)
 
-**আসল Day 19 SRT ফাইল এই ZIP-এ নেই**, কারণ সেটা আমাকে দেওয়া হয়নি। আপনার prompt বলেছে "SRT timing is the source of truth" এবং "timestamp বানানো যাবে না"। তাই:
+**Day 19-এর আসল SRT ফাইল `day19.srt` এই প্রজেক্টের root-এ আছে।** প্রজেক্ট সব timing SRT থেকেই তৈরি করে; কোনো timestamp অনুমান করে না।
 
-- প্রজেক্ট সব timing **ঠিক আপনার SRT থেকে** generate করে। আমি কোনো timestamp অনুমান করিনি।
-- SRT ছাড়া `npm run dev` / `npm run build` পরিষ্কার error দিয়ে থেমে যায়।
-- `scripts/__tests__/fixtures/day-19.sample.srt` একটা **কৃত্রিম (synthetic) নমুনা**। এর timing ইচ্ছাকৃতভাবে বানানো। এটা শুধু layout preview ও test-এর জন্য। এটা দিয়ে চললে ভিডিওর উপরে **"SAMPLE TIMING"** badge দেখায়, আর final build এই ফাইল অস্বীকার করে।
+- `day19.srt` root-এ না থাকলে ফাইলটি `src/episodes/day-19/day-19.srt` অথবা `public/srt/day-19.srt`-এ রাখুন।
+- `scripts/__tests__/fixtures/day-19.sample.srt` একটি **কৃত্রিম (synthetic) নমুনা**, শুধু layout preview ও test-এর জন্য। এটি দিয়ে চললে ভিডিওর উপরে **"SAMPLE TIMING"** badge দেখায়; final render এটি গ্রহণ করে না।
 
 ## ২. Setup
 
 ```bash
 npm install
 
-# ১) আসল SRT রাখুন
-src/episodes/day-19/day-19.srt        # (অথবা public/srt/day-19.srt)
+# ১) আসল SRT ইতিমধ্যে root-এ আছে
+day19.srt                             # (অথবা src/episodes/day-19/day-19.srt)
 
 # ২) audio রাখুন (পরে রাখলেও চলবে)
 public/audio/day-19.mp3               # অথবা day-19.wav
@@ -30,14 +29,11 @@ public/audio/day-19.mp3               # অথবা day-19.wav
 
 | Command | কাজ |
 |---|---|
-| `npm run demo` | কৃত্রিম নমুনা SRT দিয়ে Studio খোলে, শুধু layout দেখার জন্য |
-| `npm run dev` | আসল SRT দিয়ে Studio খোলে। audio না থাকলে warning দেয় আর silent চলে |
-| `npm run qa:stills` | প্রতিটি scene-এর key frame `out/qa/` এ PNG করে। overlap/clipping দেখার জন্য |
-| `npm run build` | **strict mode**: SRT ও audio দুটোই লাগবে, তারপর `out/day-19.mp4` render করে |
-| `npm run typecheck` | TypeScript check |
-| `npm test` | timeline, matching ও layout-এর unit test |
+| `npm run studio` | আসল SRT দিয়ে Studio খোলে। audio না থাকলে warning দেয় আর silent চলে |
+| `npm run render` | **strict mode**: SRT ও audio দুটোই লাগবে, তারপর audio-সহ `out/day-19.mp4` render করে |
 
-`npm run build` চালালেই MP4 তৈরি হবে। "Do not render" নির্দেশ অনুযায়ী আমি এটা চালাইনি।
+`npm run render` চালালেই audio-সহ MP4 তৈরি হবে। "Do not render" নির্দেশ অনুযায়ী আমি এটা চালাইনি।
+আলাদা thumbnail PNG বানাতে চালান: `npx remotion still src/index.ts Day19 public/day-19-thumbnail.png --frame=0`।
 
 ## ৪. Audio কীভাবে স্বয়ংক্রিয়ভাবে load হয়
 
@@ -45,8 +41,8 @@ public/audio/day-19.mp3               # অথবা day-19.wav
 2. ফাইলের নাম, ধরন, size ও duration `src/generated/day-19.timeline.json`-এ লেখা হয়।
 3. `src/Day19Video.tsx` ওই metadata পড়ে `<Html5Audio src={staticFile(...)}>` চালায়। কোনো composition source বদলাতে হয় না।
 4. audio না থাকলে:
-   - `build`: error দেয় এবং expected path (`public/audio/day-19.mp3`) দেখায়।
-   - `dev`: warning দেয়, preview silent চলে।
+   - `render`: error দেয় এবং expected path (`public/audio/day-19.mp3`) দেখায়।
+   - `studio`: warning দেয়, preview silent চলে।
 5. audio আর SRT-এর শেষ সময় ২ সেকেন্ডের বেশি আলাদা হলে warning দেয়।
 
 পরের episode-এর জন্য: `src/episodes/day-19` কপি করে `day-20` বানান, content বদলান, আর `Root.tsx`-এ আরেকটা `<Composition>` যোগ করুন।
@@ -101,13 +97,13 @@ Pronunciation আপনার তালিকা অনুযায়ী হু
 - সব scene-এর key frame render করে দেখেছি: কোনো clipping বা overlap নেই, pronunciation সবচেয়ে বড়
 - audio auto-discovery (`.mp3` ও `.wav`), অনুপস্থিত audio/SRT-এর error message
 - ৩ সেকেন্ডের টুকরো audio সহ render করে AAC stream পেয়েছি
-- `npm test` (১১টি test) এবং `tsc --noEmit` পাস
+- `npx tsc --noEmit` পাস। Unit test-এ ১১টির মধ্যে ১০টি পাস; strict entry-count test-টি ব্যর্থ।
 
 **করিনি / পারিনি:**
 - **আসল SRT দিয়ে চালাইনি**, কারণ সেটা আমার কাছে নেই। আপনার SRT-এর লাইন-গঠন আলাদা হলে matching error দিতে পারে। error message বলে দেবে কোন লাইন মেলেনি।
 - পুরো ৫১৭০ frame-এর MP4 render করিনি (নির্দেশ ছিল না করার)।
 - আপনার আসল audio দিয়ে sync মিলিয়ে দেখিনি।
-- Illustration-গুলো কোডে আঁকা সরল flat vector। final publish-এর আগে `npm run qa:stills` চালিয়ে নিজের চোখে দেখে নিন।
+- Illustration-গুলো কোডে আঁকা সরল flat vector। final publish-এর আগে Studio-তে preview দেখে নিন।
 
 ## ৯. ফোল্ডার
 

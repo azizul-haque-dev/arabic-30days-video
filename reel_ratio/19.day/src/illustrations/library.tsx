@@ -460,13 +460,13 @@ const Section: React.FC = () => (
 const OpeningSalary: React.FC = () => (
   <g>
     <Backdrop window={null} plant={null} />
-    <Pop delay={4} rise={34}>
+    <Pop delay={4} rise={34} visibleAtStart>
       <Float amp={5} period={110}>
         <Phone x={140} y={100} w={210} h={400} />
       </Float>
     </Pop>
-    <Calendar x={440} y={90} w={330} pulseLast delay={10} />
-    <Pop x={810} y={430} delay={26}>
+    <Calendar x={440} y={90} w={330} pulseLast delay={10} visibleAtStart />
+    <Pop x={810} y={430} delay={26} visibleAtStart>
       <Float amp={4} period={90}>
         <Paper w={100} h={124} lines={2} accent={ill.slateLight} dashed />
       </Float>

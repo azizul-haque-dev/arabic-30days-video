@@ -38,10 +38,11 @@ export const Pop: React.FC<{
   delay?: number;
   rise?: number;
   scale?: number;
+  visibleAtStart?: boolean;
   children: React.ReactNode;
-}> = ({ x = 0, y = 0, delay = 0, rise = 26, scale = 1, children }) => {
+}> = ({ x = 0, y = 0, delay = 0, rise = 26, scale = 1, visibleAtStart = false, children }) => {
   const { frame, fps } = useAnim();
-  const p = enter(frame, fps, delay, springs.smooth);
+  const p = Math.max(visibleAtStart ? 0.94 : 0, enter(frame, fps, delay, springs.smooth));
   const s = scale * interpolate(p, [0, 1], [0.92, 1]);
   return (
     <g transform={`translate(${x} ${y + (1 - p) * rise}) scale(${s})`} opacity={Math.min(1, p * 1.4)}>
@@ -325,9 +326,10 @@ export const Calendar: React.FC<{
   fillTo?: number;
   pulseLast?: boolean;
   checks?: number;
-}> = ({ x, y, w = 210, delay = 6, fillTo = 29, pulseLast = false, checks = 0 }) => {
+  visibleAtStart?: boolean;
+}> = ({ x, y, w = 210, delay = 6, fillTo = 29, pulseLast = false, checks = 0, visibleAtStart = false }) => {
   const { frame, fps } = useAnim();
-  const p = enter(frame, fps, delay, springs.smooth);
+  const p = Math.max(visibleAtStart ? 0.94 : 0, enter(frame, fps, delay, springs.smooth));
   const cell = (w - 28) / 7;
   const h = 62 + cell * 5 + 14;
   const last = 29;

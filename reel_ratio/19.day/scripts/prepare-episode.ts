@@ -10,6 +10,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { VIDEO } from "../src/config";
 import type { EpisodeContent, EpisodeTimeline } from "../src/types";
 import { discoverAudio } from "./lib/audio";
@@ -39,7 +40,7 @@ async function main() {
   if (srtOverride && !lenient) fail(["--srt is only allowed together with --lenient (dev/demo). Final builds must use the episode's real SRT."]);
 
   const contentPath = path.join(ROOT, "src", "episodes", `day-${episode}`, "content");
-  const content: EpisodeContent = (await import(contentPath)).content;
+  const content: EpisodeContent = (await import(pathToFileURL(contentPath).href)).content;
 
   /* ---- SRT ---- */
   const srtCandidates = srtOverride
@@ -47,6 +48,7 @@ async function main() {
     : [
         path.join(ROOT, "src", "episodes", `day-${episode}`, `day-${episode}.srt`),
         path.join(ROOT, "public", "srt", `day-${episode}.srt`),
+        path.join(ROOT, `day${episode}.srt`),
       ];
   const srtFile = srtCandidates.find((p) => fs.existsSync(p));
   if (!srtFile) {

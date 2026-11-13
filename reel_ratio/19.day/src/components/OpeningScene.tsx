@@ -15,8 +15,8 @@ export const OpeningScene: React.FC<{ scene: OpeningTiming; content: EpisodeCont
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const splitF = scene.splitSec !== null ? secToFrame(scene.splitSec, fps) - scene.startFrame : Math.round(durationInFrames * 0.55);
-  const t1 = enter(frame, fps, 2, springs.smooth);
-  const t2 = enter(frame, fps, 10, springs.smooth);
+  const t1 = Math.max(0.94, enter(frame, fps, 2, springs.smooth));
+  const t2 = Math.max(0.94, enter(frame, fps, 10, springs.smooth));
   const fadeOut = interpolate(frame, [splitF, splitF + FADE], [1, 0], { easing: ease.inOut, extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <SceneShell>
@@ -29,7 +29,7 @@ export const OpeningScene: React.FC<{ scene: OpeningTiming; content: EpisodeCont
         <div style={{ fontFamily: fonts.latin, fontWeight: 700, fontSize: 60, color: colors.white, background: colors.primary, padding: "16px 48px", borderRadius: 999 }}>{content.topicEn}</div>
       </div>
       <Sequence from={0} durationInFrames={splitF + FADE} layout="none">
-        <AnimatedIllustration id="opening" top={760} opacity={fadeOut} />
+        <AnimatedIllustration id="opening" top={760} opacity={fadeOut} visibleAtStart />
       </Sequence>
       <Sequence from={splitF}>
         <AnimatedIllustration id="leave-request" top={760} />

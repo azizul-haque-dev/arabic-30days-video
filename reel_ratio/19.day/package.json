@@ -4,14 +4,8 @@
   "private": true,
   "description": "Arabic Master - 30-Day Survival Arabic - Day 19 (Remotion project, 9:16)",
   "scripts": {
-    "prepare:dev": "tsx scripts/prepare-episode.ts --episode 19 --lenient",
-    "prepare:build": "tsx scripts/prepare-episode.ts --episode 19",
-    "dev": "npm run prepare:dev && remotion studio src/index.ts",
-    "demo": "tsx scripts/prepare-episode.ts --episode 19 --lenient --srt scripts/__tests__/fixtures/day-19.sample.srt && remotion studio src/index.ts",
-    "qa:stills": "npm run prepare:dev && tsx scripts/qa-stills.ts",
-    "build": "npm run prepare:build && remotion render src/index.ts Day19 out/day-19.mp4 --codec h264 --crf 17",
-    "typecheck": "tsx scripts/prepare-episode.ts --episode 19 --lenient --srt scripts/__tests__/fixtures/day-19.sample.srt && tsc --noEmit",
-    "test": "tsx --test scripts/__tests__/*.test.ts"
+    "studio": "tsx scripts/prepare-episode.ts --episode 19 --lenient && remotion studio src/index.ts",
+    "render": "tsx scripts/prepare-episode.ts --episode 19 && remotion render src/index.ts Day19 out/day-19.mp4 --codec h264 --crf 17"
   },
   "dependencies": {
     "@remotion/cli": "4.0.542",
