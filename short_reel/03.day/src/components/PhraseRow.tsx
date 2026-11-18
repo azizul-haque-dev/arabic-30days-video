@@ -57,14 +57,14 @@ export const PhraseRow: React.FC<{ phrase: Phrase; index: number }> = ({ phrase,
       </div>
 
       {/* Arabic + pronunciation */}
-      <div style={{ width: 420, flexShrink: 0, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      <div style={{ width: 360, minWidth: 0, flexShrink: 0, display: "flex", flexDirection: "column", justifyContent: "center" }}>
         {/* Pronunciation in Bengali (Bigger than Arabic) */}
-        <div style={{ fontFamily: theme.fonts.bengali, fontWeight: 800, fontSize: 52, lineHeight: 1.15,
+        <div style={{ fontFamily: theme.fonts.bengali, fontWeight: 800, fontSize: 38, lineHeight: 1.1,
           color: theme.colors.text, opacity: textIn,
           transform: `translateY(${interpolate(textIn, [0, 1], [10, 0])}px)` }}>{phrase.bn}</div>
         {/* Arabic Text (Subtle & clean below it) */}
-        <div dir="rtl" style={{ textAlign: "left", fontFamily: theme.fonts.arabic, fontWeight: 700, fontSize: 36,
-          lineHeight: 1.25, color: arColor, opacity: textIn, marginTop: 4,
+        <div dir="rtl" style={{ minWidth: 0, textAlign: "left", fontFamily: theme.fonts.arabic, fontWeight: 700, fontSize: 30,
+          lineHeight: 1.15, color: arColor, opacity: textIn, marginTop: 2,
           transform: `translateY(${interpolate(textIn, [0, 1], [16, 0])}px)`,
           transformOrigin: "left center" }}>{phrase.ar}</div>
       </div>
@@ -72,8 +72,9 @@ export const PhraseRow: React.FC<{ phrase: Phrase; index: number }> = ({ phrase,
       <div style={{ width: 2, height: 84, background: theme.colors.line, flexShrink: 0, opacity: textIn }} />
 
       {/* meaning */}
-      <div style={{ flex: 1, fontFamily: theme.fonts.bengali, fontWeight: 700, fontSize: 32, lineHeight: 1.3,
+      <div style={{ flex: 1, minWidth: 0, fontFamily: theme.fonts.bengali, fontWeight: 700, fontSize: 28, lineHeight: 1.2,
         color: theme.colors.text, opacity: textIn,
+        overflowWrap: "anywhere",
         transform: `translateX(${interpolate(textIn, [0, 1], [20, 0])}px)` }}>{phrase.meaning}</div>
     </div>
   );

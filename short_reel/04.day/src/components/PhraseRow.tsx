@@ -35,14 +35,14 @@ export const PhraseRow: React.FC<{ phrase: Phrase; index: number }> = ({ phrase,
   const badgeTextColor = interpolateColors(act, [0, 1], [theme.colors.textDim, "#FFFFFF"]);
 
   return (
-    <div style={{ position: "absolute", left: ROW_LEFT, top, width: ROW_W, height: ROW_H, borderRadius: 36,
+    <div style={{ position: "absolute", left: ROW_LEFT, top, width: ROW_W, height: ROW_H, borderRadius: 38,
       boxSizing: "border-box", background: cardBg, border: `3px solid ${border}`,
       boxShadow: `0 18px 38px -20px rgba(16,35,29,0.15), 0 0 ${56 * act}px ${theme.colors.glow}`,
       opacity: cardIn, display: "flex", alignItems: "center", padding: "0 30px", gap: 24,
       transform: `translateY(${interpolate(cardIn, [0, 1], [40, 0]) + float}px) scale(${interpolate(cardIn, [0, 1], [0.94, 1]) * (1 + 0.03 * actScale)})` }}>
 
       {/* badge: number → sound bars while spoken */}
-      <div style={{ position: "relative", width: 60, height: 60, borderRadius: 30, background: badgeBg, flexShrink: 0,
+      <div style={{ position: "relative", width: 68, height: 68, borderRadius: 34, background: badgeBg, flexShrink: 0,
         display: "flex", alignItems: "center", justifyContent: "center",
         transform: `scale(${1 + 0.08 * actScale})`,
         transition: "transform 0.15s" }}>
@@ -57,23 +57,23 @@ export const PhraseRow: React.FC<{ phrase: Phrase; index: number }> = ({ phrase,
       </div>
 
       {/* Arabic + pronunciation */}
-      <div style={{ width: 420, flexShrink: 0, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      <div style={{ width: 360, minWidth: 0, flexShrink: 0, display: "flex", flexDirection: "column", justifyContent: "center" }}>
         {/* Pronunciation in Bengali (Bigger than Arabic) */}
-        <div style={{ fontFamily: theme.fonts.bengali, fontWeight: 800, fontSize: 52, lineHeight: 1.15,
-          color: theme.colors.text, opacity: textIn,
+        <div style={{ fontFamily: theme.fonts.bengali, fontWeight: 800, fontSize: 42, lineHeight: 1.1,
+          color: theme.colors.text, opacity: textIn, overflowWrap: "anywhere",
           transform: `translateY(${interpolate(textIn, [0, 1], [10, 0])}px)` }}>{phrase.bn}</div>
         {/* Arabic Text (Subtle & clean below it) */}
-        <div dir="rtl" style={{ textAlign: "left", fontFamily: theme.fonts.arabic, fontWeight: 700, fontSize: 36,
-          lineHeight: 1.25, color: arColor, opacity: textIn, marginTop: 4,
+        <div dir="rtl" style={{ minWidth: 0, textAlign: "left", fontFamily: theme.fonts.arabic, fontWeight: 700, fontSize: 34,
+          lineHeight: 1.15, color: arColor, opacity: textIn, marginTop: 2, overflowWrap: "anywhere",
           transform: `translateY(${interpolate(textIn, [0, 1], [16, 0])}px)`,
           transformOrigin: "left center" }}>{phrase.ar}</div>
       </div>
 
-      <div style={{ width: 2, height: 84, background: theme.colors.line, flexShrink: 0, opacity: textIn }} />
+      <div style={{ width: 2, height: 96, background: theme.colors.line, flexShrink: 0, opacity: textIn }} />
 
       {/* meaning */}
-      <div style={{ flex: 1, fontFamily: theme.fonts.bengali, fontWeight: 700, fontSize: 32, lineHeight: 1.3,
-        color: theme.colors.text, opacity: textIn,
+      <div style={{ flex: 1, minWidth: 0, fontFamily: theme.fonts.bengali, fontWeight: 700, fontSize: 30, lineHeight: 1.2,
+        color: theme.colors.text, opacity: textIn, overflowWrap: "anywhere",
         transform: `translateX(${interpolate(textIn, [0, 1], [20, 0])}px)` }}>{phrase.meaning}</div>
     </div>
   );
