@@ -1,0 +1,13 @@
+const fs = require('fs');
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0E9F6E"/>
+      <stop offset="100%" style="stop-color:#087A54"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="96" fill="url(#g)"/>
+  <text x="100" y="118" font-family="Arial, sans-serif" font-weight="bold" font-size="82" fill="white" text-anchor="middle">AM</text>
+</svg>`;
+fs.writeFileSync('public/logo.svg', svg);
+console.log('Created public/logo.svg');
