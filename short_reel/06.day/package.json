@@ -1,0 +1,26 @@
+{
+  "name": "arabic-master-reel6",
+  "version": "1.0.0",
+  "description": "Arabic Master - Reel 6 pronouns and family vocabulary (Remotion)",
+  "scripts": {
+    "sync": "node scripts/sync-media.mjs",
+    "studio": "node scripts/sync-media.mjs && remotion studio src/index.ts",
+    "render": "node scripts/sync-media.mjs && remotion render src/index.ts ArabicMasterVocab out/arabic-master-reel6.mp4 --codec h264 --crf 17",
+    "still": "node scripts/sync-media.mjs && remotion still src/index.ts ArabicMasterVocab out/still.png --frame 60",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "remotion": "4.0.545",
+    "@remotion/cli": "4.0.545",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "typescript": "5.5.4",
+    "@types/react": "18.3.12"
+  },
+  "private": true
+}
