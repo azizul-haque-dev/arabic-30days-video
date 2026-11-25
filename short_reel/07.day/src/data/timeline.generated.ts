@@ -10,7 +10,7 @@ export const TIMELINE: TimelineWord[] = [
   {index: 4, pron: {text: "জাওজ", start: 14.18, end: 14.6}, meaning: {text: "স্বামী", start: 15.56, end: 15.96}},
   {index: 5, pron: {text: "জাওজাহ", start: 17.5, end: 17.98}, meaning: {text: "স্ত্রী", start: 18.94, end: 19.4}},
   {index: 6, pron: {text: "আয়লা", start: 20.92, end: 21.32}, meaning: {text: "পরিবার", start: 22.16, end: 22.7}},
-  {index: 7, pron: {text: "সাহাব", start: 24.28, end: 24.66}, meaning: {text: "বন্ধু", start: 25.6, end: 26.12}},
+  {index: 7, pron: {text: "", start: 24.28, end: 24.66}, meaning: {text: "বন্ধু", start: 25.6, end: 26.12}},
   {index: 8, pron: {text: "নাস", start: 27.7, end: 28.08}, meaning: {text: "মানুষ", start: 28.98, end: 29.5}},
   {index: 9, pron: {text: "রিজজাল", start: 30.96, end: 31.5}, meaning: {text: "পুরুষ", start: 32.34, end: 32.8}},
 ];

@@ -22,7 +22,7 @@ export const LESSONS: Lesson[] = [
   {id: "zawj", arabic: "زوج", pron: "জাওজ", meaning: "স্বামী", icon: "husband"},
   {id: "zawja", arabic: "زوجة", pron: "জাওজাহ", meaning: "স্ত্রী", icon: "wife"},
   {id: "aila", arabic: "عائلة", pron: "আয়লা", meaning: "পরিবার", icon: "family"},
-  {id: "sahib", arabic: "صاحب", pron: "সাহাব", meaning: "বন্ধু", icon: "friend"},
+  {id: "sahib", arabic: "صاحب", pron: "সাহেব", meaning: "বন্ধু", icon: "friend"},
   {id: "nas", arabic: "ناس", pron: "নাস", meaning: "মানুষ", icon: "people"},
   {id: "rijal", arabic: "رجال", pron: "রিজজাল", meaning: "পুরুষ", icon: "men"},
 ];
